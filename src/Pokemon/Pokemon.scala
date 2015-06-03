@@ -6,13 +6,29 @@ import Pokemon.Genero.Genero
 /**
  * @author usuario
  */
-class Pokemon(val Genero: Genero,var Especie: Especie ) {  
-  var Nivel=1
-  var Experiencia=0 
-  var Energia: Int
-  var EnergiaMaxima: Int
-  var Peso: Int
-  var Fuerza: Int
-  var Velocidad: Int
-  var Estado= new Normal
+class Pokemon(var especie: Especie, val genero: Genero, var energia: Int, var peso: Int, var fuerza: Int, var velocidad: Int) {//creo que se debe controlar que cumpla el peso de la especie  
+  var nivel=1
+  var experiencia=0   
+  var energiaMaxima= energia
+  var estado= new Normal
+  
+  
+  def evolucionar():Unit={
+    
+  }
+    
+  def ganarExperiencia(cantidad: Int): Unit ={
+    experiencia+=cantidad
+    especie.subirNivel(this)   
+  }
+  
+  def subiNivel(incrementoPeso:Int, incrementoEnergiaMaxima:Int, incrementoFuerza:Int, incrementoVelocidad:Int):Unit={
+    nivel+=1
+    peso+=incrementoPeso
+    energiaMaxima+=incrementoEnergiaMaxima
+    fuerza+=incrementoFuerza
+    velocidad+=incrementoVelocidad
+    especie.evolucionar(this)
+  }
+  
 }

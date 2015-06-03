@@ -3,6 +3,6 @@ package Pokemon.Genero
 /**
  * @author usuario
  */
-class Genero {
+abstract class Genero {
   
 }
