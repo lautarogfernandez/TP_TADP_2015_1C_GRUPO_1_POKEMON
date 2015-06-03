@@ -7,7 +7,7 @@ package Pokemon
 import Pokemon.CondicionEvolucion._
 import Pokemon.Tipo._
 
-class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoPrincipal: Tipo, val tipoSecundario: Tipo, val evolucion: List[Especie], val incrementoPeso:Int, val incrementoEnergiaMaxima:Int, val incrementoFuerza:Int, val incrementoVelocidad:Int, val condicionEvolucion: Condicion, val evoluciones: List[Especie]) {//lo de evolucion puede cambiar porque algunas no tienen y otras tienen varias
+class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoPrincipal: Tipo, val tipoSecundario: Tipo, val evoluciones: List[Especie], val incrementoPeso:Int, val incrementoEnergiaMaxima:Int, val incrementoFuerza:Int, val incrementoVelocidad:Int, val condicionEvolucion: Condicion) {//lo de evolucion puede cambiar porque algunas no tienen y otras tienen varias
   
   def energiaNecesariaParaNivel(nivel:Int):Int={
     nivel match{

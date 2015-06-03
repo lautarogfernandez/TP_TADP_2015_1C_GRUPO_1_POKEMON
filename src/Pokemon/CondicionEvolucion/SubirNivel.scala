@@ -7,7 +7,7 @@ import Pokemon._
  */
 class SubirNivel (val nivelNecesarioParaEvolucionar:Int) extends Condicion{
   
-  def nivelParaEvolucionar(pokemon:Pokemon) {
+  override def nivelParaEvolucionar(pokemon:Pokemon) {
     if (pokemon.nivel==nivelNecesarioParaEvolucionar)
       pokemon.evolucionar(pokemon.especie.evolucion())
   }

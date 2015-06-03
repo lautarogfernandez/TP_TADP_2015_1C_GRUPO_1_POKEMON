@@ -7,10 +7,10 @@ import Pokemon.CondicionEvolucion._
 /**
  * @author usuario
  */
-class Pokemon(var especie: Especie, val genero: Genero, var energia: Int, var peso: Int, var fuerza: Int, var velocidad: Int) {//creo que se debe controlar que cumpla el peso de la especie  
+class Pokemon(var especie: Especie, val genero: Genero, var energiaMaxima: Int, var peso: Int, var fuerza: Int, var velocidad: Int) {//creo que se debe controlar que cumpla el peso de la especie  
   var nivel=1
   var experiencia=0   
-  var energiaMaxima= energia
+  var energia=energiaMaxima
   var estado= new Normal
   
       

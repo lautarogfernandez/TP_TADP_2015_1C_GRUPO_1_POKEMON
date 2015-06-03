@@ -5,6 +5,6 @@ import Pokemon.Tipo
 /**
  * @author usuario
  */
-class Lunar extends Tipo {
+class Planta extends Tipo  {
   
 }

@@ -1,6 +1,7 @@
 package Pokemon
 
 import Pokemon.Tipo._
+import Pokemon.Tipo.Tipo
 
 /**
  * @author usuario
