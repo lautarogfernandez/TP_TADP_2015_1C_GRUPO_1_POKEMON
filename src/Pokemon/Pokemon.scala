@@ -1,7 +1,8 @@
 package Pokemon
 
-import Pokemon.Estado.Normal
-import Pokemon.Genero.Genero
+import Pokemon.Estado._
+import Pokemon.Genero._
+import Pokemon.CondicionEvolucion._
 
 /**
  * @author usuario
@@ -12,11 +13,7 @@ class Pokemon(var especie: Especie, val genero: Genero, var energia: Int, var pe
   var energiaMaxima= energia
   var estado= new Normal
   
-  
-  def evolucionar():Unit={
-    
-  }
-    
+      
   def ganarExperiencia(cantidad: Int): Unit ={
     experiencia+=cantidad
     especie.subirNivel(this)   
@@ -28,7 +25,19 @@ class Pokemon(var especie: Especie, val genero: Genero, var energia: Int, var pe
     energiaMaxima+=incrementoEnergiaMaxima
     fuerza+=incrementoFuerza
     velocidad+=incrementoVelocidad
-    especie.evolucionar(this)
+    especie.condicionEvolucion.nivelParaEvolucionar(this)
+  }
+  
+  def intercambiar():Unit={
+    especie.condicionEvolucion.intercambiar(this)
+  }
+  
+  def usarPiedra(piedra:Piedra):Unit={
+    especie.condicionEvolucion.usarPiedra(this,piedra:Piedra)
+  }
+  
+  def evolucionar(nuevaEspecie:Especie):Unit={
+    especie=nuevaEspecie
   }
   
 }

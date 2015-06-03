@@ -1,8 +1,15 @@
 package Pokemon.CondicionEvolucion
 
+import Pokemon._
+
 /**
  * @author usuario
  */
-class SubirNivel extends Condicion{
+class SubirNivel (val nivelNecesarioParaEvolucionar:Int) extends Condicion{
+  
+  def nivelParaEvolucionar(pokemon:Pokemon) {
+    if (pokemon.nivel==nivelNecesarioParaEvolucionar)
+      pokemon.evolucionar(pokemon.especie.evolucion())
+  }
   
 }
