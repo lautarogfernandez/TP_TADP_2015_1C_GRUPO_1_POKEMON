@@ -15,16 +15,45 @@ import Pokemon.Tipo._
  */
 class Punto1Test {
   
-  var charizard=new Especie(350,100,new Fuego,new Dragon,List(),10,10,10,10,new SubirNivel(180))
-  var charmeleon=new Especie(350,70,new Fuego,new Dragon,List(charizard),7,7,7,7,new SubirNivel(32))
-  var charmander=new Especie(350,22,new Fuego,new Dragon,List(charmeleon),4,4,4,4,new SubirNivel(16))
-  var charmanderDeAsh=new Pokemon(charmander,new Macho,10,12,10,10)
+  val charizard=new Especie(350,100,new Fuego,new Dragon,List(),10,10,10,10,new SubirNivel(180))
+  val charmeleon=new Especie(350,70,new Fuego,new Dragon,List(charizard),7,7,7,7,new SubirNivel(32))
+  val charmander=new Especie(350,22,new Fuego,new Dragon,List(charmeleon),4,4,4,4,new SubirNivel(16))
+  var carlitos=new Pokemon(charmander,new Macho,10,12,10,10)
   
   @Test
   def `pokemon sube de nivel sin evolucionar` = {
-    val nivel=charmanderDeAsh.nivel
-    charmanderDeAsh.ganarExperiencia(200)
-    assertEquals(nivel,charmanderDeAsh.nivel)
+    carlitos.ganarExperiencia(200)
+    assertEquals(1,carlitos.nivel)
+    assertEquals(12,carlitos.energiaMaxima)
+    assertEquals(10,carlitos.peso)
+    assertEquals(10,carlitos.fuerza)    
+    assertEquals(10,carlitos.velocidad)
+  }
+  
+  @Test
+  def `pokemon sube de nivel y evoluciona` = {
+    carlitos.ganarExperiencia(11468450)
+    assertEquals(16,carlitos.nivel)  
+    assertEquals(72,carlitos.energiaMaxima)
+    assertEquals(70,carlitos.peso)
+    assertEquals(70,carlitos.fuerza)    
+    assertEquals(70,carlitos.velocidad)
+    assertEquals(charmeleon,carlitos.especie)
+  }  
+ 
+  @Test
+  def `pokemon sube de nivel, evoluciona y despues sube de nivel y evoluciona de nuevo, pero si sigue ganando experiencia, no evoluciona mas` = {
+    carlitos.ganarExperiencia(11468450)
+    assertEquals(charmeleon,carlitos.especie)
+    carlitos.ganarExperiencia(999999999)
+    carlitos.ganarExperiencia(999999999)  
+    assertEquals(charizard,carlitos.especie)
+    carlitos.ganarExperiencia(999999999)
+    carlitos.ganarExperiencia(999999999)
+    carlitos.ganarExperiencia(999999999)
+    carlitos.ganarExperiencia(999999999)
+    carlitos.ganarExperiencia(999999999)
+    assertEquals(charizard,carlitos.especie)
   }
   
 }
