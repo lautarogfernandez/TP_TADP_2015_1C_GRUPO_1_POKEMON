@@ -5,7 +5,7 @@ import Pokemon._
 /**
  * @author usuario
  */
-abstract class Condicion {
+abstract class Condicion {//seria un trait
   
   def usarPiedra(pokemon:Pokemon, piedra:Piedra)={
     

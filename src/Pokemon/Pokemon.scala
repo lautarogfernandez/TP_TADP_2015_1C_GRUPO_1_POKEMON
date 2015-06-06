@@ -7,11 +7,12 @@ import Pokemon.CondicionEvolucion._
 /**
  * @author usuario
  */
-class Pokemon(var especie: Especie, val genero: Genero, var energiaMaxima: Int, var peso: Int, var fuerza: Int, var velocidad: Int) {//creo que se debe controlar que cumpla el peso de la especie  
+class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energiaMaxima: Int, var fuerza: Int,
+    var velocidad: Int,var ataques:List[Ataque]) {//creo que se debe controlar que cumpla el peso de la especie  
   var nivel=1
-  var experiencia=0   
+  var experiencia:Long=0   
   var energia=energiaMaxima
-  var estado= new Normal
+  var estado:Estado= new Normal  
   
       
   def ganarExperiencia(cantidad: Int): Unit ={
@@ -25,7 +26,8 @@ class Pokemon(var especie: Especie, val genero: Genero, var energiaMaxima: Int, 
     energiaMaxima+=incrementoEnergiaMaxima
     fuerza+=incrementoFuerza
     velocidad+=incrementoVelocidad
-    especie.condicionEvolucion.nivelParaEvolucionar(this)
+    especie.evolucioname(this)
+    especie.subirNivel(this)
   }
   
   def intercambiar():Unit={
