@@ -32,4 +32,12 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
     condicionEvolucion.nivelParaEvolucionar(pokemon)
   }
   
+  def esDelTipoPrincipal(tipo:Tipo)={
+    tipoPrincipal==tipo
+  }
+  
+  def esDelTipoSecundario(tipo:Tipo)={
+    tipoSecundario==tipo
+  }
+  
 }

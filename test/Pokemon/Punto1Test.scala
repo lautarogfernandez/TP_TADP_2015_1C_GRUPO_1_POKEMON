@@ -4,12 +4,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.Ignore
 import org.junit.Before
-
 import Pokemon._
 import Pokemon.CondicionEvolucion._
 import Pokemon.Estado._
 import Pokemon.Genero._
 import Pokemon.Tipo._
+import Pokemon.Ataque
+import Pokemon.Tipo.Dragon
 
 /**
  * @author usuario
@@ -23,7 +24,8 @@ class Punto1Test {
   
   @Before
   def setUp(){
-    carlitos=new Pokemon(charmander,new Macho,10,12,10,10,new List[Ataque])
+    var ataques:List[Ataque]= List()
+    carlitos=new Pokemon(charmander,new Macho,10,12,10,10,ataques)
   }
   
   @Test
