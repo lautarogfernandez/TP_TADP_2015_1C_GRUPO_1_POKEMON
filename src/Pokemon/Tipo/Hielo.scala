@@ -3,13 +3,14 @@ package Pokemon.Tipo
 /**
  * @author usuario
  */
-class Volador extends Tipo{
+class Hielo extends Tipo{
   
   def leGanaA(tipo:Tipo):Boolean={
     tipo match{
       case _:Planta => true
-      case _:Lucha => true
-      case _:Bicho => true
+      case _:Tierra => true
+      case _:Volador => true
+      case _:Dragon => true
       case _ => false
     }
   }

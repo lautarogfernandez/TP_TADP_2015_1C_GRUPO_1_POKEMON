@@ -1,5 +1,6 @@
 package Actividad
 
+import Pokemon._
 /**
  * @author usuario
  */

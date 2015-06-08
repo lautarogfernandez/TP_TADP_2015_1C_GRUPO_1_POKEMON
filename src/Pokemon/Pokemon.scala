@@ -4,7 +4,7 @@ import Pokemon.Estado._
 import Pokemon.Genero._
 import Pokemon.CondicionEvolucion._
 import Actividad._
-import Pokemon.Tipo.Dragon
+import Pokemon.Tipo._
 
 /**
  * @author usuario
@@ -15,7 +15,7 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
   var nivel=1
   var experiencia:Long=0   
   var energia=energiaMaxima
-  var estado:Estado= new Normal  
+  var estado:Estado= new Estado.Normal  
   
       
   def ganarExperiencia(cantidad: Int): Unit ={
@@ -61,7 +61,7 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
   }  
   
   def ataque(ataque:Ataque):Ataque={
-    ataques.find { attack => attack==ataque }.get
+    ataques.find {attack => attack.es(ataque)}.get
   }
   
   def leQuedanAtaquesDe(attack:Ataque):Boolean={
@@ -72,27 +72,32 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
     (peso>especie.pesoMaximo)&&(peso<0)//creo que hay mas, pero no se me ocurren    
   } 
   
-  def realizarActividad(actividad:Actividad)={
+  def realizarActividad(actividad:Actividad):Unit={
     estado match {
       case dormido:Dormido if dormido.acividadesQuePuedeIgnorar>0 =>  //acividadesQuePuedeIgnorar debe ser val pero no se como seria 
       case _ => actividad match {
-          case realizarAtaque:RealizarAtaque => if ((this.tieneAtaque(realizarAtaque.ataque)) || (this.leQuedanAtaquesDe(realizarAtaque.ataque)))
-                                                  ataque(realizarAtaque.ataque).bajaPA
-                                                  realizarAtaque.ataque.tipo match{
-                                                    case _:Dragon => ganarExperiencia(80)
-                                                    case _ =>          
-                                                      if (especie.esDelTipoPrincipal(realizarAtaque.ataque.tipo))
-                                                        ganarExperiencia(50)
-                                                      else
-                                                        if(especie.esDelTipoSecundario(realizarAtaque.ataque.tipo)) 
-                                                          genero match{
-                                                            case hembra:Hembra => ganarExperiencia(40) 
-                                                            case macho:Macho => ganarExperiencia(20)
-                                                          }
-                                                  }
-                                                  ataque(realizarAtaque.ataque).aplicarEfectoSecundarioA(this)
+          case realizarAtaque:RealizarAtaque => if (this.tieneAtaque(realizarAtaque.ataque))                                                  
+                                                  if (this.leQuedanAtaquesDe(realizarAtaque.ataque))
+                                                    {
+                                                      ataque(realizarAtaque.ataque).bajaPA
+                                                      realizarAtaque.ataque.tipo match{
+                                                        case _:Dragon => ganarExperiencia(80)
+                                                        case _ =>          
+                                                          if (especie.esDelTipoPrincipal(realizarAtaque.ataque.tipo))
+                                                            ganarExperiencia(50)
+                                                          else
+                                                            if(especie.esDelTipoSecundario(realizarAtaque.ataque.tipo)) 
+                                                              genero match{
+                                                                case hembra:Hembra => ganarExperiencia(40) 
+                                                                case macho:Macho => ganarExperiencia(20)
+                                                              }
+                                                      }
+                                                      ataque(realizarAtaque.ataque).aplicarEfectoSecundarioA(this)
+                                                    }                                                  
+                                                  else
+                                                    throw new NoTieneMasPA//hacer error como en el de micro                                                    
                                                 else
-                                                  new NoPuedeRealizarActividad//tirar error como en el de micro
+                                                  throw new NoTieneElAtaque//hacer error como en el de micro
           
           case levantarPesas:LevantarPesas => if (levantarPesas.cantidadKilos<fuerza)//no entiendo el enunciado            
                                                 estado match{
@@ -115,10 +120,9 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
                                   case _:Agua => ganarExperiencia(200*nadar.minutos)
                                                  ganarVelocidad(nadar.minutos/60) 
                                                  perderEnergia(nadar.minutos)
-                                  case _ if ((especie.tipoPrincipal.pierdeContra(new Agua))|| especie.tipoSecundario.pierdeContra(new Agua))) => estado=new KO
+                                  case _ if ((especie.tipoPrincipal.pierdeContra(new Agua))|| especie.tipoSecundario.pierdeContra(new Agua)) => estado=new KO
                                   case _ =>  ganarExperiencia(200*nadar.minutos)
                                              perderEnergia(nadar.minutos)
-                                    
                                 }
             
           //case otras activiidades

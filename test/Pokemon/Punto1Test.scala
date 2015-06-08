@@ -9,8 +9,6 @@ import Pokemon.CondicionEvolucion._
 import Pokemon.Estado._
 import Pokemon.Genero._
 import Pokemon.Tipo._
-import Pokemon.Ataque
-import Pokemon.Tipo.Dragon
 
 /**
  * @author usuario

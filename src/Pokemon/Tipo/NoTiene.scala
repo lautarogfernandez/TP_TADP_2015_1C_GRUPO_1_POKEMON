@@ -1,14 +1,12 @@
 package Pokemon.Tipo
 
-import Pokemon.Tipo
-
 /**
  * @author usuario
  */
-class Lunar extends Tipo {
+class NoTiene extends Tipo{
   
   def leGanaA(tipo:Tipo):Boolean={
     false
   }
-  
+
 }
