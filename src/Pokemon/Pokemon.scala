@@ -28,7 +28,7 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
     peso+=incrementoPeso
     energiaMaxima+=incrementoEnergiaMaxima
     fuerza+=incrementoFuerza
-    velocidad+=incrementoVelocidad
+    ganarVelocidad(incrementoVelocidad)
     especie.evolucioname(this)
     especie.subirNivel(this)
   }
@@ -47,6 +47,14 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
   
   /*-------------------------------------------------------------------------- Hasta aca es el punto 1*/  
   /*CREO QUE VA EN EL POKEMON */ 
+  
+  def perderEnergia(cantidad:Int)={
+    energia-=cantidad
+  }
+  
+  def ganarVelocidad(cantidad:Int)={
+    velocidad+=cantidad
+  }
   
   def tieneAtaque(ataque:Ataque)={
     ataques.contains(ataque)//???    comparar dos ataques???  podria ser con un string y un any
@@ -84,7 +92,35 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
                                                   }
                                                   ataque(realizarAtaque.ataque).aplicarEfectoSecundarioA(this)
                                                 else
-                                                  new NoPuedeRealizarActividad//tirar error como en el de micro  
+                                                  new NoPuedeRealizarActividad//tirar error como en el de micro
+          
+          case levantarPesas:LevantarPesas => if (levantarPesas.cantidadKilos<fuerza)//no entiendo el enunciado            
+                                                estado match{
+                                                  case _:Paralizado => estado=new KO
+                                                  case _ => especie.tipoPrincipal match{
+                                                              case _:Fantasma => new NoPuedeRealizarActividad  
+                                                              case _:Lucha => ganarExperiencia(levantarPesas.cantidadKilos*2)   
+                                                              case _ => especie.tipoSecundario match{
+                                                                          case _:Lucha => ganarExperiencia(levantarPesas.cantidadKilos*2)
+                                                                          case _ => ganarExperiencia(levantarPesas.cantidadKilos)
+                                                                        } 
+                                                            }                                                  
+                                                }                                          
+                                              else
+                                                estado=new Paralizado
+          case nadar:Nadar => if ((energia-nadar.minutos)<0)//no se si hace falta porque controla el estado al final   
+                                new NoPuedeRealizarActividad
+                              else
+                                especie.tipoPrincipal match{
+                                  case _:Agua => ganarExperiencia(200*nadar.minutos)
+                                                 ganarVelocidad(nadar.minutos/60) 
+                                                 perderEnergia(nadar.minutos)
+                                  case _ if ((especie.tipoPrincipal.pierdeContra(new Agua))|| especie.tipoSecundario.pierdeContra(new Agua))) => estado=new KO
+                                  case _ =>  ganarExperiencia(200*nadar.minutos)
+                                             perderEnergia(nadar.minutos)
+                                    
+                                }
+            
           //case otras activiidades
         } 
             
