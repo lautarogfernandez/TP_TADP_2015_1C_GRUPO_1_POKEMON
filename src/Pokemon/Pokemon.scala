@@ -99,20 +99,22 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
                                                 else
                                                   throw new NoTieneElAtaque//hacer error como en el de micro
           
-          case levantarPesas:LevantarPesas => if (levantarPesas.cantidadKilos<fuerza)//no entiendo el enunciado            
-                                                estado match{
-                                                  case _:Paralizado => estado=new KO
-                                                  case _ => especie.tipoPrincipal match{
-                                                              case _:Fantasma => new NoPuedeRealizarActividad  
-                                                              case _:Lucha => ganarExperiencia(levantarPesas.cantidadKilos*2)   
-                                                              case _ => especie.tipoSecundario match{
-                                                                          case _:Lucha => ganarExperiencia(levantarPesas.cantidadKilos*2)
-                                                                          case _ => ganarExperiencia(levantarPesas.cantidadKilos)
-                                                                        } 
-                                                            }                                                  
-                                                }                                          
-                                              else
-                                                estado=new Paralizado
+          case levantarPesas:LevantarPesas => especie.tipoPrincipal match{
+                                                case _:Fantasma => throw new NoPuedeLevantarPesas
+                                                case _ => if (levantarPesas.cantidadKilos<=fuerza*10)            
+                                                            estado match{
+                                                              case _:Paralizado => estado=new KO
+                                                              case _ => especie.tipoPrincipal match{
+                                                                          case _:Lucha => ganarExperiencia(levantarPesas.cantidadKilos*2)   
+                                                                          case _ => especie.tipoSecundario match{
+                                                                                      case _:Lucha => ganarExperiencia(levantarPesas.cantidadKilos*2)
+                                                                                      case _ => ganarExperiencia(levantarPesas.cantidadKilos)
+                                                                                    } 
+                                                                        }                                                  
+                                                            }                                          
+                                                          else
+                                                            estado=new Paralizado
+                                              }              
           case nadar:Nadar => if ((energia-nadar.minutos)<0)//no se si hace falta porque controla el estado al final   
                                 new NoPuedeRealizarActividad
                               else
