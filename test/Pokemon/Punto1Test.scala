@@ -4,6 +4,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.Ignore
 import org.junit.Before
+
+import tadp.grupo1.pokemon.Especie;
 import Pokemon._
 import Pokemon.CondicionEvolucion._
 import Pokemon.Estado._
