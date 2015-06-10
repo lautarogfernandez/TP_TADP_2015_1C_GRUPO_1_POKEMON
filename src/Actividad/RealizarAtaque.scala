@@ -4,6 +4,6 @@ import Pokemon._
 /**
  * @author usuario
  */
-case class RealizarAtaque(val ataque:Ataque) extends Actividad {
+case class RealizarAtaque(val ataque:AtaqueGenerico) extends Actividad {
   
 }

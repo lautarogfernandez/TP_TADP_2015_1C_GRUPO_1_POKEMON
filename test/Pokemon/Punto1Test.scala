@@ -22,7 +22,7 @@ class Punto1Test {
   
   @Before
   def setUp(){
-    var ataques:List[Ataque]= List()
+    var ataques:List[AtaquePokemon]= List()
     carlitos=new Pokemon(charmander,new Macho,10,12,10,10,ataques)
   }
   

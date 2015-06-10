@@ -10,7 +10,7 @@ import Pokemon.Tipo._
  * @author usuario
  */
 class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energiaMaxima: Int, var fuerza: Int,
-    var velocidad: Int,var ataques:List[Ataque]) {//Hay que controlar que cumpla el peso de la especie  
+    var velocidad: Int,var ataques:List[AtaquePokemon]) {//Hay que controlar que cumpla el peso de la especie  
   
   var nivel=1
   var experiencia:Long=0   
@@ -37,11 +37,8 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
     especie.condicionEvolucion.intercambiar(this)
   }
   
-  def usarPiedra(piedra:Piedra):Unit={
-    especie.condicionEvolucion.usarPiedra(this,piedra:Piedra)
-  }
-  
-  def evolucionar(nuevaEspecie:Especie):Unit={
+  def evolucionar():Unit={
+    val nuevaEspecie=especie.evolucion
     especie=nuevaEspecie
   } 
   
@@ -56,21 +53,42 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
     velocidad+=cantidad
   }
   
-  def tieneAtaque(ataque:Ataque)={
-    ataques.contains(ataque)//???    comparar dos ataques???  podria ser con un string y un any
+  def tieneAtaque(ataque:AtaqueGenerico)={
+    ataques.exists { attack => attack.ataqueGenerico==ataque }
   }  
   
-  def ataque(ataque:Ataque):Ataque={
+  def ataque(ataque:AtaqueGenerico):AtaquePokemon={
     ataques.find {attack => attack.es(ataque)}.get
   }
   
-  def leQuedanAtaquesDe(attack:Ataque):Boolean={
+  def leQuedanAtaquesDe(attack:AtaqueGenerico):Boolean={
     ataque(attack).puntosAtaque>0  
   }
   
   def estadoValido():Boolean={
-    (peso>especie.pesoMaximo)&&(peso<0)//creo que hay mas, pero no se me ocurren    
+    (peso<=especie.pesoMaximo)&&(peso>0)//creo que hay mas, pero no se me ocurren    
   } 
+  
+  def aprendeAtaque(ataque:AtaqueGenerico){
+    ataques=ataques.::(new AtaquePokemon(ataque))
+  }
+  
+/*  def usaPiedra(piedra:Piedra)={
+    especie.condicionEvolucion match{
+      case _:UsarPiedraLunar if piedra.tipo==new Lunar => evolucionar()
+      case _:CondicionEvolucion.UsarPiedra if piedra.tipo==especie.tipoPrincipal => evolucionar() 
+      case _ if (piedra.tipo.leGanaA(especie.tipoPrincipal)||piedra.tipo.leGanaA(especie.tipoSecundario)) => estado=new Envenenado
+    }
+  }*/
+  
+  def usaPiedra(piedra:Piedra)={
+    especie.condicionEvolucion match{
+      case _:UsarPiedraLunar if piedra.tipo==new Lunar => evolucionar()
+      case _:CondicionEvolucion.UsarPiedra if piedra.tipo==especie.tipoPrincipal => evolucionar() 
+      case _ => if (piedra.tipo.leGanaA(especie.tipoPrincipal) || piedra.tipo.leGanaA(especie.tipoSecundario))
+                  estado=new Envenenado
+    }
+  }  
   
   def realizarActividad(actividad:Actividad):Unit={
     estado match {
@@ -126,8 +144,15 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
                                   case _ =>  ganarExperiencia(200*nadar.minutos)
                                              perderEnergia(nadar.minutos)
                                 }
+          case aprenderAtaque:AprenderAtaque => aprenderAtaque.ataque match{
+                                                  case attack if (especie.esAfin(attack.tipo)) => aprendeAtaque(attack)
+                                                  case _ => estado=new KO  
+                                                }
+          case usarPiedra:Actividad.UsarPiedra => usaPiedra(usarPiedra.piedra)
             
-          //case otras activiidades
+            
+            
+            //case otras activiidades
         } 
             
     }

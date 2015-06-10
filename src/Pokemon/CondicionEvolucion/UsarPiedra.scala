@@ -6,3 +6,7 @@ package Pokemon.CondicionEvolucion
 class UsarPiedra extends Condicion{
   
 }
+
+class UsarPiedraLunar extends Condicion{
+  
+}

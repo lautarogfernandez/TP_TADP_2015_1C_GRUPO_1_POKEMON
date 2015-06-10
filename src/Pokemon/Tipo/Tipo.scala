@@ -11,4 +11,8 @@ abstract class Tipo {
     tipo.leGanaA(this)
   }
   
+def ==(tipo:Tipo):Boolean={//redefino el igual
+    tipo.getClass()==this.getClass()
+  }  
+  
 }

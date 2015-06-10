@@ -17,6 +17,7 @@ import Actividad._
 class Punto2Test {
   
   val noTiene=new NoTiene
+  val lunar=new Lunar
   val normal=new Tipo.Normal
   val hielo=new Hielo
   val psiquico=new Psiquico
@@ -27,6 +28,10 @@ class Punto2Test {
   val fantasma=new Fantasma
   val veneno=new Veneno
   val agua=new Agua
+  val planta=new Planta
+  
+  val piedraLunar=new Piedra(lunar)
+  val piedraAgua=new Piedra(agua)
   
   val charizard=new Especie(350,100,fuego,10,10,10,10,volador)
   val charmeleon=new Especie(350,70,fuego,7,7,7,7,dragon,new SubirNivel(32),charizard)
@@ -39,15 +44,18 @@ class Punto2Test {
   val machop=new Especie(100,70,lucha,4,4,4,4,noTiene,new SubirNivel(28),machoke) 
   val gengar=new Especie(100,50,fantasma,4,4,4,4,veneno)
   val seeking=new Especie(1000,50,agua,4,4,4,4,noTiene)
+  val nidoqueen=new Especie(100,50,veneno,7,7,7,7,noTiene)
+  val nidorina=new Especie(100,50,veneno,4,4,4,4,noTiene,new UsarPiedraLunar,nidoqueen)
+  val starmie=new Especie(100,50,agua,7,7,7,7,psiquico)
+  val staryu=new Especie(100,50,agua,4,4,4,4,noTiene,new CondicionEvolucion.UsarPiedra,starmie)
   
-  val mordida=new Ataque(normal,30)//no se que es lo de efecto secundario, debe ser una porcion de codigo que evalua el pokemon
-  val hipnosis =new Ataque(psiquico,20)
-  val dragonTail =new Ataque(dragon,10)
+  val mordida=new AtaqueGenerico(normal,30,0)//no se que es lo de efecto secundario, debe ser una porcion de codigo que evalua el pokemon
+  val hipnosis =new AtaqueGenerico(psiquico,20,0)
+  val dragonTail =new AtaqueGenerico(dragon,10,0)
+  val maldicion =new AtaqueGenerico(fantasma,25,0)
+  val corte = new AtaqueGenerico(normal,30,0)
   
-  var ataques1:List[Ataque]= List(mordida)
-  var ataques2:List[Ataque]= List(hipnosis)
-  var ataques3:List[Ataque]= List(dragonTail)
-  var sinAtaques:List[Ataque]= List()
+  var sinAtaques:List[AtaquePokemon]= List()
   
   val morder=RealizarAtaque(mordida)
   val hipnotizar=RealizarAtaque(hipnosis)
@@ -55,6 +63,10 @@ class Punto2Test {
   val hacerPesas=new LevantarPesas (5)
   val nada=new Nadar(5)
   val nadaMas=new Nadar(125)
+  val aprendeMaldicion=new AprenderAtaque(maldicion)
+  val aprendeCorte=new AprenderAtaque(corte)
+  val usaPiedraLunar=new Actividad.UsarPiedra(piedraLunar)
+  val usaPiedraAgua=new Actividad.UsarPiedra(piedraAgua)
   
   var carlitos:Pokemon=null
   var carlita:Pokemon=null
@@ -63,35 +75,64 @@ class Punto2Test {
   var luchador:Pokemon=null
   var unPokemonDeFuego:Pokemon=null
   var unPokemonDeAgua:Pokemon=null
+  var unPokemonQueEvolucionaConPiedraLunar:Pokemon=null
+  var unPokemonQueEvolucionaConPiedraAgua:Pokemon=null  
   
   @Before
   def setUp(){    
-    carlitos=new Pokemon(rattata,new Macho,10,12,10,10,ataques1)
-    carlita=new Pokemon(jynx,new Hembra,10,12,10,10,ataques2)
-    pequeñoDragon=new Pokemon(charmander,new Macho,10,12,10,10,ataques3)
+    carlitos=new Pokemon(rattata,new Macho,10,12,10,10,sinAtaques)
+    carlitos.aprendeAtaque(mordida)
+    carlita=new Pokemon(jynx,new Hembra,10,12,10,10,sinAtaques)
+    carlita.aprendeAtaque(hipnosis)
+    pequeñoDragon=new Pokemon(charmander,new Macho,10,12,10,10,sinAtaques)
+    pequeñoDragon.aprendeAtaque(dragonTail)
     phantom=new Pokemon(gengar,new Macho,10,12,10,10,sinAtaques)
     luchador=new Pokemon(machop,new Macho,10,12,10,10,sinAtaques)
     unPokemonDeFuego=new Pokemon(charmander,new Macho,10,12,10,10,sinAtaques)
     unPokemonDeAgua=new Pokemon(seeking,new Macho,10,1000,10,10,sinAtaques)
+    unPokemonQueEvolucionaConPiedraLunar=new Pokemon(nidorina,new Hembra,10,20,10,10,sinAtaques)
+    unPokemonQueEvolucionaConPiedraAgua=new Pokemon(staryu,new Hembra,10,20,10,10,sinAtaques)
   }
   
   def assertEstado(estado1:Estado, estado2:Estado)={
     assertEquals(true,estado1.getClass==estado2.getClass)
   }
   
+//////////////////////////////////////////////////////APRENDER ATAQUE//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon aprende un ataque afin distinto de normal` = {
+    phantom.realizarActividad(aprendeMaldicion)
+    assertEquals(25,phantom.ataque(maldicion).puntosAtaque)
+    assertEstado(new Estado.Normal,phantom.estado)
+  }  
+  
+  @Test
+  def `pokemon aprende un ataque normal` = {
+    phantom.realizarActividad(aprendeCorte)
+    assertEquals(30,phantom.ataque(corte).puntosAtaque)
+    assertEstado(new Estado.Normal,phantom.estado)
+  }  
+  
+  @Test
+  def `pokemon intenta aprender un ataque no afin y queda KO` = {
+    luchador.realizarActividad(aprendeMaldicion)
+    assertEquals(0,luchador.ataques.size)
+    assertEstado(new KO,luchador.estado)
+  }    
+  
 //////////////////////////////////////////////////////REALIZAR ATAQUE//////////////////////////////////////////////////////////////////////////////////////////////////  
   @Test
   def `pokemon macho realiza un ataque de su tipo principal que puede hacer y gana experiencia` = {
     carlitos.realizarActividad(morder)
     assertEquals(50,carlitos.experiencia)
-    assertEquals(29,mordida.puntosAtaque)
+    assertEquals(29,carlitos.ataque(mordida).puntosAtaque)
   }
   
   @Test
   def `pokemon hembra gana realiza un ataque que no es de su tipo principal  que puede hacer  y gana experiencia` = {
     carlita.realizarActividad(hipnotizar)
     assertEquals(40,carlita.experiencia)
-    assertEquals(19,hipnosis.puntosAtaque)
+    assertEquals(19,carlita.ataque(hipnosis).puntosAtaque)
   }
   
   @Test
@@ -107,7 +148,7 @@ class Punto2Test {
   @Test
   def `pokemon realiza un ataque que puede hacer, pero no tiene mas PA y tira error` = {   
     var tiroError=false
-    mordida.puntosAtaque=0
+    carlitos.ataque(mordida).puntosAtaque=0
     try{carlitos.realizarActividad(morder)}
     catch{
         case e: NoTieneMasPA => tiroError=true
@@ -119,7 +160,7 @@ class Punto2Test {
   def `pokemon realiza un ataque de tipo dragon` = {   
     pequeñoDragon.realizarActividad(colaDragonea)
     assertEquals(80,pequeñoDragon.experiencia)
-    assertEquals(9,dragonTail.puntosAtaque)
+    assertEquals(9,pequeñoDragon.ataque(dragonTail).puntosAtaque)
   }    
   
   @Test
@@ -179,10 +220,39 @@ class Punto2Test {
   def `pokemon de agua nada y gana experiencia y le aumenta la velocidad` = {
     val velocidadQueTendriaQueTener=unPokemonDeAgua.velocidad+4*4+2
     unPokemonDeAgua.realizarActividad(nadaMas)    
-    assertEquals(25000*2,unPokemonDeAgua.experiencia)
+    assertEquals(25000,unPokemonDeAgua.experiencia)
     assertEquals(velocidadQueTendriaQueTener,unPokemonDeAgua.velocidad)
     assertEquals(5,unPokemonDeAgua.nivel)
     assertEstado(new Estado.Normal,unPokemonDeAgua.estado)
   }    
+  
+//////////////////////////////////////////////////NADAR//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `se usa una piedra lunar en un pokemon que evoluciona con ella y evoluciona` = {
+    unPokemonQueEvolucionaConPiedraLunar.realizarActividad(usaPiedraLunar) 
+    assertEquals(nidoqueen,unPokemonQueEvolucionaConPiedraLunar.especie)
+    assertEstado(new Estado.Normal,unPokemonQueEvolucionaConPiedraLunar.estado)
+  }    
+  
+  @Test
+  def `se usa una piedra del tipo del pokemon y evoluciona` = {
+    unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraAgua) 
+    assertEquals(starmie,unPokemonQueEvolucionaConPiedraAgua.especie)
+    assertEstado(new Estado.Normal,unPokemonQueEvolucionaConPiedraAgua.estado)
+  }    
+  
+  @Test
+  def `se usa una piedra del tipo que no corresponde al tipo pokemon pero no queda envenenado` = {
+    unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraLunar) 
+    assertEquals(staryu,unPokemonQueEvolucionaConPiedraAgua.especie)
+    assertEstado(new Estado.Normal,unPokemonQueEvolucionaConPiedraAgua.estado)
+  } 
+  
+  @Test
+  def `se usa una piedra del tipo que no corresponde al pokemon y queda envenenado` = {
+    pequeñoDragon.realizarActividad(usaPiedraAgua) 
+    assertEquals(charmander,pequeñoDragon.especie)
+    assertEstado(new Envenenado,pequeñoDragon.estado)
+  } 
   
 }
