@@ -9,12 +9,12 @@ import tadp.grupo1.pokemon.tipo._
 /**
  * @author usuario
  */
-case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val energiaMaxima: Int, val fuerza: Int,
-    val velocidad: Int, val ataques:List[AtaquePokemon], val nivel:Int = 1, val experiencia:Long=0 , val energia:Int = energiaMaxima,
+case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val energiaMaxima: Int,  val energia:Int, val fuerza: Int,
+    val velocidad: Int, val ataques:List[AtaquePokemon], val nivel:Int = 1, val experiencia:Long=0 , 
     val estado:Estado= new tadp.grupo1.pokemon.estado.Normal) {//Hay que controlar que cumpla el peso de la especie  
   
   def ganarExperiencia(cantidad: Int): Unit ={
-    val nuevaExperiencia = experiencia += cantidad
+    val nuevaExperiencia = experiencia + cantidad
     val nuevoPokemon = copy(experiencia = nuevaExperiencia)
     especie.subirNivel(nuevoPokemon)   
   }
@@ -40,11 +40,11 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   /*CREO QUE VA EN EL POKEMON */ 
   
   def perderEnergia(cantidad:Int)={
-    energia-=cantidad
+    copy(energia = this.energia - cantidad)
   }
   
   def ganarVelocidad(cantidad:Int)={
-    velocidad+=cantidad
+    copy(velocidad = velocidad + cantidad)
   }
   
   def tieneAtaque(ataque:AtaqueGenerico)={
@@ -64,7 +64,8 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   } 
   
   def aprendeAtaque(ataque:AtaqueGenerico){
-    ataques=ataques.::(new AtaquePokemon(ataque))
+    val nuevaListAtaques = ataques.::(new AtaquePokemon(ataque))
+    copy(ataques = nuevaListAtaques)
   }
   
 /*  def usaPiedra(piedra:Piedra)={

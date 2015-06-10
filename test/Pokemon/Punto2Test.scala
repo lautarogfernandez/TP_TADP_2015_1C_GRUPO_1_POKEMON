@@ -8,11 +8,11 @@ import org.junit.Before
 import tadp.grupo1.pokemon.AtaqueGenerico;
 import tadp.grupo1.pokemon.Especie;
 import tadp.grupo1.pokemon.Piedra;
-import Pokemon._
-import Pokemon.CondicionEvolucion._
-import Pokemon.Estado._
-import Pokemon.Genero._
-import Pokemon.Tipo._
+import tadp.grupo1.pokemon._
+import tadp.grupo1.pokemon.condicion_evolucion._
+import tadp.grupo1.pokemon.estado._
+import tadp.grupo1.pokemon.genero._
+import tadp.grupo1.pokemon.tipo._
 import Actividad._
 
 /**
@@ -107,14 +107,14 @@ class Punto2Test {
   def `pokemon aprende un ataque afin distinto de normal` = {
     phantom.realizarActividad(aprendeMaldicion)
     assertEquals(25,phantom.ataque(maldicion).puntosAtaque)
-    assertEstado(new Estado.Normal,phantom.estado)
+    assertEstado(new EstadoNormal,phantom.estado)
   }  
   
   @Test
   def `pokemon aprende un ataque normal` = {
     phantom.realizarActividad(aprendeCorte)
     assertEquals(30,phantom.ataque(corte).puntosAtaque)
-    assertEstado(new Estado.Normal,phantom.estado)
+    assertEstado(new EstadoNormal,phantom.estado)
   }  
   
   @Test
@@ -187,7 +187,7 @@ class Punto2Test {
   def `pokemon no luchador levantar pesas y gana experiencia simple` = {   
     carlitos.realizarActividad(hacerPesas)
     assertEquals(5,carlitos.experiencia)
-    assertEstado(new Estado.Normal,carlitos.estado)
+    assertEstado(new EstadoNormal,carlitos.estado)
   }  
   
   @Test
@@ -217,7 +217,7 @@ class Punto2Test {
   def `pokemon que es de un tipo que no pierde contra uno de agua nadar y gana experiencia` = {
     carlitos.realizarActividad(nada)    
     assertEquals(1000,carlitos.experiencia)
-    assertEstado(new Estado.Normal,carlitos.estado)
+    assertEstado(new EstadoNormal,carlitos.estado)
   }    
   
   @Test
@@ -227,7 +227,7 @@ class Punto2Test {
     assertEquals(25000,unPokemonDeAgua.experiencia)
     assertEquals(velocidadQueTendriaQueTener,unPokemonDeAgua.velocidad)
     assertEquals(5,unPokemonDeAgua.nivel)
-    assertEstado(new Estado.Normal,unPokemonDeAgua.estado)
+    assertEstado(new EstadoNormal,unPokemonDeAgua.estado)
   }    
   
 //////////////////////////////////////////////////NADAR//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,14 +235,14 @@ class Punto2Test {
   def `se usa una piedra lunar en un pokemon que evoluciona con ella y evoluciona` = {
     unPokemonQueEvolucionaConPiedraLunar.realizarActividad(usaPiedraLunar) 
     assertEquals(nidoqueen,unPokemonQueEvolucionaConPiedraLunar.especie)
-    assertEstado(new Estado.Normal,unPokemonQueEvolucionaConPiedraLunar.estado)
+    assertEstado(new EstadoNormal,unPokemonQueEvolucionaConPiedraLunar.estado)
   }    
   
   @Test
   def `se usa una piedra del tipo del pokemon y evoluciona` = {
     unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraAgua) 
     assertEquals(starmie,unPokemonQueEvolucionaConPiedraAgua.especie)
-    assertEstado(new Estado.Normal,unPokemonQueEvolucionaConPiedraAgua.estado)
+    assertEstado(new EstadoNormal,unPokemonQueEvolucionaConPiedraAgua.estado)
   }    
   
   @Test

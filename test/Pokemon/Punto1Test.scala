@@ -6,11 +6,11 @@ import org.junit.Ignore
 import org.junit.Before
 
 import tadp.grupo1.pokemon.Especie;
-import Pokemon._
-import Pokemon.CondicionEvolucion._
-import Pokemon.Estado._
-import Pokemon.Genero._
-import Pokemon.Tipo._
+import tadp.grupo1.pokemon._
+import tadp.grupo1.pokemon.condicion_evolucion._
+import tadp.grupo1.pokemon.estado._
+import tadp.grupo1.pokemon.genero._
+import tadp.grupo1.pokemon.tipo._
 
 /**
  * @author usuario
