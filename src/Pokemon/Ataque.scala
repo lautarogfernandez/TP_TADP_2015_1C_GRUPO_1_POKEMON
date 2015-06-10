@@ -17,7 +17,8 @@ class AtaqueGenerico (val tipo:Tipo, var puntosAtaqueMaximo:Int, val efectoSecun
 
 class AtaquePokemon (val ataqueGenerico:AtaqueGenerico){
   
-  var puntosAtaque=ataqueGenerico.puntosAtaqueMaximo
+  var puntosAtaqueMaximoDelPokemon=ataqueGenerico.puntosAtaqueMaximo
+  var puntosAtaque=puntosAtaqueMaximoDelPokemon
   
   def bajaPA(){
     puntosAtaque-=1
@@ -30,6 +31,15 @@ class AtaquePokemon (val ataqueGenerico:AtaqueGenerico){
   def es(unAtaque:AtaqueGenerico)={
     ataqueGenerico==unAtaque
   }
+  
+  def aumentarPAMaximo(aumento:Int)={
+    puntosAtaqueMaximoDelPokemon+=aumento
+  }
+  
+  def reestablecerPA()={
+    puntosAtaque=puntosAtaqueMaximoDelPokemon
+  }
+  
 }
 
 

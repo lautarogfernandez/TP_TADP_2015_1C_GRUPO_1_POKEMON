@@ -67,6 +67,14 @@ class Punto2Test {
   val aprendeCorte=new AprenderAtaque(corte)
   val usaPiedraLunar=new Actividad.UsarPiedra(piedraLunar)
   val usaPiedraAgua=new Actividad.UsarPiedra(piedraAgua)
+  val usarPocion=new UsarPocion()
+  val usarAntidoto=new UsarAntidoto()
+  val usarEther=new UsarEther()
+  val comeHierro=new ComerHierro()
+  val comeZinc=new ComerZinc()
+  val comeCalcio=new ComerCalcio()
+  val descansa=new Descansar()
+  val teCambioPorOtro=new FingirIntercambio()  
   
   var carlitos:Pokemon=null
   var carlita:Pokemon=null
@@ -76,13 +84,14 @@ class Punto2Test {
   var unPokemonDeFuego:Pokemon=null
   var unPokemonDeAgua:Pokemon=null
   var unPokemonQueEvolucionaConPiedraLunar:Pokemon=null
-  var unPokemonQueEvolucionaConPiedraAgua:Pokemon=null  
+  var unPokemonQueEvolucionaConPiedraAgua:Pokemon=null
+  var peleador:Pokemon=null  
   
   @Before
   def setUp(){    
     carlitos=new Pokemon(rattata,new Macho,10,12,10,10,sinAtaques)
     carlitos.aprendeAtaque(mordida)
-    carlita=new Pokemon(jynx,new Hembra,10,12,10,10,sinAtaques)
+    carlita=new Pokemon(jynx,new Hembra,20,12,10,10,sinAtaques)
     carlita.aprendeAtaque(hipnosis)
     pequeñoDragon=new Pokemon(charmander,new Macho,10,12,10,10,sinAtaques)
     pequeñoDragon.aprendeAtaque(dragonTail)
@@ -92,6 +101,7 @@ class Punto2Test {
     unPokemonDeAgua=new Pokemon(seeking,new Macho,10,1000,10,10,sinAtaques)
     unPokemonQueEvolucionaConPiedraLunar=new Pokemon(nidorina,new Hembra,10,20,10,10,sinAtaques)
     unPokemonQueEvolucionaConPiedraAgua=new Pokemon(staryu,new Hembra,10,20,10,10,sinAtaques)
+    peleador=new Pokemon(machoke,new Macho,10,20,10,10,sinAtaques)
   }
   
   def assertEstado(estado1:Estado, estado2:Estado)={
@@ -226,7 +236,7 @@ class Punto2Test {
     assertEstado(new Estado.Normal,unPokemonDeAgua.estado)
   }    
   
-//////////////////////////////////////////////////NADAR//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////USAR IEDRA//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `se usa una piedra lunar en un pokemon que evoluciona con ella y evoluciona` = {
     unPokemonQueEvolucionaConPiedraLunar.realizarActividad(usaPiedraLunar) 
@@ -253,6 +263,138 @@ class Punto2Test {
     pequeñoDragon.realizarActividad(usaPiedraAgua) 
     assertEquals(charmander,pequeñoDragon.especie)
     assertEstado(new Envenenado,pequeñoDragon.estado)
-  } 
+  }  
+
+////////////////////////////////////////////////USAR POCION//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon usa pocion y se cura hasta su energia maxima` = {
+    luchador.energia=1
+    luchador.realizarActividad(usarPocion) 
+    assertEquals(luchador.energiaMaxima,luchador.energia)
+  }   
+
+  @Test
+  def `pokemon usa pocion y se cura hasta menos de su energia maxima` = {
+    unPokemonDeAgua.energia=900
+    unPokemonDeAgua.realizarActividad(usarPocion) 
+    assertEquals(950,unPokemonDeAgua.energia)
+  }   
+  
+////////////////////////////////////////////////USAR ANTIDOTO//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon paralizado usa antidoto y su estado pasa a ser normal` = {
+    luchador.estado=new Envenenado
+    luchador.realizarActividad(usarAntidoto) 
+    assertEstado(new Estado.Normal,luchador.estado)
+  }   
+
+  @Test
+  def `pokemon no paralizado usa antidoto y no cambia el estado` = {
+    luchador.realizarActividad(usarAntidoto) 
+    assertEstado(new Estado.Normal,luchador.estado)
+  }   
+  
+////////////////////////////////////////////////USAR ETHER//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon KO usa ether y no cambia su estado` = {
+    luchador.estado=new KO
+    luchador.realizarActividad(usarEther) 
+    assertEstado(new KO,luchador.estado)
+  }   
+
+  @Test
+  def `pokemon no KO usa ether y cambia su estado a normal` = {
+    luchador.estado=new Envenenado
+    luchador.realizarActividad(usarEther) 
+    assertEstado(new Estado.Normal,luchador.estado)
+  }      
+  
+////////////////////////////////////////////////COMER HIERRO//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon come hierro y aumenta fuerza` = {
+    val valorEsperado=luchador.fuerza+5
+    luchador.realizarActividad(comeHierro) 
+    assertEquals(valorEsperado,luchador.fuerza)
+  }    
+  
+////////////////////////////////////////////////COMER CALCIO//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon come calcio y aumenta velocidad` = {
+    val valorEsperado=luchador.velocidad+5
+    luchador.realizarActividad(comeCalcio) 
+    assertEquals(valorEsperado,luchador.velocidad)
+  }     
+  
+////////////////////////////////////////////////COMER ZINC//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon come zinc y aumenta los PA maximos de todos sus ataques` = {
+    carlitos.aprendeAtaque(corte)
+    val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
+    val valorEsperado2=carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon+2
+    carlitos.realizarActividad(comeZinc) 
+    assertEquals(valorEsperado1,carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado2,carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon)        
+    val valorEsperado3=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
+    val valorEsperado4=carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon+2
+    carlitos.realizarActividad(comeZinc) 
+    assertEquals(valorEsperado3,carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado4,carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon)
+  }    
+  
+////////////////////////////////////////////////DESCANSAR//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon con estado normal y energia menor al 50% descansa y sube todos los PA y cambia su estado a dormido` = {
+    val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon
+    carlitos.ataque(mordida).puntosAtaque-=5
+    carlitos.energia=4
+    carlitos.realizarActividad(descansa) 
+    assertEquals(valorEsperado1,carlitos.ataque(mordida).puntosAtaque)
+    assertEstado(new Dormido,carlitos.estado) 
+  }    
+  
+  @Test
+  def `pokemon descansa y solo sube todos los PA` = {
+    val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon
+    carlitos.ataque(mordida).puntosAtaque-=5
+    carlitos.realizarActividad(descansa) 
+    assertEquals(valorEsperado1,carlitos.ataque(mordida).puntosAtaque)
+    assertEstado(new Estado.Normal,carlitos.estado) 
+  }    
+  
+////////////////////////////////////////////////FINGIR INTERCAMBIO//////////////////////////////////////////////////////////////////////////////////////////////////
+  @Test
+  def `pokemon cuya condicion de evolucion es el intercambio, es inercambiado y evoluciona` = {
+    val valorEsperado=peleador.peso
+    peleador.realizarActividad(teCambioPorOtro) 
+    assertEquals(machamp,peleador.especie)
+    assertEquals(valorEsperado,peleador.peso)
+  }    
+  
+  @Test
+  def `pokemon macho que no evoluciona por intercambio, es cambiado y varia su peso` = {
+    val valorEsperado=pequeñoDragon.peso+1
+    pequeñoDragon.realizarActividad(teCambioPorOtro) 
+    assertEquals(charmander,pequeñoDragon.especie)
+    assertEquals(valorEsperado,pequeñoDragon.peso)
+  }   
+  
+  @Test
+  def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso` = {
+    val valorEsperado=carlita.peso-10
+    carlita.realizarActividad(teCambioPorOtro) 
+    assertEquals(jynx,carlita.especie)
+    assertEquals(valorEsperado,carlita.peso)
+  }    
+  
+  @Test
+  def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso pero queda en estado invalido y lanza error` = {
+    carlita.cambiarPeso(-19)
+    var tiroError=false
+    try{carlita.realizarActividad(teCambioPorOtro)}
+    catch{
+        case e: EstadoInvalido => tiroError=true
+    }
+    assertEquals(true,tiroError)    
+  }  
   
 }

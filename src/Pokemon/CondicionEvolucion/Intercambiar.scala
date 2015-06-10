@@ -7,7 +7,7 @@ import Pokemon._
  */
 class Intercambiar extends Condicion{
   
-  override def intercambiar(pokemon:Pokemon){
+  override def intercambio(pokemon:Pokemon){
     pokemon.evolucionar()
   }
   

@@ -25,16 +25,12 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
   
   def subiNivel(incrementoPeso:Int, incrementoEnergiaMaxima:Int, incrementoFuerza:Int, incrementoVelocidad:Int):Unit={
     nivel+=1
-    peso+=incrementoPeso
+    cambiarPeso(incrementoPeso)
     energiaMaxima+=incrementoEnergiaMaxima
     fuerza+=incrementoFuerza
     ganarVelocidad(incrementoVelocidad)
     especie.evolucioname(this)
     especie.subirNivel(this)
-  }
-  
-  def intercambiar():Unit={
-    especie.condicionEvolucion.intercambiar(this)
   }
   
   def evolucionar():Unit={
@@ -44,6 +40,10 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
   
   /*-------------------------------------------------------------------------- Hasta aca es el punto 1*/  
   /*CREO QUE VA EN EL POKEMON */ 
+  
+  def cambiarPeso(variacion:Int)={
+    peso+=variacion
+  }
   
   def perderEnergia(cantidad:Int)={
     energia-=cantidad
@@ -73,14 +73,6 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
     ataques=ataques.::(new AtaquePokemon(ataque))
   }
   
-/*  def usaPiedra(piedra:Piedra)={
-    especie.condicionEvolucion match{
-      case _:UsarPiedraLunar if piedra.tipo==new Lunar => evolucionar()
-      case _:CondicionEvolucion.UsarPiedra if piedra.tipo==especie.tipoPrincipal => evolucionar() 
-      case _ if (piedra.tipo.leGanaA(especie.tipoPrincipal)||piedra.tipo.leGanaA(especie.tipoSecundario)) => estado=new Envenenado
-    }
-  }*/
-  
   def usaPiedra(piedra:Piedra)={
     especie.condicionEvolucion match{
       case _:UsarPiedraLunar if piedra.tipo==new Lunar => evolucionar()
@@ -89,6 +81,48 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
                   estado=new Envenenado
     }
   }  
+  
+  def usaPocion(){
+    energia=math.min(energia+50,energiaMaxima)
+  }
+  
+  def usaAntidoto(){
+    estado match{
+      case _:Envenenado => estado=new Estado.Normal
+      case _ =>
+    }
+  }      
+  
+  def usaEther(){
+    estado match{
+      case _:KO =>
+      case _ => estado=new Estado.Normal
+    }
+  }      
+  
+  def comeHierro(){
+    fuerza+=5
+  }      
+  
+  def comeCalcio(){
+    velocidad+=5
+  }  
+  
+  def comeZinc()={
+    ataques.map(ataque => ataque.aumentarPAMaximo(2))
+  }  
+  
+  def descansa()={
+    ataques.map(ataque => ataque.reestablecerPA)
+    estado match{
+      case _:Estado.Normal if ((energiaMaxima*0.5)>energia) => estado=new Dormido
+      case _ =>
+    }
+  }  
+  
+  def fingirIntercambio()={
+    especie.sufriIntercambio(this)
+  }
   
   def realizarActividad(actividad:Actividad):Unit={
     estado match {
@@ -149,6 +183,14 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
                                                   case _ => estado=new KO  
                                                 }
           case usarPiedra:Actividad.UsarPiedra => usaPiedra(usarPiedra.piedra)
+          case _:UsarPocion => usaPocion()
+          case _:UsarAntidoto => usaAntidoto()
+          case _:UsarEther => usaEther()
+          case _:ComerHierro => comeHierro()
+          case _:ComerCalcio => comeCalcio()
+          case _:ComerZinc => comeZinc()
+          case _:Descansar => descansa()
+          case _:FingirIntercambio => fingirIntercambio()
             
             
             
@@ -156,7 +198,7 @@ class Pokemon(var especie: Especie, val genero: Genero, var peso: Int, var energ
         } 
             
     }
-    if (!estadoValido()) new EstadoInvalido
+    if (!estadoValido()) throw new EstadoInvalido()
   }   
   
 }
