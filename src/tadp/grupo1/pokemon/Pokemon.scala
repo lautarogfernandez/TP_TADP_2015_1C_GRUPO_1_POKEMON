@@ -9,22 +9,31 @@ import tadp.grupo1.pokemon.tipo._
 /**
  * @author usuario
  */
-case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val energiaMaxima: Int,  val energia:Int, val fuerza: Int,
-    val velocidad: Int, val ataques:List[AtaquePokemon], val nivel:Int = 1, val experiencia:Long=0 , 
-    val estado:Estado= new tadp.grupo1.pokemon.estado.Normal) {//Hay que controlar que cumpla el peso de la especie  
+case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val energiaMaxima: Int ,val energia:Int,  val fuerza: Int,
+    val velocidad: Int, val ataques:List[AtaquePokemon], val nivel:Int = 1, 
+    val estado:Estado= new EstadoNormal, val experiencia:Long=0) {//Hay que controlar que cumpla el peso de la especie  
   
-  def ganarExperiencia(cantidad: Int): Unit ={
+  
+  
+  
+  def ganarExperiencia(cantidad: Int): Pokemon ={
     val nuevaExperiencia = experiencia + cantidad
-    val nuevoPokemon = copy(experiencia = nuevaExperiencia)
-    especie.subirNivel(nuevoPokemon)   
+    var nuevoPokemon = copy(experiencia = nuevaExperiencia)
+    nuevoPokemon = especie.subirNivel(nuevoPokemon)
+    nuevoPokemon
   }
   
-  def subiNivel(incrementoPeso:Int, incrementoEnergiaMaxima:Int, incrementoFuerza:Int, incrementoVelocidad:Int):Unit={
-    val nuevoPokemon = copy(nivel = nivel + 1, peso = peso + incrementoPeso, energiaMaxima = energiaMaxima + incrementoEnergiaMaxima, 
-                        fuerza = fuerza + incrementoFuerza, velocidad = incrementoVelocidad)
+  def cambiarEstado(nuevoEstado: Estado): Pokemon = {
+     copy(estado = nuevoEstado)
+  }
+  
+  def subiNivel(incrementoPeso:Int, incrementoEnergiaMaxima:Int, incrementoFuerza:Int, incrementoVelocidad:Int) : Pokemon = {
+    var nuevoPokemon = copy(nivel = nivel + 1, peso = peso + incrementoPeso, energiaMaxima = energiaMaxima + incrementoEnergiaMaxima, 
+                        fuerza = fuerza + incrementoFuerza, velocidad = velocidad + incrementoVelocidad)
     
-    especie.evolucioname(this)
-    especie.subirNivel(this)
+    nuevoPokemon = especie.evolucioname(nuevoPokemon)
+    nuevoPokemon = especie.subirNivel(nuevoPokemon)
+    nuevoPokemon
   }
   
   def intercambiar():Unit={
@@ -63,7 +72,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
     (peso<=especie.pesoMaximo)&&(peso>0)//creo que hay mas, pero no se me ocurren    
   } 
   
-  def aprendeAtaque(ataque:AtaqueGenerico){
+  def aprendeAtaque(ataque:AtaqueGenerico) : Pokemon = {
     val nuevaListAtaques = ataques.::(new AtaquePokemon(ataque))
     copy(ataques = nuevaListAtaques)
   }
@@ -79,7 +88,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   def usaPiedra(piedra:Piedra)={
     especie.condicionEvolucion match{
       case _:UsarPiedraLunar if piedra.tipo==new Lunar => evolucionar()
-      case _:tadp.grupo1.pokemon.condicion_evolucion.UsarPiedra if piedra.tipo==especie.tipoPrincipal => evolucionar() 
+      case _:UsarPiedraParaEvolucion if piedra.tipo==especie.tipoPrincipal => evolucionar() 
       case _ => if (piedra.tipo.leGanaA(especie.tipoPrincipal) || piedra.tipo.leGanaA(especie.tipoSecundario)){
                   copy(estado = new Envenenado)
                 }

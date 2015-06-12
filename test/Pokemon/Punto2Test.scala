@@ -10,9 +10,9 @@ import tadp.grupo1.pokemon.Especie;
 import tadp.grupo1.pokemon.Piedra;
 import tadp.grupo1.pokemon._
 import tadp.grupo1.pokemon.condicion_evolucion._
+import tadp.grupo1.pokemon.tipo._
 import tadp.grupo1.pokemon.estado._
 import tadp.grupo1.pokemon.genero._
-import tadp.grupo1.pokemon.tipo._
 import Actividad._
 
 /**
@@ -22,7 +22,7 @@ class Punto2Test {
   
   val noTiene=new NoTiene
   val lunar=new Lunar
-  val normal=new Tipo.Normal
+  val normal=new Normal
   val hielo=new Hielo
   val psiquico=new Psiquico
   val fuego=new Fuego
@@ -51,7 +51,7 @@ class Punto2Test {
   val nidoqueen=new Especie(100,50,veneno,7,7,7,7,noTiene)
   val nidorina=new Especie(100,50,veneno,4,4,4,4,noTiene,new UsarPiedraLunar,nidoqueen)
   val starmie=new Especie(100,50,agua,7,7,7,7,psiquico)
-  val staryu=new Especie(100,50,agua,4,4,4,4,noTiene,new CondicionEvolucion.UsarPiedra,starmie)
+  val staryu=new Especie(100,50,agua,4,4,4,4,noTiene,new UsarPiedraParaEvolucion, starmie)
   
   val mordida=new AtaqueGenerico(normal,30,0)//no se que es lo de efecto secundario, debe ser una porcion de codigo que evalua el pokemon
   val hipnosis =new AtaqueGenerico(psiquico,20,0)
@@ -84,18 +84,18 @@ class Punto2Test {
   
   @Before
   def setUp(){    
-    carlitos=new Pokemon(rattata,new Macho,10,12,10,10,sinAtaques)
-    carlitos.aprendeAtaque(mordida)
-    carlita=new Pokemon(jynx,new Hembra,10,12,10,10,sinAtaques)
-    carlita.aprendeAtaque(hipnosis)
-    pequeñoDragon=new Pokemon(charmander,new Macho,10,12,10,10,sinAtaques)
-    pequeñoDragon.aprendeAtaque(dragonTail)
-    phantom=new Pokemon(gengar,new Macho,10,12,10,10,sinAtaques)
-    luchador=new Pokemon(machop,new Macho,10,12,10,10,sinAtaques)
-    unPokemonDeFuego=new Pokemon(charmander,new Macho,10,12,10,10,sinAtaques)
-    unPokemonDeAgua=new Pokemon(seeking,new Macho,10,1000,10,10,sinAtaques)
-    unPokemonQueEvolucionaConPiedraLunar=new Pokemon(nidorina,new Hembra,10,20,10,10,sinAtaques)
-    unPokemonQueEvolucionaConPiedraAgua=new Pokemon(staryu,new Hembra,10,20,10,10,sinAtaques)
+    carlitos = new Pokemon(rattata,new Macho,10,12,12,10,10,sinAtaques)
+    carlitos = carlitos.aprendeAtaque(mordida)
+    carlita=new Pokemon(jynx,new Hembra,10,12,12,10,10,sinAtaques)
+    carlita = carlita.aprendeAtaque(hipnosis)
+    pequeñoDragon=new Pokemon(charmander,new Macho,10,12,12,10,10,sinAtaques)
+    pequeñoDragon = pequeñoDragon.aprendeAtaque(dragonTail)
+    phantom=new Pokemon(gengar,new Macho,10,12,12,10,10,sinAtaques)
+    luchador=new Pokemon(machop,new Macho,10,12,12,10,10,sinAtaques)
+    unPokemonDeFuego=new Pokemon(charmander,new Macho,10,12,12,10,10,sinAtaques)
+    unPokemonDeAgua=new Pokemon(seeking,new Macho,10,1000,1000,10,10,sinAtaques)
+    unPokemonQueEvolucionaConPiedraLunar=new Pokemon(nidorina,new Hembra,10,20,20,10,10,sinAtaques)
+    unPokemonQueEvolucionaConPiedraAgua=new Pokemon(staryu,new Hembra,10,20,20,10,10,sinAtaques)
   }
   
   def assertEstado(estado1:Estado, estado2:Estado)={
@@ -192,7 +192,7 @@ class Punto2Test {
   
   @Test
   def `pokemon paralizado que quiere levantar pesas, queda KO y no gana experiencia` = {   
-    carlitos.estado=new Paralizado
+    carlitos = carlitos.cambiarEstado(new Paralizado)
     carlitos.realizarActividad(hacerPesas)    
     assertEquals(0,carlitos.experiencia)
     assertEstado(new KO,carlitos.estado)
@@ -202,7 +202,7 @@ class Punto2Test {
   def `pokemon tipo lucha quiere levantar pesas gana el doble de experiencia` = {
     luchador.realizarActividad(hacerPesas)    
     assertEquals(10,luchador.experiencia)
-    assertEstado(new Estado.Normal,luchador.estado)
+    assertEstado(new EstadoNormal,luchador.estado)
   }  
   
 ////////////////////////////////////////////////////NADAR////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -249,7 +249,7 @@ class Punto2Test {
   def `se usa una piedra del tipo que no corresponde al tipo pokemon pero no queda envenenado` = {
     unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraLunar) 
     assertEquals(staryu,unPokemonQueEvolucionaConPiedraAgua.especie)
-    assertEstado(new Estado.Normal,unPokemonQueEvolucionaConPiedraAgua.estado)
+    assertEstado(new EstadoNormal,unPokemonQueEvolucionaConPiedraAgua.estado)
   } 
   
   @Test

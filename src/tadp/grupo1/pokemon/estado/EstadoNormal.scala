@@ -3,6 +3,6 @@ package tadp.grupo1.pokemon.estado
 /**
  * @author usuario
  */
-class Normal extends Estado{
+class EstadoNormal extends Estado{
   
 }

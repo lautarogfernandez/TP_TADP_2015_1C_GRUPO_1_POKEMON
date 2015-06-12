@@ -23,12 +23,16 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
     }
   }
   
-  def subirNivel(pokemon: Pokemon):Unit={
-    if ((pokemon.experiencia >= experienciaNecesariaParaNivel(pokemon.nivel+1)) && (pokemon.nivel != 100))
-      pokemon.subiNivel(incrementoPeso, incrementoEnergiaMaxima, incrementoFuerza, incrementoVelocidad)      
-  }
+  def subirNivel(pokemon: Pokemon):Pokemon={
+		   var nuevoPokemon = pokemon
+       
+       if ((pokemon.experiencia >= experienciaNecesariaParaNivel(pokemon.nivel+1)) && (pokemon.nivel != 100))
+		      nuevoPokemon = pokemon.subiNivel(incrementoPeso, incrementoEnergiaMaxima, incrementoFuerza, incrementoVelocidad)  
+          
+       nuevoPokemon   
+	}
   
-  def evolucioname(pokemon:Pokemon)={//evolucionaSiPuedo
+  def evolucioname(pokemon:Pokemon) : Pokemon={//evolucionaSiPuedo
     condicionEvolucion.nivelParaEvolucionar(pokemon)
   }
   

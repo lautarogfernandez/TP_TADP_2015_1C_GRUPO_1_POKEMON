@@ -1,6 +1,5 @@
 package tadp.grupo1.pokemon.condicion_evolucion
 
-import Pokemon._
 import tadp.grupo1.pokemon.Pokemon
 
 /**
@@ -8,9 +7,13 @@ import tadp.grupo1.pokemon.Pokemon
  */
 class SubirNivel (val nivelNecesarioParaEvolucionar:Int) extends Condicion{
   
-  override def nivelParaEvolucionar(pokemon:Pokemon) {
+  override def nivelParaEvolucionar(pokemon:Pokemon) : Pokemon = {
+    var nuevoPokemon = pokemon
+    
     if (pokemon.nivel==nivelNecesarioParaEvolucionar)
-      pokemon.evolucionar()
+      nuevoPokemon = pokemon.evolucionar()
+    
+    nuevoPokemon
   }
   
 }

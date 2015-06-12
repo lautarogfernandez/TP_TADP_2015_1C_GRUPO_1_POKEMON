@@ -25,7 +25,7 @@ class Punto1Test {
   @Before
   def setUp(){
     var ataques:List[AtaquePokemon]= List()
-    carlitos=new Pokemon(charmander,new Macho,10,12,10,10,ataques)
+    carlitos= new Pokemon(charmander,new Macho,10,12,12,10,10,ataques)
   }
   
   @Test
@@ -41,7 +41,7 @@ class Punto1Test {
   
   @Test
   def `pokemon sube de nivel y evoluciona` = {
-    carlitos.ganarExperiencia(11468450)
+    carlitos = carlitos.ganarExperiencia(11468450)
     assertEquals(16,carlitos.nivel)  
     assertEquals(72,carlitos.energiaMaxima)
     assertEquals(70,carlitos.peso)
@@ -52,33 +52,33 @@ class Punto1Test {
  
   @Test
   def `pokemon sube de nivel, evoluciona y despues sube de nivel y evoluciona de nuevo, pero si sigue ganando experiencia, no evoluciona mas` = {
-    carlitos.ganarExperiencia(11468450)
+    carlitos = carlitos.ganarExperiencia(11468450)
     assertEquals(charmeleon,carlitos.especie)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
     assertEquals(charizard,carlitos.especie)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
     assertEquals(charizard,carlitos.especie)
   }
   
   @Test
   def `pokemon sube de nivel de nivel hasta un maximo de 100` = {
-    carlitos.ganarExperiencia(11468450)
+    carlitos = carlitos.ganarExperiencia(11468450)
     assertEquals(charmeleon,carlitos.especie)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
     assertEquals(charizard,carlitos.especie)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
-    carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
+    carlitos = carlitos.ganarExperiencia(999999999)
     assertEquals(charizard,carlitos.especie)
     assertEquals(100,carlitos.nivel)    
   }

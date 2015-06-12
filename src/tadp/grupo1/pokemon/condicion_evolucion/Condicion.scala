@@ -1,6 +1,6 @@
 package tadp.grupo1.pokemon.condicion_evolucion
 
-import Pokemon._
+import tadp.grupo1.pokemon._
 import tadp.grupo1.pokemon.Piedra
 import tadp.grupo1.pokemon.Pokemon
 
@@ -9,16 +9,16 @@ import tadp.grupo1.pokemon.Pokemon
  */
 abstract class Condicion {//seria un trait
   
-  def usarPiedra(pokemon:Pokemon, piedra:Piedra)={
-    
+  def usarPiedra(pokemon:Pokemon, piedra:Piedra): Pokemon ={
+    pokemon
   }
   
-  def intercambiar(pokemon:Pokemon)={
-    
+  def intercambiar(pokemon:Pokemon): Pokemon ={
+    pokemon
   }
   
-  def nivelParaEvolucionar(pokemon:Pokemon)={
-    
+  def nivelParaEvolucionar(pokemon:Pokemon) : Pokemon = {
+    pokemon
   }
   
 }
