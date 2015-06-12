@@ -7,7 +7,7 @@ import tadp.grupo1.pokemon.Pokemon
  */
 class Intercambiar extends Condicion{
   
-  override def intercambiar(pokemon:Pokemon) : Pokemon = {
+  override def intercambio(pokemon:Pokemon) : Pokemon = {
     pokemon.evolucionar()
   }
   
