@@ -53,7 +53,7 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
     }
   }  
   
-  def sufriIntercambio(pokemon:Pokemon){
+  def sufriIntercambio(pokemon:Pokemon) : Pokemon = {
     condicionEvolucion.intercambio(pokemon)
   }
   

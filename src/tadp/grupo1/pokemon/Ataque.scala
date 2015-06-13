@@ -4,8 +4,8 @@ import tadp.grupo1.pokemon.tipo.Tipo
 
 class AtaqueGenerico (val tipo:Tipo, var puntosAtaqueMaximo:Int, val efectoSecundario:Unit) {//ver el tipo de efecto secundario(le pongo Unit porque si)
   
-  def aplicarEfectoSecundarioA(pokemon:Pokemon)={
-    
+  def aplicarEfectoSecundarioA(pokemon:Pokemon) : Pokemon={
+    pokemon // TODO Hacer lo del Efecto secundario
   }
   
 }
@@ -20,7 +20,7 @@ class AtaquePokemon (val ataqueGenerico:AtaqueGenerico){
     puntosAtaque-=1
   }
   
-  def aplicarEfectoSecundarioA(pokemon:Pokemon)={
+  def aplicarEfectoSecundarioA(pokemon:Pokemon) : Pokemon ={
     ataqueGenerico.aplicarEfectoSecundarioA(pokemon)
   }  
   

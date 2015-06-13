@@ -91,11 +91,14 @@ class Punto2Test {
   var unPokemonQueEvolucionaConPiedraAgua:Pokemon=null
   var peleador:Pokemon=null  
   
+  // SUPER TODO en todos lados que hice pepe = pepe.realizarActividad() en realidad estaria bueno 
+  // crear un val pepeNuevo para que se vea la diferencia que pepe sigue siendo el original
+  
   @Before
   def setUp(){    
     carlitos = new Pokemon(rattata,new Macho,10,12,12,10,10,sinAtaques)
     carlitos = carlitos.aprendeAtaque(mordida)
-    carlita=new Pokemon(jynx,new Hembra,10,12,12,10,10,sinAtaques)
+    carlita=new Pokemon(jynx,new Hembra,11,12,12,10,10,sinAtaques)
     carlita = carlita.aprendeAtaque(hipnosis)
     pequeñoDragon=new Pokemon(charmander,new Macho,10,12,12,10,10,sinAtaques)
     pequeñoDragon = pequeñoDragon.aprendeAtaque(dragonTail)
@@ -115,21 +118,21 @@ class Punto2Test {
 //////////////////////////////////////////////////////APRENDER ATAQUE//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon aprende un ataque afin distinto de normal` = {
-    phantom.realizarActividad(aprendeMaldicion)
+    phantom = phantom.realizarActividad(aprendeMaldicion)
     assertEquals(25,phantom.ataque(maldicion).puntosAtaque)
     assertEstado(new EstadoNormal,phantom.estado)
   }  
   
   @Test
   def `pokemon aprende un ataque normal` = {
-    phantom.realizarActividad(aprendeCorte)
+    phantom = phantom.realizarActividad(aprendeCorte)
     assertEquals(30,phantom.ataque(corte).puntosAtaque)
     assertEstado(new EstadoNormal,phantom.estado)
   }  
   
   @Test
   def `pokemon intenta aprender un ataque no afin y queda KO` = {
-    luchador.realizarActividad(aprendeMaldicion)
+    luchador = luchador.realizarActividad(aprendeMaldicion)
     assertEquals(0,luchador.ataques.size)
     assertEstado(new KO,luchador.estado)
   }    
@@ -137,14 +140,14 @@ class Punto2Test {
 //////////////////////////////////////////////////////REALIZAR ATAQUE//////////////////////////////////////////////////////////////////////////////////////////////////  
   @Test
   def `pokemon macho realiza un ataque de su tipo principal que puede hacer y gana experiencia` = {
-    carlitos.realizarActividad(morder)
+    carlitos = carlitos.realizarActividad(morder)
     assertEquals(50,carlitos.experiencia)
     assertEquals(29,carlitos.ataque(mordida).puntosAtaque)
   }
   
   @Test
   def `pokemon hembra gana realiza un ataque que no es de su tipo principal  que puede hacer  y gana experiencia` = {
-    carlita.realizarActividad(hipnotizar)
+    carlita = carlita.realizarActividad(hipnotizar)
     assertEquals(40,carlita.experiencia)
     assertEquals(19,carlita.ataque(hipnosis).puntosAtaque)
   }
@@ -172,13 +175,13 @@ class Punto2Test {
   
   @Test
   def `pokemon realiza un ataque de tipo dragon` = {   
-    pequeñoDragon.realizarActividad(colaDragonea)
+    pequeñoDragon = pequeñoDragon.realizarActividad(colaDragonea)
     assertEquals(80,pequeñoDragon.experiencia)
     assertEquals(9,pequeñoDragon.ataque(dragonTail).puntosAtaque)
   }    
   
   @Test
-  def `pokemon realiza un ataque y sufre efecto secundario` = {//TODO: lo del efecto secundario    
+  def `pokemon realiza un ataque y sufre efecto secundario` = {// TODO: lo del efecto secundario    
     
   }    
   
@@ -190,12 +193,12 @@ class Punto2Test {
     catch{
         case e: NoPuedeLevantarPesas => tiroError=true
     }
-    assertEquals(true,tiroError)
+    assertEquals(true,tiroError) // TODO En Junit le podes @Test expected(TipoDeException) y listo no hace falta que hagas el try y eso a mano
   }
   
   @Test
   def `pokemon no luchador levantar pesas y gana experiencia simple` = {   
-    carlitos.realizarActividad(hacerPesas)
+    carlitos = carlitos.realizarActividad(hacerPesas)
     assertEquals(5,carlitos.experiencia)
     assertEstado(new EstadoNormal,carlitos.estado)
   }  
@@ -203,14 +206,14 @@ class Punto2Test {
   @Test
   def `pokemon paralizado que quiere levantar pesas, queda KO y no gana experiencia` = {   
     carlitos = carlitos.cambiarEstado(new Paralizado)
-    carlitos.realizarActividad(hacerPesas)    
+    carlitos = carlitos.realizarActividad(hacerPesas)    
     assertEquals(0,carlitos.experiencia)
     assertEstado(new KO,carlitos.estado)
   }
   
   @Test
   def `pokemon tipo lucha quiere levantar pesas gana el doble de experiencia` = {
-    luchador.realizarActividad(hacerPesas)    
+    luchador = luchador.realizarActividad(hacerPesas)    
     assertEquals(10,luchador.experiencia)
     assertEstado(new EstadoNormal,luchador.estado)
   }  
@@ -218,14 +221,14 @@ class Punto2Test {
 ////////////////////////////////////////////////////NADAR////////////////////////////////////////////////////////////////////////////////////////////////// 
   @Test
   def `pokemon de un tipo que pierde contra uno de agua quiere nadar y no gana experiencia y queda KO` = {
-    unPokemonDeFuego.realizarActividad(nada)    
-    assertEquals(0,unPokemonDeFuego.experiencia)
-    assertEstado(new KO,unPokemonDeFuego.estado)
+    unPokemonDeFuego = unPokemonDeFuego.realizarActividad(nada)    
+    assertEquals(0, unPokemonDeFuego.experiencia)
+    assertEstado(new KO, unPokemonDeFuego.estado)
   }  
 
   @Test
   def `pokemon que es de un tipo que no pierde contra uno de agua nadar y gana experiencia` = {
-    carlitos.realizarActividad(nada)    
+    carlitos = carlitos.realizarActividad(nada)    
     assertEquals(1000,carlitos.experiencia)
     assertEstado(new EstadoNormal,carlitos.estado)
   }    
@@ -233,9 +236,9 @@ class Punto2Test {
   @Test
   def `pokemon de agua nada y gana experiencia y le aumenta la velocidad` = {
     val velocidadQueTendriaQueTener=unPokemonDeAgua.velocidad+4*4+2
-    unPokemonDeAgua.realizarActividad(nadaMas)    
-    assertEquals(25000,unPokemonDeAgua.experiencia)
-    assertEquals(velocidadQueTendriaQueTener,unPokemonDeAgua.velocidad)
+    unPokemonDeAgua = unPokemonDeAgua.realizarActividad(nadaMas)    
+    assertEquals(25000, unPokemonDeAgua.experiencia)
+    assertEquals(velocidadQueTendriaQueTener, unPokemonDeAgua.velocidad)
     assertEquals(5,unPokemonDeAgua.nivel)
     assertEstado(new EstadoNormal,unPokemonDeAgua.estado)
   }    
@@ -243,28 +246,28 @@ class Punto2Test {
 //////////////////////////////////////////////////USAR IEDRA//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `se usa una piedra lunar en un pokemon que evoluciona con ella y evoluciona` = {
-    unPokemonQueEvolucionaConPiedraLunar.realizarActividad(usaPiedraLunar) 
+    unPokemonQueEvolucionaConPiedraLunar = unPokemonQueEvolucionaConPiedraLunar.realizarActividad(usaPiedraLunar) 
     assertEquals(nidoqueen,unPokemonQueEvolucionaConPiedraLunar.especie)
     assertEstado(new EstadoNormal,unPokemonQueEvolucionaConPiedraLunar.estado)
   }    
   
   @Test
   def `se usa una piedra del tipo del pokemon y evoluciona` = {
-    unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraAgua) 
+    unPokemonQueEvolucionaConPiedraAgua = unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraAgua) 
     assertEquals(starmie,unPokemonQueEvolucionaConPiedraAgua.especie)
     assertEstado(new EstadoNormal,unPokemonQueEvolucionaConPiedraAgua.estado)
   }    
   
   @Test
   def `se usa una piedra del tipo que no corresponde al tipo pokemon pero no queda envenenado` = {
-    unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraLunar) 
+    unPokemonQueEvolucionaConPiedraAgua = unPokemonQueEvolucionaConPiedraAgua.realizarActividad(usaPiedraLunar) 
     assertEquals(staryu,unPokemonQueEvolucionaConPiedraAgua.especie)
     assertEstado(new EstadoNormal,unPokemonQueEvolucionaConPiedraAgua.estado)
   } 
   
   @Test
   def `se usa una piedra del tipo que no corresponde al pokemon y queda envenenado` = {
-    pequeñoDragon.realizarActividad(usaPiedraAgua) 
+    pequeñoDragon = pequeñoDragon.realizarActividad(usaPiedraAgua) 
     assertEquals(charmander,pequeñoDragon.especie)
     assertEstado(new Envenenado,pequeñoDragon.estado)
   }  
@@ -279,22 +282,22 @@ class Punto2Test {
 
   @Test
   def `pokemon usa pocion y se cura hasta menos de su energia maxima` = {
-    unPokemonDeAgua = unPokemonDeAgua.subirAtributo(energiaASubir=900)
-    unPokemonDeAgua.realizarActividad(usarPocion) 
-    assertEquals(950,unPokemonDeAgua.energia)
+    unPokemonDeAgua = unPokemonDeAgua.copy(energia = 900)
+    unPokemonDeAgua = unPokemonDeAgua.realizarActividad(usarPocion) 
+    assertEquals(950, unPokemonDeAgua.energia)
   }   
   
 ////////////////////////////////////////////////USAR ANTIDOTO//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon paralizado usa antidoto y su estado pasa a ser normal` = {
     luchador = luchador.cambiarEstado(new Envenenado)
-    luchador.realizarActividad(usarAntidoto) 
+    luchador = luchador.realizarActividad(usarAntidoto) 
     assertEstado(new EstadoNormal,luchador.estado)
   }   
 
   @Test
   def `pokemon no paralizado usa antidoto y no cambia el estado` = {
-    luchador.realizarActividad(usarAntidoto) 
+    luchador = luchador.realizarActividad(usarAntidoto) 
     assertEstado(new EstadoNormal,luchador.estado)
   }   
   
@@ -302,47 +305,47 @@ class Punto2Test {
   @Test
   def `pokemon KO usa ether y no cambia su estado` = {
     luchador = luchador.cambiarEstado(new KO)
-    luchador.realizarActividad(usarEther) 
-    assertEstado(new KO,luchador.estado)
+    val nuevoLuchador = luchador.realizarActividad(usarEther) 
+    assertEstado(new KO, nuevoLuchador.estado)
   }   
 
   @Test
   def `pokemon no KO usa ether y cambia su estado a normal` = {
     luchador = luchador.cambiarEstado(new Envenenado)
-    luchador.realizarActividad(usarEther) 
-    assertEstado(new EstadoNormal,luchador.estado)
+    val nuevoLuchador = luchador.realizarActividad(usarEther) 
+    assertEstado(new EstadoNormal, nuevoLuchador.estado)
   }      
   
 ////////////////////////////////////////////////COMER HIERRO//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon come hierro y aumenta fuerza` = {
     val valorEsperado=luchador.fuerza+5
-    luchador.realizarActividad(comeHierro) 
-    assertEquals(valorEsperado,luchador.fuerza)
+    val nuevoLuchador = luchador.realizarActividad(comeHierro) 
+    assertEquals(valorEsperado, nuevoLuchador.fuerza)
   }    
   
 ////////////////////////////////////////////////COMER CALCIO//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon come calcio y aumenta velocidad` = {
     val valorEsperado=luchador.velocidad+5
-    luchador.realizarActividad(comeCalcio) 
-    assertEquals(valorEsperado,luchador.velocidad)
+    val nuevoLuchador = luchador.realizarActividad(comeCalcio) 
+    assertEquals(valorEsperado, nuevoLuchador.velocidad)
   }     
   
 ////////////////////////////////////////////////COMER ZINC//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon come zinc y aumenta los PA maximos de todos sus ataques` = {
-    carlitos.aprendeAtaque(corte)
+    carlitos = carlitos.aprendeAtaque(corte)
     val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
     val valorEsperado2=carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon+2
-    carlitos.realizarActividad(comeZinc) 
-    assertEquals(valorEsperado1,carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon)
-    assertEquals(valorEsperado2,carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon)        
-    val valorEsperado3=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
-    val valorEsperado4=carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon+2
-    carlitos.realizarActividad(comeZinc) 
-    assertEquals(valorEsperado3,carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon)
-    assertEquals(valorEsperado4,carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon)
+    val carlitosDespuesDeComerZinc = carlitos.realizarActividad(comeZinc) 
+    assertEquals(valorEsperado1, carlitosDespuesDeComerZinc.ataque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado2, carlitosDespuesDeComerZinc.ataque(corte).puntosAtaqueMaximoDelPokemon)        
+    val valorEsperado3 = carlitosDespuesDeComerZinc.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
+    val valorEsperado4 = carlitosDespuesDeComerZinc.ataque(corte).puntosAtaqueMaximoDelPokemon+2
+    val carlitosDespuesDeComerZinc2Veces = carlitosDespuesDeComerZinc.realizarActividad(comeZinc) 
+    assertEquals(valorEsperado3, carlitosDespuesDeComerZinc2Veces.ataque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado4, carlitosDespuesDeComerZinc2Veces.ataque(corte).puntosAtaqueMaximoDelPokemon)
   }    
   
 ////////////////////////////////////////////////DESCANSAR//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -351,48 +354,48 @@ class Punto2Test {
     val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon
     carlitos.ataque(mordida).puntosAtaque-=5
     carlitos = carlitos.copy(energia=4)
-    carlitos.realizarActividad(descansa) 
-    assertEquals(valorEsperado1,carlitos.ataque(mordida).puntosAtaque)
-    assertEstado(new Dormido,carlitos.estado) 
+    val carlitosDescanzado = carlitos.realizarActividad(descansa) 
+    assertEquals(valorEsperado1, carlitosDescanzado.ataque(mordida).puntosAtaque)
+    assertEstado(new Dormido, carlitosDescanzado.estado) 
   }    
   
   @Test
   def `pokemon descansa y solo sube todos los PA` = {
     val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon
     carlitos.ataque(mordida).puntosAtaque-=5
-    carlitos.realizarActividad(descansa) 
-    assertEquals(valorEsperado1,carlitos.ataque(mordida).puntosAtaque)
-    assertEstado(new EstadoNormal,carlitos.estado) 
+    val carlitosDescanzado = carlitos.realizarActividad(descansa) 
+    assertEquals(valorEsperado1, carlitosDescanzado.ataque(mordida).puntosAtaque)
+    assertEstado(new EstadoNormal, carlitosDescanzado.estado) 
   }    
   
 ////////////////////////////////////////////////FINGIR INTERCAMBIO//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon cuya condicion de evolucion es el intercambio, es inercambiado y evoluciona` = {
-    val valorEsperado=peleador.peso
-    peleador.realizarActividad(teCambioPorOtro) 
-    assertEquals(machamp,peleador.especie)
-    assertEquals(valorEsperado,peleador.peso)
+    val valorEsperado = peleador.peso
+    val peleadorCambiado = peleador.realizarActividad(teCambioPorOtro) 
+    assertEquals(machamp, peleadorCambiado.especie)
+    assertEquals(valorEsperado, peleadorCambiado.peso)
   }    
   
   @Test
   def `pokemon macho que no evoluciona por intercambio, es cambiado y varia su peso` = {
-    val valorEsperado=pequeñoDragon.peso+1
-    pequeñoDragon.realizarActividad(teCambioPorOtro) 
-    assertEquals(charmander,pequeñoDragon.especie)
-    assertEquals(valorEsperado,pequeñoDragon.peso)
+    val valorEsperado = pequeñoDragon.peso+1
+    val pequeñoDragonCambiado = pequeñoDragon.realizarActividad(teCambioPorOtro) 
+    assertEquals(charmander, pequeñoDragonCambiado.especie)
+    assertEquals(valorEsperado, pequeñoDragonCambiado.peso)
   }   
   
   @Test
   def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso` = {
     val valorEsperado=carlita.peso-10
-    carlita.realizarActividad(teCambioPorOtro) 
-    assertEquals(jynx,carlita.especie)
-    assertEquals(valorEsperado,carlita.peso)
+    val carlitaIntercambiada = carlita.realizarActividad(teCambioPorOtro) 
+    assertEquals(jynx, carlitaIntercambiada.especie)
+    assertEquals(valorEsperado, carlitaIntercambiada.peso)
   }    
   
   @Test
   def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso pero queda en estado invalido y lanza error` = {
-    carlita.cambiarPeso(-19)
+    carlita = carlita.cambiarPeso(-19)
     var tiroError=false
     try{carlita.realizarActividad(teCambioPorOtro)}
     catch{

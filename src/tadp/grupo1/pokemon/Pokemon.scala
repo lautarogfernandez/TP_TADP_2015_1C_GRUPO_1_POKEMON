@@ -82,64 +82,70 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
     copy(ataques = nuevaListAtaques)
   }
 
-  def usaPiedra(piedra: Piedra) = {
+  def usaPiedra(piedra: Piedra) : Pokemon = {
     especie.condicionEvolucion match {
       case _: UsarPiedraLunar if piedra.tipo == new Lunar                     => evolucionar()
       case _: UsarPiedraParaEvolucion if piedra.tipo == especie.tipoPrincipal => evolucionar()
-      case _ => if (piedra.tipo.leGanaA(especie.tipoPrincipal) || piedra.tipo.leGanaA(especie.tipoSecundario))
-        copy(estado = new Envenenado)
-    }
+      case _ => var pokemonCapazEnvenenado = this 
+        if (piedra.tipo.leGanaA(especie.tipoPrincipal) || piedra.tipo.leGanaA(especie.tipoSecundario)){
+          pokemonCapazEnvenenado = copy(estado = new Envenenado)
+        }
+        pokemonCapazEnvenenado
+      }
   }
 
-  def usaPocion() {
+  def usaPocion() : Pokemon = {
     copy(energia = math.min(energia + 50, energiaMaxima))
   }
 
-  def usaAntidoto() {
+  def usaAntidoto() : Pokemon = {
     estado match {
       case _: Envenenado => cambiarEstado(new EstadoNormal)
-      case _             =>
+      case _             => this
     }
   }
 
-  def usaEther() {
+  def usaEther() : Pokemon = {
     estado match {
-      case _: KO =>
+      case _: KO => this // TODO no habria que controlar el KO antes de entrar a la actividad en si ?? porque con el KO creo que no puede hacer nada
       case _     => cambiarEstado(new EstadoNormal)
     }
   }
 
-  def comeHierro() {
+  def comeHierro() : Pokemon = {
     subirAtributo(fuerzaASubir = 5)
   }
 
-  def comeCalcio() {
+  def comeCalcio() : Pokemon = {
     subirAtributo(velocidadASubir = 5)
   }
 
-  def comeZinc() = {
-    ataques.map(ataque => ataque.aumentarPAMaximo(2))
+  def comeZinc() : Pokemon = {
+    ataques.map(ataque => ataque.aumentarPAMaximo(2)) // TODO es correcto 
+    this
   }
-  def descansa() = {
+  
+  def descansa() : Pokemon = {
     ataques.map(ataque => ataque.reestablecerPA)
     estado match {
       case _: EstadoNormal if ((energiaMaxima * 0.5) > energia) => cambiarEstado(new Dormido)
-      case _ =>
+      case _ => this
     }
   }
-  def fingirIntercambio() = {
+  def fingirIntercambio() : Pokemon = {
     especie.sufriIntercambio(this)
   }
 
   def realizarActividad(actividad: Actividad): Pokemon = {
-    estado match {
-      case dormido: Dormido if dormido.acividadesQuePuedeIgnorar > 0 => //acividadesQuePuedeIgnorar debe ser val pero no se como seria 
+    val pokemonDespuesDeRealizarActivdad = estado match {
+      case dormido: Dormido if dormido.acividadesQuePuedeIgnorar > 0 => this//TODO acividadesQuePuedeIgnorar debe ser val pero no se como seria 
       case _ => actividad match {
 
         case realizarAtaque: RealizarAtaque => if (this.tieneAtaque(realizarAtaque.ataque))
           if (this.leQuedanAtaquesDe(realizarAtaque.ataque)) {
             ataque(realizarAtaque.ataque).bajaPA
-            realizarAtaque.ataque.tipo match {
+            
+            val pokemonDespuesDeGanarExpPorAtacar : Pokemon = realizarAtaque.ataque.tipo match {
               case _: Dragon => ganarExperiencia(80)
               case _ =>
                 if (especie.esDelTipoPrincipal(realizarAtaque.ataque.tipo))
@@ -149,8 +155,11 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
                     case hembra: Hembra => ganarExperiencia(40)
                     case macho: Macho   => ganarExperiencia(20)
                   }
+                else this
+                  
             }
-            ataque(realizarAtaque.ataque).aplicarEfectoSecundarioA(this)
+            ataque(realizarAtaque.ataque).aplicarEfectoSecundarioA(pokemonDespuesDeGanarExpPorAtacar)
+            
           } else
             throw new NoTieneMasPA //hacer error como en el de micro                                                    
         else
@@ -172,19 +181,25 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
           else
             copy(estado = new Paralizado)
         }
-        case nadar: Nadar => if ((energia - nadar.minutos) < 0) //no se si hace falta porque controla el estado al final   
-          new NoPuedeRealizarActividad
-        else
-          especie.tipoPrincipal match {
-            case _: Agua =>
-              ganarExperiencia(200 * nadar.minutos)
-              ganarVelocidad(nadar.minutos / 60)
-              perderEnergia(nadar.minutos)
-            case _ if ((especie.tipoPrincipal.pierdeContra(new Agua)) || especie.tipoSecundario.pierdeContra(new Agua)) => copy(estado = new KO)
-            case _ =>
-              ganarExperiencia(200 * nadar.minutos)
-              perderEnergia(nadar.minutos)
+        case nadar: Nadar => 
+          var pokemonDespuesDeNadar = this
+          if ((energia - nadar.minutos) < 0) // TODO no se si hace falta porque controla el estado al final   
+            new NoPuedeRealizarActividad // TODO Y si devolvemos a this en vez de tirar exception?? se necesita para el punto 4??
+          else{
+            especie.tipoPrincipal match {
+              case _: Agua =>
+                pokemonDespuesDeNadar = ganarExperiencia(200 * nadar.minutos)
+                pokemonDespuesDeNadar = pokemonDespuesDeNadar.ganarVelocidad(nadar.minutos / 60)
+                pokemonDespuesDeNadar = pokemonDespuesDeNadar.perderEnergia(nadar.minutos)
+              case _ if ((especie.tipoPrincipal.pierdeContra(new Agua)) || especie.tipoSecundario.pierdeContra(new Agua)) => pokemonDespuesDeNadar = copy(estado = new KO)
+              case _ =>
+                pokemonDespuesDeNadar = ganarExperiencia(200 * nadar.minutos)
+                pokemonDespuesDeNadar = pokemonDespuesDeNadar.perderEnergia(nadar.minutos)
+            }
           }
+          
+          pokemonDespuesDeNadar
+          
         case aprenderAtaque: AprenderAtaque => aprenderAtaque.ataque match {
           case attack if (especie.esAfin(attack.tipo)) => aprendeAtaque(attack)
           case _                                       => copy(estado = new KO)
@@ -203,7 +218,10 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
       }
 
     }
-    if (!estadoValido()) throw new EstadoInvalido()
+    
+    if (! pokemonDespuesDeRealizarActivdad.estadoValido()) throw new EstadoInvalido() // Por que hacer un if en vez de un match al principio??
+    
+    pokemonDespuesDeRealizarActivdad
   }
 
 }

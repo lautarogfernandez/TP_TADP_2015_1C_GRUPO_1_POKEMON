@@ -12,7 +12,7 @@ abstract class Tipo {
   }
   
 def ==(tipo:Tipo):Boolean={//redefino el igual
-    tipo.getClass()==this.getClass()
+    tipo.getClass()==this.getClass() // TODO no hace falta hacer esto. Porque al definir al tipo como Case class ya te redefine el equals por los atributos
   }  
   
 }
