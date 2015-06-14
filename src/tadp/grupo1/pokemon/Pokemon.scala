@@ -126,10 +126,11 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   }
   
   def descansa() : Pokemon = {
-    ataques.map(ataque => ataque.reestablecerPA)
-    estado match {
-      case _: EstadoNormal if ((energiaMaxima * 0.5) > energia) => cambiarEstado(new Dormido)
-      case _ => this
+    val ataquesConPARecargados = ataques.map(ataque => ataque.reestablecerPA)
+    val pokemonConAtaquesRecargados = copy(ataques = ataquesConPARecargados)
+    pokemonConAtaquesRecargados.estado match {
+      case _: EstadoNormal if ((energiaMaxima * 0.5) > energia) => pokemonConAtaquesRecargados.cambiarEstado(new Dormido)
+      case _ => pokemonConAtaquesRecargados
     }
   }
   def fingirIntercambio() : Pokemon = {

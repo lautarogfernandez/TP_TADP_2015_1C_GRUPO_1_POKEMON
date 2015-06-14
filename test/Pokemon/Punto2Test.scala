@@ -380,8 +380,7 @@ class Punto2Test {
   def `pokemon con estado normal y energia menor al 50% descansa y sube todos los PA y cambia su estado a dormido` = {
     val valorEsperado1=carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon
     val ataqueMordidaSinPA = carlitos.dameAtaque(mordida).copy(puntosAtaque = 0)
-    carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA)
-    carlitos = carlitos.copy(energia=4)
+    carlitos = carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA).copy(energia=4)
     
     assertEquals(carlitos.dameAtaque(mordida).puntosAtaque, 0)
     val carlitosDescanzado = carlitos.realizarActividad(descansa) 
@@ -393,7 +392,7 @@ class Punto2Test {
   def `pokemon descansa y solo sube todos los PA` = {
     val valorEsperado1 = carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon
     val ataqueMordidaSinPA = carlitos.dameAtaque(mordida).copy(puntosAtaque = 0)
-    carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA)
+    carlitos = carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA)
     
     assertEquals(carlitos.dameAtaque(mordida).puntosAtaque, 0)
     val carlitosDescanzado = carlitos.realizarActividad(descansa) 
