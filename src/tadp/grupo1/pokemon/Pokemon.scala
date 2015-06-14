@@ -136,14 +136,21 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
     especie.sufriIntercambio(this)
   }
   
-  def bajarPA(ataque : AtaqueGenerico) = {
+  def bajarPA(ataqueGenerico : AtaqueGenerico) = {
     
-    val nuevoAtaque = dameAtaque(ataque).bajaPA()
-    val nuevaListaConAtaqueModicado = ataques.filterNot { _.es(ataque) }.::(nuevoAtaque )
+    val nuevoAtaque = dameAtaque(ataqueGenerico).bajaPA()
+    val nuevaListaConAtaqueModicado = ataques.filterNot { _.es(ataqueGenerico) }.::(nuevoAtaque )
     copy( ataques = nuevaListaConAtaqueModicado ) 
   
   }
 
+  def cambiarAtaque(ataqueViejo : AtaqueGenerico, ataqueNuevo : AtaquePokemon) = {
+    
+    val nuevaListaConAtaqueModicado = ataques.filterNot { _.es(ataqueViejo) }.::(ataqueNuevo)
+    copy( ataques = nuevaListaConAtaqueModicado ) 
+  
+  }
+  
   def realizarActividad(actividad: Actividad): Pokemon = {
     val pokemonDespuesDeRealizarActivdad = estado match {
       case pokemonKO : KO => throw new NoPuedeRealizarActividadPorKO
