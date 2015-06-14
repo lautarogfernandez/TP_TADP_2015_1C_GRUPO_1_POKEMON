@@ -53,11 +53,14 @@ class Punto2Test {
   val starmie=new Especie(100,50,agua,7,7,7,7,psiquico)
   val staryu=new Especie(100,50,agua,4,4,4,4,noTiene,new UsarPiedraParaEvolucion, starmie)
   
-  val mordida=new AtaqueGenerico(normal,30,0)//no se que es lo de efecto secundario, debe ser una porcion de codigo que evalua el pokemon
-  val hipnosis =new AtaqueGenerico(psiquico,20,0)
-  val dragonTail =new AtaqueGenerico(dragon,10,0)
-  val maldicion =new AtaqueGenerico(fantasma,25,0)
-  val corte = new AtaqueGenerico(normal,30,0)
+  val mordida=new AtaqueGenerico(normal,30)
+  val hipnosis =new AtaqueGenerico(psiquico,20, { pokemonAtacante => pokemonAtacante.cambiarEstado(new Dormido)})
+  val dragonTail =new AtaqueGenerico(dragon,10)
+  val maldicion =new AtaqueGenerico(fantasma,25)
+  val corte = new AtaqueGenerico(normal,30)
+  val reposo = new AtaqueGenerico(normal,30, { pokemonAtacante => pokemonAtacante.copy(energia = pokemonAtacante.energiaMaxima).cambiarEstado(new Dormido) })
+  val enfocarse = new AtaqueGenerico(normal,30, { pokemonAtacante => pokemonAtacante.subirAtributo(velocidadASubir = 1) } )
+  val endurucerse = new AtaqueGenerico(normal,30, { pokemonAtacante => pokemonAtacante.subirAtributo(energiaASubir = 5).cambiarEstado(new Paralizado) })
   
   var sinAtaques:List[AtaquePokemon]= List()
   
@@ -119,14 +122,14 @@ class Punto2Test {
   @Test
   def `pokemon aprende un ataque afin distinto de normal` = {
     phantom = phantom.realizarActividad(aprendeMaldicion)
-    assertEquals(25,phantom.ataque(maldicion).puntosAtaque)
+    assertEquals(25,phantom.dameAtaque(maldicion).puntosAtaque)
     assertEstado(new EstadoNormal,phantom.estado)
   }  
   
   @Test
   def `pokemon aprende un ataque normal` = {
     phantom = phantom.realizarActividad(aprendeCorte)
-    assertEquals(30,phantom.ataque(corte).puntosAtaque)
+    assertEquals(30,phantom.dameAtaque(corte).puntosAtaque)
     assertEstado(new EstadoNormal,phantom.estado)
   }  
   
@@ -142,58 +145,81 @@ class Punto2Test {
   def `pokemon macho realiza un ataque de su tipo principal que puede hacer y gana experiencia` = {
     carlitos = carlitos.realizarActividad(morder)
     assertEquals(50,carlitos.experiencia)
-    assertEquals(29,carlitos.ataque(mordida).puntosAtaque)
+    assertEquals(29,carlitos.dameAtaque(mordida).puntosAtaque)
   }
   
   @Test
   def `pokemon hembra gana realiza un ataque que no es de su tipo principal  que puede hacer  y gana experiencia` = {
     carlita = carlita.realizarActividad(hipnotizar)
     assertEquals(40,carlita.experiencia)
-    assertEquals(19,carlita.ataque(hipnosis).puntosAtaque)
+    assertEquals(19,carlita.dameAtaque(hipnosis).puntosAtaque)
   }
   
-  @Test
-  def `pokemon realiza un ataque que no puede hacer y tira error` = {
-    var tiroError=false
-    try{carlitos.realizarActividad(hipnotizar)}
-    catch{
-        case e: NoTieneElAtaque => tiroError=true
-    }
-    assertEquals(true,tiroError)
+  @Test(expected = classOf[NoTieneElAtaque])
+  def `pokemon realiza un ataque que no puede hacer y tira error` : Unit = {
+    
+    carlitos.realizarActividad(hipnotizar)
+
   }
   
-  @Test
-  def `pokemon realiza un ataque que puede hacer, pero no tiene mas PA y tira error` = {   
-    var tiroError=false
-    carlitos.ataque(mordida).puntosAtaque=0
-    try{carlitos.realizarActividad(morder)}
-    catch{
-        case e: NoTieneMasPA => tiroError=true
-    }
-    assertEquals(true,tiroError)
+  @Test(expected = classOf[NoTieneMasPA])
+  def `pokemon realiza un ataque que puede hacer, pero no tiene mas PA y tira error` : Unit = {   
+
+    val ataqueMordidaSinPA = carlitos.dameAtaque(mordida).copy(puntosAtaque = 0)
+    carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA).realizarActividad(morder)
+    
   }  
   
   @Test
   def `pokemon realiza un ataque de tipo dragon` = {   
     pequeñoDragon = pequeñoDragon.realizarActividad(colaDragonea)
     assertEquals(80,pequeñoDragon.experiencia)
-    assertEquals(9,pequeñoDragon.ataque(dragonTail).puntosAtaque)
+    assertEquals(9,pequeñoDragon.dameAtaque(dragonTail).puntosAtaque)
   }    
   
   @Test
-  def `pokemon realiza un ataque y sufre efecto secundario` = {// TODO: lo del efecto secundario    
+  def `pokemon realiza un ataque y sufre efecto secundario` = {   
+    val carlitaDormida = carlita.realizarActividad(hipnotizar)
+    assertEquals(new Dormido, carlitaDormida.estado)
+  }    
+  
+  @Test
+  def `pokemon realiza un ataque que no tiene efecto secundario, sigue manteniendo el estado anterior` = {   
+    val carlitosDespuesDeMorder = carlitos.realizarActividad(morder)
+    assertEquals(carlitosDespuesDeMorder.estado, carlitos.estado)
+  }  
+  
+  @Test
+  def `pokemon realiza ataque Reposar y aumenta su energia al maximo pero lo deja dormido` = {   
+    assertEstado(carlitos.estado, new EstadoNormal)
     
+    val reposar = RealizarAtaque(reposo)
+    
+    val carlitosReposado = carlitos.copy(energia = carlitos.energia - 10).aprendeAtaque(reposo).realizarActividad(reposar)
+    
+    assertEquals(carlitosReposado.estado, new Dormido)
+    assertEquals(carlitosReposado.energiaMaxima, carlitosReposado.energia)
+  }    
+    
+  @Test
+  def `pokemon realiza ataque Enfocarse sube su velocidad en un punto` = {   
+    val enfocar = RealizarAtaque(enfocarse)
+    val carlitosEnfocado = carlitos.aprendeAtaque(enfocarse).realizarActividad(enfocar)
+    assertEquals(carlitos.velocidad + 1, carlitosEnfocado.velocidad)
+  }    
+      
+  @Test
+  def `pokemon realiza ataque endurecerse, sube su energia 5 puntos pero queda paralizado` = {   
+    val endurecer = RealizarAtaque(endurucerse)
+    val carlitosEnfocado = carlitos.aprendeAtaque(endurucerse).realizarActividad(endurecer)
+    assertEquals(carlitos.energia + 5, carlitosEnfocado.energia)
+    assertEstado(carlitosEnfocado.estado, new Paralizado)
   }    
   
 //////////////////////////////////////////////////////LEVANTAR PESAS//////////////////////////////////////////////////////////////////////////////////////////////////
-  @Test
-  def `pokemon fantasma quiere levantar pesas y tira error` = {   
-    var tiroError=false    
-    try{phantom.realizarActividad(hacerPesas)}
-    catch{
-        case e: NoPuedeLevantarPesas => tiroError=true
-    }
-    assertEquals(true,tiroError) // TODO En Junit le podes @Test expected(TipoDeException) y listo no hace falta que hagas el try y eso a mano
+  @Test(expected = classOf[NoPuedeLevantarPesas])
+  def `pokemon fantasma quiere levantar pesas y tira error` : Unit = {   
+    phantom.realizarActividad(hacerPesas)
   }
   
   @Test
@@ -302,7 +328,7 @@ class Punto2Test {
   }   
   
 ////////////////////////////////////////////////USAR ETHER//////////////////////////////////////////////////////////////////////////////////////////////////
-  @Test
+  //@Test(expected )
   def `pokemon KO usa ether y no cambia su estado` = {
     luchador = luchador.cambiarEstado(new KO)
     val nuevoLuchador = luchador.realizarActividad(usarEther) 
@@ -336,35 +362,40 @@ class Punto2Test {
   @Test
   def `pokemon come zinc y aumenta los PA maximos de todos sus ataques` = {
     carlitos = carlitos.aprendeAtaque(corte)
-    val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
-    val valorEsperado2=carlitos.ataque(corte).puntosAtaqueMaximoDelPokemon+2
+    val valorEsperado1=carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon+2
+    val valorEsperado2=carlitos.dameAtaque(corte).puntosAtaqueMaximoDelPokemon+2
     val carlitosDespuesDeComerZinc = carlitos.realizarActividad(comeZinc) 
-    assertEquals(valorEsperado1, carlitosDespuesDeComerZinc.ataque(mordida).puntosAtaqueMaximoDelPokemon)
-    assertEquals(valorEsperado2, carlitosDespuesDeComerZinc.ataque(corte).puntosAtaqueMaximoDelPokemon)        
-    val valorEsperado3 = carlitosDespuesDeComerZinc.ataque(mordida).puntosAtaqueMaximoDelPokemon+2
-    val valorEsperado4 = carlitosDespuesDeComerZinc.ataque(corte).puntosAtaqueMaximoDelPokemon+2
+    assertEquals(valorEsperado1, carlitosDespuesDeComerZinc.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado2, carlitosDespuesDeComerZinc.dameAtaque(corte).puntosAtaqueMaximoDelPokemon)        
+    val valorEsperado3 = carlitosDespuesDeComerZinc.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon+2
+    val valorEsperado4 = carlitosDespuesDeComerZinc.dameAtaque(corte).puntosAtaqueMaximoDelPokemon+2
     val carlitosDespuesDeComerZinc2Veces = carlitosDespuesDeComerZinc.realizarActividad(comeZinc) 
-    assertEquals(valorEsperado3, carlitosDespuesDeComerZinc2Veces.ataque(mordida).puntosAtaqueMaximoDelPokemon)
-    assertEquals(valorEsperado4, carlitosDespuesDeComerZinc2Veces.ataque(corte).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado3, carlitosDespuesDeComerZinc2Veces.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(valorEsperado4, carlitosDespuesDeComerZinc2Veces.dameAtaque(corte).puntosAtaqueMaximoDelPokemon)
   }    
   
 ////////////////////////////////////////////////DESCANSAR//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon con estado normal y energia menor al 50% descansa y sube todos los PA y cambia su estado a dormido` = {
-    val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon
-    carlitos.ataque(mordida).puntosAtaque-=5
-    carlitos = carlitos.copy(energia=4)
+    val valorEsperado1=carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon
+    val ataqueMordidaSinPA = carlitos.dameAtaque(mordida).copy(puntosAtaque = 0)
+    carlitos = carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA).copy(energia=4)
+    
+    assertEquals(carlitos.dameAtaque(mordida).puntosAtaque, 0)
     val carlitosDescanzado = carlitos.realizarActividad(descansa) 
-    assertEquals(valorEsperado1, carlitosDescanzado.ataque(mordida).puntosAtaque)
+    assertEquals(valorEsperado1, carlitosDescanzado.dameAtaque(mordida).puntosAtaque)
     assertEstado(new Dormido, carlitosDescanzado.estado) 
   }    
   
   @Test
   def `pokemon descansa y solo sube todos los PA` = {
-    val valorEsperado1=carlitos.ataque(mordida).puntosAtaqueMaximoDelPokemon
-    carlitos.ataque(mordida).puntosAtaque-=5
+    val valorEsperado1 = carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon
+    val ataqueMordidaSinPA = carlitos.dameAtaque(mordida).copy(puntosAtaque = 0)
+    carlitos = carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA)
+    
+    assertEquals(carlitos.dameAtaque(mordida).puntosAtaque, 0)
     val carlitosDescanzado = carlitos.realizarActividad(descansa) 
-    assertEquals(valorEsperado1, carlitosDescanzado.ataque(mordida).puntosAtaque)
+    assertEquals(valorEsperado1, carlitosDescanzado.dameAtaque(mordida).puntosAtaque)
     assertEstado(new EstadoNormal, carlitosDescanzado.estado) 
   }    
   
@@ -393,15 +424,10 @@ class Punto2Test {
     assertEquals(valorEsperado, carlitaIntercambiada.peso)
   }    
   
-  @Test
-  def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso pero queda en estado invalido y lanza error` = {
+  @Test(expected = classOf[EstadoInvalido])
+  def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso pero queda en estado invalido y lanza error` : Unit = {
     carlita = carlita.cambiarPeso(-19)
-    var tiroError=false
-    try{carlita.realizarActividad(teCambioPorOtro)}
-    catch{
-        case e: EstadoInvalido => tiroError=true
-    }
-    assertEquals(true,tiroError)    
+    carlita.realizarActividad(teCambioPorOtro)    
   }  
   
 }
