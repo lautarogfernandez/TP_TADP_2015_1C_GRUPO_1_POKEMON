@@ -166,9 +166,8 @@ class Punto2Test {
   def `pokemon realiza un ataque que puede hacer, pero no tiene mas PA y tira error` : Unit = {   
 
     val ataqueMordidaSinPA = carlitos.dameAtaque(mordida).copy(puntosAtaque = 0)
-    carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA)
+    carlitos.cambiarAtaque(mordida, ataqueMordidaSinPA).realizarActividad(morder)
     
-    carlitos.realizarActividad(morder)
   }  
   
   @Test

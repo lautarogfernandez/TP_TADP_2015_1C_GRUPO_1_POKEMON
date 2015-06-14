@@ -121,8 +121,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   }
 
   def comeZinc() : Pokemon = {
-    ataques.map(ataque => ataque.aumentarPAMaximo(2)) // TODO es correcto 
-    this
+    this.copy(ataques = this.ataques.map(ataque => ataque.aumentarPAMaximo(2))) // TODO es correcto 
   }
   
   def descansa() : Pokemon = {
