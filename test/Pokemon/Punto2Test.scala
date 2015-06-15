@@ -4,10 +4,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.Ignore
 import org.junit.Before
-
-import tadp.grupo1.pokemon.AtaqueGenerico;
-import tadp.grupo1.pokemon.Especie;
-import tadp.grupo1.pokemon.Piedra;
+import tadp.grupo1.pokemon.AtaqueGenerico
+import tadp.grupo1.pokemon.Especie
+import tadp.grupo1.pokemon.Piedra
 import tadp.grupo1.pokemon._
 import tadp.grupo1.pokemon.condicion_evolucion._
 import tadp.grupo1.pokemon.tipo._
@@ -18,70 +17,56 @@ import Actividad._
 /**
  * @author usuario
  */
-class Punto2Test {
+class Punto2Test {  
   
-  val noTiene=new NoTiene
-  val lunar=new Lunar
-  val normal=new Normal
-  val hielo=new Hielo
-  val psiquico=new Psiquico
-  val fuego=new Fuego
-  val dragon=new Dragon
-  val volador=new Volador
-  val lucha=new Lucha
-  val fantasma=new Fantasma
-  val veneno=new Veneno
-  val agua=new Agua
-  val planta=new Planta
+  val piedraLunar=new Piedra(Lunar)
+  val piedraAgua=new Piedra(Agua)
   
-  val piedraLunar=new Piedra(lunar)
-  val piedraAgua=new Piedra(agua)
+  val charizard=new Especie(350,100,Fuego,10,10,10,10,Volador)
+  val charmeleon=new Especie(350,70,Fuego,7,7,7,7,Dragon,new SubirNivel(32),Some(charizard))
+  val charmander=new Especie(350,22,Fuego,4,4,4,4,Dragon,new SubirNivel(16),Some(charmeleon))
+  val raticate=new Especie(350,100,Normal,10,10,10,10,NoTiene)
+  val rattata=new Especie(100,22,Normal,4,4,4,4,NoTiene,new SubirNivel(20),Some(raticate))
+  val jynx=new Especie(100,22,Hielo,4,4,4,4,Psiquico)
+  val machamp=new Especie(100,70,Lucha,4,4,4,4,NoTiene)
+  val machoke=new Especie(100,70,Lucha,4,4,4,4,NoTiene,new Intercambiar,Some(machamp)) 
+  val machop=new Especie(100,70,Lucha,4,4,4,4,NoTiene,new SubirNivel(28),Some(machoke)) 
+  val gengar=new Especie(100,50,Fantasma,4,4,4,4,Veneno)
+  val seeking=new Especie(1000,50,Agua,4,4,4,4,NoTiene)
+  val nidoqueen=new Especie(100,50,Veneno,7,7,7,7,NoTiene)
+  val nidorina=new Especie(100,50,Veneno,4,4,4,4,NoTiene,new UsarPiedraLunar,Some(nidoqueen))
+  val starmie=new Especie(100,50,Agua,7,7,7,7,Psiquico)
+  val staryu=new Especie(100,50,Agua,4,4,4,4,NoTiene,new UsarPiedraParaEvolucion, Some(starmie))
   
-  val charizard=new Especie(350,100,fuego,10,10,10,10,volador)
-  val charmeleon=new Especie(350,70,fuego,7,7,7,7,dragon,new SubirNivel(32),charizard)
-  val charmander=new Especie(350,22,fuego,4,4,4,4,dragon,new SubirNivel(16),charmeleon)
-  val raticate=new Especie(350,100,normal,10,10,10,10,noTiene)
-  val rattata=new Especie(100,22,normal,4,4,4,4,noTiene,new SubirNivel(20),raticate)
-  val jynx=new Especie(100,22,hielo,4,4,4,4,psiquico)
-  val machamp=new Especie(100,70,lucha,4,4,4,4,noTiene)
-  val machoke=new Especie(100,70,lucha,4,4,4,4,noTiene,new Intercambiar,machamp) 
-  val machop=new Especie(100,70,lucha,4,4,4,4,noTiene,new SubirNivel(28),machoke) 
-  val gengar=new Especie(100,50,fantasma,4,4,4,4,veneno)
-  val seeking=new Especie(1000,50,agua,4,4,4,4,noTiene)
-  val nidoqueen=new Especie(100,50,veneno,7,7,7,7,noTiene)
-  val nidorina=new Especie(100,50,veneno,4,4,4,4,noTiene,new UsarPiedraLunar,nidoqueen)
-  val starmie=new Especie(100,50,agua,7,7,7,7,psiquico)
-  val staryu=new Especie(100,50,agua,4,4,4,4,noTiene,new UsarPiedraParaEvolucion, starmie)
-  
-  val mordida=new AtaqueGenerico(normal,30)
-  val hipnosis =new AtaqueGenerico(psiquico,20, { pokemonAtacante => pokemonAtacante.cambiarEstado(new Dormido)})
-  val dragonTail =new AtaqueGenerico(dragon,10)
-  val maldicion =new AtaqueGenerico(fantasma,25)
-  val corte = new AtaqueGenerico(normal,30)
-  val reposo = new AtaqueGenerico(normal,30, { pokemonAtacante => pokemonAtacante.copy(energia = pokemonAtacante.energiaMaxima).cambiarEstado(new Dormido) })
-  val enfocarse = new AtaqueGenerico(normal,30, { pokemonAtacante => pokemonAtacante.subirAtributo(velocidadASubir = 1) } )
-  val endurucerse = new AtaqueGenerico(normal,30, { pokemonAtacante => pokemonAtacante.subirAtributo(energiaASubir = 5).cambiarEstado(new Paralizado) })
+  val mordida=new AtaqueGenerico(Normal,30)
+  val hipnosis =new AtaqueGenerico(Psiquico,20, { pokemonAtacante => pokemonAtacante.cambiarEstado(new Dormido)})
+  val dragonTail =new AtaqueGenerico(Dragon,10)
+  val maldicion =new AtaqueGenerico(Fantasma,25)
+  val corte = new AtaqueGenerico(Normal,30)
+  val reposo = new AtaqueGenerico(Normal,30, { pokemonAtacante => pokemonAtacante.copy(energia = pokemonAtacante.energiaMaxima).cambiarEstado(new Dormido) })
+  val enfocarse = new AtaqueGenerico(Normal,30, { pokemonAtacante => pokemonAtacante.subirAtributo(velocidadASubir = 1) } )
+  val endurucerse = new AtaqueGenerico(Normal,30, { pokemonAtacante => pokemonAtacante.subirAtributo(energiaASubir = 5).cambiarEstado(new Paralizado) })
   
   var sinAtaques:List[AtaquePokemon]= List()
   
-  val morder=RealizarAtaque(mordida)
-  val hipnotizar=RealizarAtaque(hipnosis)
-  val colaDragonea=RealizarAtaque(dragonTail)  
+  val morder=new RealizarAtaque(mordida)
+  val hipnotizar=new RealizarAtaque(hipnosis)
+  val colaDragonea=new RealizarAtaque(dragonTail)  
   val hacerPesas=new LevantarPesas (5)
   val nada=new Nadar(5)
   val nadaMas=new Nadar(125)
   val aprendeMaldicion=new AprenderAtaque(maldicion)
   val aprendeCorte=new AprenderAtaque(corte)
-  val usaPiedraLunar=new Actividad.UsarPiedra(piedraLunar)
-  val usaPiedraAgua=new Actividad.UsarPiedra(piedraAgua)
-  val usarPocion=new UsarPocion()
-  val usarAntidoto=new UsarAntidoto()
-  val usarEther=new UsarEther()
-  val comeHierro=new ComerHierro()
-  val comeZinc=new ComerZinc()
-  val comeCalcio=new ComerCalcio()
-  val descansa=new Descansar()
-  val teCambioPorOtro=new FingirIntercambio()  
+  val usaPiedraLunar=new Usar(piedraLunar)
+  val usaPiedraAgua=new Usar(piedraAgua)
+  val usarPocion=new Usar(Pocion)
+  val usarAntidoto=new Usar(Antidoto)
+  val usarEther=new Usar(Ether)
+  val comeHierro=new Usar(Hierro)
+  val comeZinc=new Usar(Zinc)
+  val comeCalcio=new Usar(Calcio)
+  val descansa=Descansar
+  val teCambioPorOtro=FingirIntercambio  
   
   var carlitos:Pokemon=null
   var carlita:Pokemon=null
@@ -99,19 +84,19 @@ class Punto2Test {
   
   @Before
   def setUp(){    
-    carlitos = new Pokemon(rattata,new Macho,10,12,12,10,10,sinAtaques)
+    carlitos = new Pokemon(rattata, Macho,10,12,12,10,10,sinAtaques)
     carlitos = carlitos.aprendeAtaque(mordida)
-    carlita=new Pokemon(jynx,new Hembra,11,12,12,10,10,sinAtaques)
+    carlita=new Pokemon(jynx, Hembra,11,12,12,10,10,sinAtaques)
     carlita = carlita.aprendeAtaque(hipnosis)
-    pequeñoDragon=new Pokemon(charmander,new Macho,10,12,12,10,10,sinAtaques)
+    pequeñoDragon=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
     pequeñoDragon = pequeñoDragon.aprendeAtaque(dragonTail)
-    phantom=new Pokemon(gengar,new Macho,10,12,12,10,10,sinAtaques)
-    luchador=new Pokemon(machop,new Macho,10,12,12,10,10,sinAtaques)
-    unPokemonDeFuego=new Pokemon(charmander,new Macho,10,12,12,10,10,sinAtaques)
-    unPokemonDeAgua=new Pokemon(seeking,new Macho,10,1000,1000,10,10,sinAtaques)
-    unPokemonQueEvolucionaConPiedraLunar=new Pokemon(nidorina,new Hembra,10,20,20,10,10,sinAtaques)
-    unPokemonQueEvolucionaConPiedraAgua=new Pokemon(staryu,new Hembra,10,20,20,10,10,sinAtaques)
-    peleador=new Pokemon(machoke,new Macho,10,20,20,10,10,sinAtaques)
+    phantom=new Pokemon(gengar, Macho,10,12,12,10,10,sinAtaques)
+    luchador=new Pokemon(machop, Macho,10,12,12,10,10,sinAtaques)
+    unPokemonDeFuego=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
+    unPokemonDeAgua=new Pokemon(seeking, Macho,10,1000,1000,10,10,sinAtaques)
+    unPokemonQueEvolucionaConPiedraLunar= Pokemon(nidorina, Hembra,10,20,20,10,10,sinAtaques)
+    unPokemonQueEvolucionaConPiedraAgua= Pokemon(staryu, Hembra,10,20,20,10,10,sinAtaques)
+    peleador=new Pokemon(machoke, Macho,10,20,20,10,10,sinAtaques)
   }
   
   def assertEstado(estado1:Estado, estado2:Estado)={
@@ -193,7 +178,7 @@ class Punto2Test {
   def `pokemon realiza ataque Reposar y aumenta su energia al maximo pero lo deja dormido` = {   
     assertEstado(carlitos.estado, new EstadoNormal)
     
-    val reposar = RealizarAtaque(reposo)
+    val reposar = new RealizarAtaque(reposo)
     
     val carlitosReposado = carlitos.copy(energia = carlitos.energia - 10).aprendeAtaque(reposo).realizarActividad(reposar)
     
@@ -203,7 +188,7 @@ class Punto2Test {
     
   @Test
   def `pokemon realiza ataque Enfocarse sube su velocidad en un punto` = {   
-    val enfocar = RealizarAtaque(enfocarse)
+    val enfocar = new RealizarAtaque(enfocarse)
     val carlitosEnfocado = carlitos.aprendeAtaque(enfocarse).realizarActividad(enfocar)
     assertEquals(carlitos.velocidad + 1, carlitosEnfocado.velocidad)
   }    

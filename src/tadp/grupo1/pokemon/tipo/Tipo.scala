@@ -3,7 +3,7 @@ package tadp.grupo1.pokemon.tipo
 /**
  * @author usuario
  */
-abstract class Tipo {
+trait Tipo {
   
   def leGanaA(tipo:Tipo):Boolean
   
@@ -11,7 +11,7 @@ abstract class Tipo {
     tipo.leGanaA(this)
   }
   
-def ==(tipo:Tipo):Boolean={//redefino el igual
+  def ==(tipo:Tipo):Boolean={//redefino el igual
     tipo.getClass()==this.getClass() // TODO no hace falta hacer esto. Porque al definir al tipo como Case class ya te redefine el equals por los atributos
   }  
   

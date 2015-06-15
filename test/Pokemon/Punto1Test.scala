@@ -17,15 +17,16 @@ import tadp.grupo1.pokemon.tipo._
  */
 class Punto1Test {
   
-  val charizard=new Especie(350,100,new Fuego,10,10,10,10,new Volador)//Some(new Dragon))
-  val charmeleon=new Especie(350,70,new Fuego,7,7,7,7,new Dragon,new SubirNivel(32),charizard)
-  val charmander=new Especie(350,22,new Fuego,4,4,4,4,new Dragon,new SubirNivel(16),charmeleon)
+  val charizard=new Especie(350,100, Fuego,10,10,10,10, Volador)
+  val charmeleon=new Especie(350,70, Fuego,7,7,7,7, Dragon,new SubirNivel(32),Some(charizard))
+  val charmander=new Especie(350,22, Fuego,4,4,4,4, Dragon,new SubirNivel(16),Some(charmeleon))
+  
   var carlitos:Pokemon=null
   
   @Before
   def setUp(){
     var ataques:List[AtaquePokemon]= List()
-    carlitos= new Pokemon(charmander,new Macho,10,12,12,10,10,ataques)
+    carlitos= new Pokemon(charmander,Macho,10,12,12,10,10,ataques)
   }
   
   @Test
@@ -43,10 +44,10 @@ class Punto1Test {
   def `pokemon sube de nivel y evoluciona` = {
     carlitos = carlitos.ganarExperiencia(11468450)
     assertEquals(16,carlitos.nivel)  
-    assertEquals(72,carlitos.energiaMaxima)
-    assertEquals(70,carlitos.peso)
-    assertEquals(70,carlitos.fuerza)    
-    assertEquals(70,carlitos.velocidad)
+    assertEquals(117,carlitos.energiaMaxima)
+    assertEquals(115,carlitos.peso)
+    assertEquals(115,carlitos.fuerza)  
+    assertEquals(115,carlitos.velocidad)
     assertEquals(charmeleon,carlitos.especie)
   }  
  

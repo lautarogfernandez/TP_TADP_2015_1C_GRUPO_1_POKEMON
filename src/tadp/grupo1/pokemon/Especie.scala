@@ -7,14 +7,14 @@ package tadp.grupo1.pokemon
 import tadp.grupo1.pokemon.condicion_evolucion._
 import tadp.grupo1.pokemon.tipo._
 
+case class NoHayEvolucion() {}
+
 case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoPrincipal: Tipo,
     val incrementoPeso:Int, val incrementoEnergiaMaxima:Int,
     val incrementoFuerza:Int, val incrementoVelocidad:Int,
-    val tipoSecundario: Tipo,//Option[Tipo] = None,
-    val condicionEvolucion: Condicion=new NoEvoluciona,//Option[Condicion] = None,
-    val evolucion: Especie=null//val evolucion: Option[Especie]=None
-     
-    ) {//lo de evolucion puede cambiar porque algunas no tienen y otras tienen varias
+    val tipoSecundario: Tipo,
+    val condicionEvolucion: Condicion=new NoEvoluciona,
+    val evolucion: Option[Especie]=None) {
   
   def experienciaNecesariaParaNivel(nivel:Int):Int={
     nivel match{
@@ -44,9 +44,9 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
     tipoSecundario==tipo
   }
   
-  def esAfin(tipo:Tipo):Boolean={
+  def esAfin(tipo:Tipo):Boolean={//TODO: hacer bien esto del pattern matching
     tipo match{
-      case _:Normal => true
+      case Normal => true
       case _ if esDelTipoPrincipal(tipo) => true
       case _ if esDelTipoSecundario(tipo) => true
       case _ => false
@@ -56,5 +56,9 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
   def sufriIntercambio(pokemon:Pokemon) : Pokemon = {
     condicionEvolucion.intercambio(pokemon)
   }
+  
+  def queNivelSoy(experiencia:Long):Int={
+    1//TODO:hacer
+  }  
   
 }

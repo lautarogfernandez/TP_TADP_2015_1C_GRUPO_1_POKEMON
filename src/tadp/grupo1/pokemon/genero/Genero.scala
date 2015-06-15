@@ -3,6 +3,10 @@ package tadp.grupo1.pokemon.genero
 /**
  * @author usuario
  */
-abstract class Genero {
-  
-}
+trait Genero {}
+
+
+object Hembra extends Genero{}
+
+
+object Macho extends Genero{}

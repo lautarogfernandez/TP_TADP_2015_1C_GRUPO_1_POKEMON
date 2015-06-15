@@ -9,10 +9,46 @@ import tadp.grupo1.pokemon.tipo._
 /**
  * @author usuario
  */
-case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val energiaMaxima: Int, val energia: Int, val fuerza: Int,
-                   val velocidad: Int, val ataques: List[AtaquePokemon], val nivel: Int = 1,
+case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, val energiaMaximaBase: Int, val energia: Int, val fuerzaBase: Int,
+                   val velocidadBase: Int, val ataques: List[AtaquePokemon], val nivel: Int = 1,
                    val estado: Estado = new EstadoNormal, val experiencia: Long = 0) { //Hay que controlar que cumpla el peso de la especie  
-
+  
+//  def nivel()={
+//    especie.queNivelSoy(experiencia)
+//  }   
+  
+  def pesoAdquirido()={
+    especie.incrementoPeso*(nivel-1)
+  }
+  
+  def fuerzaAdquirida()={
+    especie.incrementoFuerza*(nivel-1)
+  }
+  
+  def velocidadAdquirida()={
+    especie.incrementoVelocidad*(nivel-1)
+  }
+  
+  def energiaMaximaAdquirida()={
+    especie.incrementoEnergiaMaxima*(nivel-1)
+  }
+  
+  def peso()={
+    pesoBase+pesoAdquirido()
+  }  
+  
+  def energiaMaxima()={
+    energiaMaximaBase+energiaMaximaAdquirida()
+  }  
+  
+  def velocidad()={
+    velocidadBase+velocidadAdquirida()
+  }  
+  
+  def fuerza()={
+    fuerzaBase+fuerzaAdquirida()
+  }    
+    
   def ganarExperiencia(cantidad: Int): Pokemon = {
     val nuevaExperiencia = experiencia + cantidad
     var nuevoPokemon = copy(experiencia = nuevaExperiencia)
@@ -25,8 +61,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   }
 
   def subiNivel(incrementoPeso: Int, incrementoEnergiaMaxima: Int, incrementoFuerza: Int, incrementoVelocidad: Int): Pokemon = {
-    var nuevoPokemon = copy(nivel = nivel + 1, peso = peso + incrementoPeso, energiaMaxima = energiaMaxima + incrementoEnergiaMaxima,
-      fuerza = fuerza + incrementoFuerza, velocidad = velocidad + incrementoVelocidad)
+    var nuevoPokemon = copy(nivel = nivel + 1)
 
     nuevoPokemon = especie.evolucioname(nuevoPokemon)
     nuevoPokemon = especie.subirNivel(nuevoPokemon)
@@ -39,14 +74,11 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
 
   def evolucionar(): Pokemon = {
     val nuevaEspecie = especie.evolucion
-    copy(especie = nuevaEspecie)
+    copy(especie = nuevaEspecie.get)
   }
 
-  /*-------------------------------------------------------------------------- Hasta aca es el punto 1*/
-  /*CREO QUE VA EN EL POKEMON */
-
   def cambiarPeso(variacion: Int) = {
-    copy(peso = peso + variacion)
+    copy(pesoBase = pesoBase + variacion)
   }
 
   def perderEnergia(cantidad: Int) = {
@@ -54,11 +86,11 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   }
 
   def ganarVelocidad(cantidad: Int) = {
-    copy(velocidad = velocidad + cantidad)
+    copy(velocidadBase = velocidadBase + cantidad)
   }
 
   def subirAtributo(energiaASubir: Int = 0, fuerzaASubir: Int = 0, velocidadASubir: Int = 0): Pokemon = {
-    copy(energia = energia + energiaASubir, fuerza = fuerza + fuerzaASubir, velocidad = velocidad + velocidadASubir)
+    copy(energia = energia + energiaASubir, fuerzaBase = fuerzaBase + fuerzaASubir, velocidadBase = velocidadBase + velocidadASubir)
   }
 
   def tieneAtaque(ataque: AtaqueGenerico) = {
@@ -84,7 +116,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
 
   def usaPiedra(piedra: Piedra) : Pokemon = {
     especie.condicionEvolucion match {
-      case _: UsarPiedraLunar if piedra.tipo == new Lunar                     => evolucionar()
+      case _: UsarPiedraLunar if piedra.tipo == Lunar                     => evolucionar()
       case _: UsarPiedraParaEvolucion if piedra.tipo == especie.tipoPrincipal => evolucionar()
       case _ => var pokemonCapazEnvenenado = this 
         if (piedra.tipo.leGanaA(especie.tipoPrincipal) || piedra.tipo.leGanaA(especie.tipoSecundario)){
@@ -132,6 +164,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
       case _ => pokemonConAtaquesRecargados
     }
   }
+  
   def fingirIntercambio() : Pokemon = {
     especie.sufriIntercambio(this)
   }
@@ -153,36 +186,15 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
   
   def realizarActividad(actividad: Actividad): Pokemon = {
     val pokemonDespuesDeRealizarActivdad = estado match {
-      case pokemonKO : KO => throw new NoPuedeRealizarActividadPorKO
+      case _ : KO => throw new NoPuedeRealizarActividadPorKO
       case dormido: Dormido => copy(estado = dormido.ignorasteActividad)  
-      case _ => actividad match {
-
-        case realizarAtaque: RealizarAtaque  => realizarAtaque(this)
-       
-        case levantarPesas: LevantarPesas => especie.tipoPrincipal match {
-          case _: Fantasma => throw new NoPuedeLevantarPesas
-          case _ => if (levantarPesas.cantidadKilos <= fuerza * 10)
-            estado match {
-              case _: Paralizado => copy(estado = new KO)
-              case _ => especie.tipoPrincipal match {
-                case _: Lucha => ganarExperiencia(levantarPesas.cantidadKilos * 2)
-                case _ => especie.tipoSecundario match {
-                  case _: Lucha => ganarExperiencia(levantarPesas.cantidadKilos * 2)
-                  case _        => ganarExperiencia(levantarPesas.cantidadKilos)
-                }
-              }
-            }
-          else
-            copy(estado = new Paralizado)
-        }
-        
-        case nadar: Nadar => nadar(this)
-          
-        case aprenderAtaque: AprenderAtaque => aprenderAtaque.ataque match {
-          case attack if (especie.esAfin(attack.tipo)) => aprendeAtaque(attack)
-          case _                                       => copy(estado = new KO)
-        }
-        case usarPiedra: Actividad.UsarPiedra => usaPiedra(usarPiedra.piedra)
+      case _ => actividad(this)
+      /* match {
+        case realizarAtaque: RealizarAtaque  => realizarAtaque(this)       
+        case levantarPesas: LevantarPesas => levantarPesas(this)        
+        case nadar: Nadar => nadar(this)          
+        case aprenderAtaque: AprenderAtaque => aprenderAtaque(this)        
+        case usarPiedra: Actividad.UsarPiedra => usarPiedra(this)
         case _: UsarPocion                    => usaPocion()
         case _: UsarAntidoto                  => usaAntidoto()
         case _: UsarEther                     => usaEther()
@@ -191,10 +203,8 @@ case class Pokemon(val especie: Especie, val genero: Genero, val peso: Int, val 
         case _: ComerZinc                     => comeZinc()
         case _: Descansar                     => descansa()
         case _: FingirIntercambio             => fingirIntercambio()
-
-        //case otras activiidades
       }
-
+*/
     }
     
     if (! pokemonDespuesDeRealizarActivdad.estadoValido()) throw new EstadoInvalido() // Por que hacer un if en vez de un match al principio??

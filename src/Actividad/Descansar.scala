@@ -1,8 +1,14 @@
 package Actividad
 
+import tadp.grupo1.pokemon.Pokemon
+
 /**
  * @author usuario
  */
-class Descansar extends Actividad{
+object Descansar extends Actividad{
+  
+  override def apply(pokemon: Pokemon) = {
+    pokemon.descansa()
+  }
   
 }
