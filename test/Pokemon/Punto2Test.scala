@@ -129,14 +129,14 @@ class Punto2Test {
   @Test
   def `pokemon macho realiza un ataque de su tipo principal que puede hacer y gana experiencia` = {
     carlitos = carlitos.realizarActividad(morder)
-    assertEquals(50,carlitos.experiencia)
+    assertEquals(BigInt(50),carlitos.experiencia)
     assertEquals(29,carlitos.dameAtaque(mordida).puntosAtaque)
   }
   
   @Test
   def `pokemon hembra gana realiza un ataque que no es de su tipo principal  que puede hacer  y gana experiencia` = {
     carlita = carlita.realizarActividad(hipnotizar)
-    assertEquals(40,carlita.experiencia)
+    assertEquals(BigInt(40),carlita.experiencia)
     assertEquals(19,carlita.dameAtaque(hipnosis).puntosAtaque)
   }
   
@@ -158,7 +158,7 @@ class Punto2Test {
   @Test
   def `pokemon realiza un ataque de tipo dragon` = {   
     pequeñoDragon = pequeñoDragon.realizarActividad(colaDragonea)
-    assertEquals(80,pequeñoDragon.experiencia)
+    assertEquals(BigInt(80),pequeñoDragon.experiencia)
     assertEquals(9,pequeñoDragon.dameAtaque(dragonTail).puntosAtaque)
   }    
   
@@ -210,7 +210,7 @@ class Punto2Test {
   @Test
   def `pokemon no luchador levantar pesas y gana experiencia simple` = {   
     carlitos = carlitos.realizarActividad(hacerPesas)
-    assertEquals(5,carlitos.experiencia)
+    assertEquals(BigInt(5),carlitos.experiencia)
     assertEstado(new EstadoNormal,carlitos.estado)
   }  
   
@@ -218,14 +218,14 @@ class Punto2Test {
   def `pokemon paralizado que quiere levantar pesas, queda KO y no gana experiencia` = {   
     carlitos = carlitos.cambiarEstado(new Paralizado)
     carlitos = carlitos.realizarActividad(hacerPesas)    
-    assertEquals(0,carlitos.experiencia)
+    assertEquals(BigInt(0),carlitos.experiencia)
     assertEstado(new KO,carlitos.estado)
   }
   
   @Test
   def `pokemon tipo lucha quiere levantar pesas gana el doble de experiencia` = {
     luchador = luchador.realizarActividad(hacerPesas)    
-    assertEquals(10,luchador.experiencia)
+    assertEquals(BigInt(10),luchador.experiencia)
     assertEstado(new EstadoNormal,luchador.estado)
   }  
   
@@ -233,14 +233,14 @@ class Punto2Test {
   @Test
   def `pokemon de un tipo que pierde contra uno de agua quiere nadar y no gana experiencia y queda KO` = {
     unPokemonDeFuego = unPokemonDeFuego.realizarActividad(nada)    
-    assertEquals(0, unPokemonDeFuego.experiencia)
+    assertEquals(BigInt(0), unPokemonDeFuego.experiencia)
     assertEstado(new KO, unPokemonDeFuego.estado)
   }  
 
   @Test
   def `pokemon que es de un tipo que no pierde contra uno de agua nadar y gana experiencia` = {
     carlitos = carlitos.realizarActividad(nada)    
-    assertEquals(1000,carlitos.experiencia)
+    assertEquals(BigInt(1000),carlitos.experiencia)
     assertEstado(new EstadoNormal,carlitos.estado)
   }    
   
@@ -248,7 +248,7 @@ class Punto2Test {
   def `pokemon de agua nada y gana experiencia y le aumenta la velocidad` = {
     val velocidadQueTendriaQueTener=unPokemonDeAgua.velocidad+4*4+2
     unPokemonDeAgua = unPokemonDeAgua.realizarActividad(nadaMas)    
-    assertEquals(25000, unPokemonDeAgua.experiencia)
+    assertEquals(BigInt(25000), unPokemonDeAgua.experiencia)
     assertEquals(velocidadQueTendriaQueTener, unPokemonDeAgua.velocidad)
     assertEquals(5,unPokemonDeAgua.nivel)
     assertEstado(new EstadoNormal,unPokemonDeAgua.estado)

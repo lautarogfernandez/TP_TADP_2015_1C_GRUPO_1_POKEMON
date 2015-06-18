@@ -16,14 +16,14 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
                    val condicionEvolucion: Condicion = new NoEvoluciona,
                    val evolucion: Option[Especie] = None) {
 
-  def experienciaNecesariaParaNivel(nivel: Int): Long = {
+  def experienciaNecesariaParaNivel(nivel: Int): BigInt = {
     nivel match {
       case 1 => 0
       case _ => 2 * experienciaNecesariaParaNivel(nivel - 1) + resistenciaEvolutiva
     }
   }
 
-  def queNivelSoy(experiencia: Long, nivel: Int = 1): Int = {
+  def queNivelSoy(experiencia: BigInt, nivel: Int = 1): Int = {
     val experienciaNecesaria = experienciaNecesariaParaNivel(nivel + 1)
     nivel match {
       case 100 => 100
@@ -32,15 +32,6 @@ case class Especie(val resistenciaEvolutiva: Int, val pesoMaximo: Int, val tipoP
     }
 
   }
-
-//  def subirNivel(pokemon: Pokemon): Pokemon = {
-//    var nuevoPokemon = pokemon
-//
-//    if ((pokemon.experiencia >= experienciaNecesariaParaNivel(pokemon.nivel + 1)) && (pokemon.nivel != 100))
-//      nuevoPokemon = pokemon.subiNivel(incrementoPeso, incrementoEnergiaMaxima, incrementoFuerza, incrementoVelocidad)
-//
-//    nuevoPokemon
-//  }
 
   def evolucioname(pokemon: Pokemon): Pokemon = { //evolucionaSiPuedo
     condicionEvolucion.nivelParaEvolucionar(pokemon)
