@@ -3,7 +3,7 @@ package tadp.grupo1.pokemon.tipo
 /**
  * @author usuario
  */
-class NoTiene extends Tipo{
+object NoTiene extends Tipo{
   
   def leGanaA(tipo:Tipo):Boolean={
     false

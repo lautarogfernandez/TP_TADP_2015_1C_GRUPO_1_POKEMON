@@ -1,8 +1,14 @@
 package Actividad
 
+import tadp.grupo1.pokemon.Pokemon
+
 /**
  * @author usuario
  */
-class FingirIntercambio extends Actividad{
+object FingirIntercambio extends Actividad{
+  
+  override def apply(pokemon: Pokemon) = {
+    pokemon.fingirIntercambio()
+  }  
   
 }

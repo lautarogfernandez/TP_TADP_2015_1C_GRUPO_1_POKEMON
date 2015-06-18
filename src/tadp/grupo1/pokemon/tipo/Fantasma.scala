@@ -3,12 +3,12 @@ package tadp.grupo1.pokemon.tipo
 /**
  * @author usuario
  */
-class Fantasma extends Tipo {
+object Fantasma extends Tipo {
   
   def leGanaA(tipo:Tipo):Boolean={
     tipo match{
-      case _:Fantasma => true
-      case _:Psiquico => true
+      case Fantasma => true
+      case Psiquico => true
       case _ => false
     }
   }

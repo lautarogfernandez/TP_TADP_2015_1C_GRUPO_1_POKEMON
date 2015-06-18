@@ -1,14 +1,12 @@
 package tadp.grupo1.pokemon.condicion_evolucion
 
 import tadp.grupo1.pokemon._
-import tadp.grupo1.pokemon.Piedra
-import tadp.grupo1.pokemon.Pokemon
 import tadp.grupo1.pokemon.genero._
 
 /**
  * @author usuario
  */
-abstract class Condicion {//seria un trait
+trait Condicion {
   
   def usarPiedra(pokemon:Pokemon, piedra:Piedra): Pokemon ={
     pokemon
@@ -16,8 +14,8 @@ abstract class Condicion {//seria un trait
   
   def intercambio(pokemon:Pokemon): Pokemon ={
     pokemon.genero match{
-      case _:Macho => pokemon.cambiarPeso(1)
-      case _:Hembra => pokemon.cambiarPeso(-10)
+      case Macho => pokemon.cambiarPeso(1)
+      case Hembra => pokemon.cambiarPeso(-10)
     }
   }
   
@@ -26,3 +24,33 @@ abstract class Condicion {//seria un trait
   }
   
 }
+
+
+class Intercambiar extends Condicion{
+  
+  override def intercambio(pokemon:Pokemon) : Pokemon = {
+    pokemon.evolucionar()
+  }
+  
+}
+
+
+class SubirNivel (val nivelNecesarioParaEvolucionar:Int) extends Condicion{
+  
+  override def nivelParaEvolucionar(pokemon:Pokemon) : Pokemon = {
+    var nuevoPokemon = pokemon    
+    if (pokemon.nivel==nivelNecesarioParaEvolucionar)
+      nuevoPokemon = pokemon.evolucionar()    
+    nuevoPokemon
+  }
+  
+}
+
+
+class UsarPiedraParaEvolucion extends Condicion{}
+
+
+class UsarPiedraLunar extends Condicion{}
+
+
+class NoEvoluciona extends Condicion{}
