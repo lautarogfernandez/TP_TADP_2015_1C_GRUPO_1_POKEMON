@@ -10,12 +10,12 @@ import tadp.grupo1.pokemon.tipo._
  * @author usuario
  */
 case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, val energiaMaximaBase: Int, val energia: Int, val fuerzaBase: Int,
-                   val velocidadBase: Int, val ataques: List[AtaquePokemon], val nivel: Int = 1,
+                   val velocidadBase: Int, val ataques: List[AtaquePokemon],
                    val estado: Estado = new EstadoNormal, val experiencia: Long = 0) { //Hay que controlar que cumpla el peso de la especie  
   
-//  def nivel()={
-//    especie.queNivelSoy(experiencia)
-//  }   
+   def nivel()={
+    especie.queNivelSoy(experiencia)
+   }   
   
   def pesoAdquirido()={
     especie.incrementoPeso*(nivel-1)
@@ -50,23 +50,24 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
   }    
     
   def ganarExperiencia(cantidad: Int): Pokemon = {
-    val nuevaExperiencia = experiencia + cantidad
-    var nuevoPokemon = copy(experiencia = nuevaExperiencia)
-    nuevoPokemon = especie.subirNivel(nuevoPokemon)
-    nuevoPokemon
+
+    val pokemonConMasExperiencia = copy(experiencia = experiencia + cantidad)
+
+    especie.evolucioname(pokemonConMasExperiencia)
+    
   }
 
   def cambiarEstado(nuevoEstado: Estado): Pokemon = {
     copy(estado = nuevoEstado)
   }
 
-  def subiNivel(incrementoPeso: Int, incrementoEnergiaMaxima: Int, incrementoFuerza: Int, incrementoVelocidad: Int): Pokemon = {
-    var nuevoPokemon = copy(nivel = nivel + 1)
-
-    nuevoPokemon = especie.evolucioname(nuevoPokemon)
-    nuevoPokemon = especie.subirNivel(nuevoPokemon)
-    nuevoPokemon
-  }
+//  def subiNivel(incrementoPeso: Int, incrementoEnergiaMaxima: Int, incrementoFuerza: Int, incrementoVelocidad: Int): Pokemon = {
+//    //var nuevoPokemon = copy(nivel = nivel + 1)
+//
+//    nuevoPokemon = especie.evolucioname(nuevoPokemon)
+//    nuevoPokemon = especie.subirNivel(nuevoPokemon)
+//    nuevoPokemon
+//  }
 
   def intercambiar(): Unit = {
     especie.condicionEvolucion.intercambio(this)

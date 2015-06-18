@@ -52,12 +52,16 @@ class Punto1Test {
   }  
  
   @Test
-  def `pokemon sube de nivel, evoluciona y despues sube de nivel y evoluciona de nuevo, pero si sigue ganando experiencia, no evoluciona mas` = {
+  def `pokemon sube de nivel, evoluciona ` = {//y despues sube de nivel y evoluciona de nuevo, pero si sigue ganando experiencia, no evoluciona mas` = {
     carlitos = carlitos.ganarExperiencia(11468450)
+    val nive1l = carlitos.nivel()
     assertEquals(charmeleon,carlitos.especie)
     carlitos = carlitos.ganarExperiencia(999999999)
+    val nivel2 = carlitos.nivel()
     carlitos = carlitos.ganarExperiencia(999999999)
+    val nivel3 = carlitos.nivel()
     carlitos = carlitos.ganarExperiencia(999999999)
+    val nivel4 = carlitos.nivel()
     assertEquals(charizard,carlitos.especie)
     carlitos = carlitos.ganarExperiencia(999999999)
     carlitos = carlitos.ganarExperiencia(999999999)
