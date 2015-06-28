@@ -86,7 +86,7 @@ class Punto2Test {
   def setUp(){    
     carlitos = new Pokemon(rattata, Macho,10,12,12,10,10,sinAtaques)
     carlitos = carlitos.aprendeAtaque(mordida)
-    carlita=new Pokemon(jynx, Hembra,11,12,12,10,10,sinAtaques)
+    carlita = new Pokemon(jynx, Hembra,11,12,12,10,10,sinAtaques)
     carlita = carlita.aprendeAtaque(hipnosis)
     pequeñoDragon=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
     pequeñoDragon = pequeñoDragon.aprendeAtaque(dragonTail)
@@ -94,6 +94,7 @@ class Punto2Test {
     luchador=new Pokemon(machop, Macho,10,12,12,10,10,sinAtaques)
     unPokemonDeFuego=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
     unPokemonDeAgua=new Pokemon(seeking, Macho,10,1000,1000,10,10,sinAtaques)
+    unPokemonDeAgua = unPokemonDeAgua.aprendeAtaque(mordida)
     unPokemonQueEvolucionaConPiedraLunar= Pokemon(nidorina, Hembra,10,20,20,10,10,sinAtaques)
     unPokemonQueEvolucionaConPiedraAgua= Pokemon(staryu, Hembra,10,20,20,10,10,sinAtaques)
     peleador=new Pokemon(machoke, Macho,10,20,20,10,10,sinAtaques)
@@ -138,6 +139,13 @@ class Punto2Test {
     carlita = carlita.realizarActividad(hipnotizar)
     assertEquals(BigInt(40),carlita.experiencia)
     assertEquals(19,carlita.dameAtaque(hipnosis).puntosAtaque)
+  }
+  
+  @Test
+  def `pokemon macho realiza un ataque que no es de su tipo principal ni secundario pero es ataque normal y gana experiencia` = {
+    val unPokeDeAguaDespuesDeMorder = unPokemonDeAgua.realizarActividad(morder)
+    assertEquals(BigInt(20), unPokeDeAguaDespuesDeMorder.experiencia)
+    assertEquals(29, unPokeDeAguaDespuesDeMorder.dameAtaque(mordida).puntosAtaque)
   }
   
   @Test(expected = classOf[NoTieneElAtaque])

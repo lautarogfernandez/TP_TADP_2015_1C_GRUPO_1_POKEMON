@@ -18,8 +18,8 @@ case class RealizarAtaque(val ataque:AtaqueGenerico) extends Actividad {
        case (ataque, _ , pokemon, _ , _, _) if (!pokemon.leQuedanAtaquesDe(ataque)) => throw new NoTieneMasPA
        case (ataque, Dragon , pokemon, _ , _, _) => bajarPAGanarExperienciaYAplicarEfectoSecundario(pokemon, ataque, 80)    
        case (ataque, tipoAtaque , pokemon, tipoPrincipalPokemon , _, _) if(tipoAtaque == tipoPrincipalPokemon) => bajarPAGanarExperienciaYAplicarEfectoSecundario(pokemon, ataque, 50)                                                                                                                          
-       case (ataque, tipoAtaque , pokemon, _ , tipoSecundarioPokemon, Macho) if(tipoAtaque == tipoSecundarioPokemon) =>  bajarPAGanarExperienciaYAplicarEfectoSecundario(pokemon, ataque, 20)
-       case (ataque, tipoAtaque , pokemon, _ , tipoSecundarioPokemon, Hembra) if(tipoAtaque == tipoSecundarioPokemon) => bajarPAGanarExperienciaYAplicarEfectoSecundario(pokemon, ataque, 40)                      
+       case (ataque, tipoAtaque , pokemon, _ , tipoSecundarioPokemon, Macho) if(tipoAtaque == tipoSecundarioPokemon || tipoAtaque == Normal) =>  bajarPAGanarExperienciaYAplicarEfectoSecundario(pokemon, ataque, 20)
+       case (ataque, tipoAtaque , pokemon, _ , tipoSecundarioPokemon, Hembra) if(tipoAtaque == tipoSecundarioPokemon || tipoAtaque == Normal) => bajarPAGanarExperienciaYAplicarEfectoSecundario(pokemon, ataque, 40)                      
       }
   }
    
