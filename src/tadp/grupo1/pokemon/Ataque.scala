@@ -2,7 +2,7 @@ package tadp.grupo1.pokemon
 
 import tadp.grupo1.pokemon.tipo.Tipo
 
-case class AtaqueGenerico (val tipo:Tipo, val puntosAtaqueMaximo:Int, aplicarEfectoSecundarioA: Pokemon => Pokemon = { pokemon => pokemon }) {//ver el tipo de efecto secundario(le pongo Unit porque si)
+case class AtaqueGenerico (val tipo:Tipo, val puntosAtaqueMaximo:Int, aplicarEfectoSecundarioA : (Pokemon => Pokemon) = { pokemon => pokemon }) {
    
 }
 

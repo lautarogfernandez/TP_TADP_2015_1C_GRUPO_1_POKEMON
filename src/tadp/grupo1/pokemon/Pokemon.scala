@@ -5,6 +5,7 @@ import tadp.grupo1.pokemon.genero._
 import tadp.grupo1.pokemon.condicion_evolucion._
 import Actividad._
 import tadp.grupo1.pokemon.tipo._
+import scala.util.Try
 
 /**
  * @author usuario
@@ -90,6 +91,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
     ataques.exists { attack => attack.ataqueGenerico == ataque }
   }
 
+  // TODO tirar exception si no se encuentra el ataque
   def dameAtaque(ataque: AtaqueGenerico): AtaquePokemon = {
     ataques.find { attack => attack.es(ataque) }.get
   }
@@ -179,7 +181,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
   }
 
   def realizarActividad(actividad: Actividad): Pokemon = {
-    val pokemonDespuesDeRealizarActivdad = estado match {
+    val pokemonDespuesDeRealizarActivdad : Pokemon = estado match {
       case _: KO            => throw new NoPuedeRealizarActividadPorKO
       case dormido: Dormido => copy(estado = dormido.ignorasteActividad)
       case _                => actividad(this)
@@ -201,8 +203,10 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
 */
     }
 
-    if (!pokemonDespuesDeRealizarActivdad.estadoValido()) throw new EstadoInvalido() // Por que hacer un if en vez de un match al principio??
-
+    if (!pokemonDespuesDeRealizarActivdad.estadoValido()){ 
+      throw new EstadoInvalido()  // Por que hacer un if en vez de un match al principio??
+    }
+    
     pokemonDespuesDeRealizarActivdad
   }
 
