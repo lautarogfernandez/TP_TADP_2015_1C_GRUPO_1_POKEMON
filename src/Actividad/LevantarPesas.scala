@@ -9,7 +9,7 @@ import tadp.grupo1.pokemon.estado._
  */
 case class LevantarPesas (val cantidadKilos: Int) extends Actividad {
   
-  override def apply(pokemon: Pokemon) = {
+  override def applyActividad(pokemon: Pokemon) = {
     (this, pokemon,pokemon.estado,pokemon.especie.tipoPrincipal, pokemon.especie.tipoSecundario,pokemon.fuerza) match {
       case (_,_,_,Fantasma,_,_) => throw new NoPuedeLevantarPesas
       case (_,poke,_:Paralizado,_,_,_) => poke.cambiarEstado(new KO)

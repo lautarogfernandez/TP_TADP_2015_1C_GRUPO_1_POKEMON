@@ -7,8 +7,10 @@ import tadp.grupo1.pokemon.Pokemon
  */
 object FingirIntercambio extends Actividad{
   
-  override def apply(pokemon: Pokemon) = {
-    pokemon.fingirIntercambio()
+  override def applyActividad(pokemon: Pokemon) = {
+
+      pokemon.especie.sufriIntercambio(pokemon)  
+
   }  
-  
+
 }

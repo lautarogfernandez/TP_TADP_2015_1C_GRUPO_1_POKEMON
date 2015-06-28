@@ -10,7 +10,7 @@ import tadp.grupo1.pokemon.estado.KO
  */
 case class Nadar(val minutos: Int) extends Actividad {
   
-  override def apply(p: Pokemon) = {
+  override def applyActividad(p: Pokemon) = {
     (this, p.especie.tipoPrincipal, p.especie.tipoSecundario) match {
       case (Nadar(minutos),_,_) if (p.energia < minutos) => throw new NoPuedeRealizarActividad
       case (Nadar(minutos),Agua,ts) =>

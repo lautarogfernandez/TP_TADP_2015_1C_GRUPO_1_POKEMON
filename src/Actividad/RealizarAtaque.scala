@@ -12,7 +12,7 @@ import tadp.grupo1.pokemon.genero.Hembra
  */
 case class RealizarAtaque(val ataque:AtaqueGenerico) extends Actividad {
   
-   override def apply(pokemon: Pokemon) = {   
+   override def applyActividad(pokemon: Pokemon) = {   
       (ataque, ataque.tipo, pokemon, pokemon.especie.tipoPrincipal, pokemon.especie.tipoSecundario, pokemon.genero) match {
        case (ataque, _ , pokemon, _ , _, _) if (!pokemon.tieneAtaque(ataque)) => throw new NoTieneElAtaque
        case (ataque, _ , pokemon, _ , _, _) if (!pokemon.leQuedanAtaquesDe(ataque)) => throw new NoTieneMasPA

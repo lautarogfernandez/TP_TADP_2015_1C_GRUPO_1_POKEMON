@@ -13,6 +13,7 @@ import tadp.grupo1.pokemon.tipo._
 import tadp.grupo1.pokemon.estado._
 import tadp.grupo1.pokemon.genero._
 import Actividad._
+import Actividad.AprenderAtaque
 
 /**
  * @author usuario
@@ -55,8 +56,14 @@ class Punto2Test {
   val hacerPesas=new LevantarPesas (5)
   val nada=new Nadar(5)
   val nadaMas=new Nadar(125)
+  val aprendeMordida = new AprenderAtaque(mordida)
   val aprendeMaldicion=new AprenderAtaque(maldicion)
+  val aprendeHipnosis = new AprenderAtaque(hipnosis)
   val aprendeCorte=new AprenderAtaque(corte)
+  val aprendeReposo = new AprenderAtaque(reposo)
+  val aprendeDragonTail=new AprenderAtaque(dragonTail)
+  val aprendeEndurecerse = new AprenderAtaque(endurucerse)
+  val aprendeEnfocarse = new AprenderAtaque(enfocarse)
   val usaPiedraLunar=new Usar(piedraLunar)
   val usaPiedraAgua=new Usar(piedraAgua)
   val usarPocion=new Usar(Pocion)
@@ -85,16 +92,16 @@ class Punto2Test {
   @Before
   def setUp(){    
     carlitos = new Pokemon(rattata, Macho,10,12,12,10,10,sinAtaques)
-    carlitos = carlitos.aprendeAtaque(mordida)
+    carlitos = aprendeMordida(carlitos)
     carlita = new Pokemon(jynx, Hembra,11,12,12,10,10,sinAtaques)
-    carlita = carlita.aprendeAtaque(hipnosis)
+    carlita = aprendeHipnosis(carlita)
     pequeñoDragon=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
-    pequeñoDragon = pequeñoDragon.aprendeAtaque(dragonTail)
+    pequeñoDragon = aprendeDragonTail(pequeñoDragon)
     phantom=new Pokemon(gengar, Macho,10,12,12,10,10,sinAtaques)
     luchador=new Pokemon(machop, Macho,10,12,12,10,10,sinAtaques)
     unPokemonDeFuego=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
     unPokemonDeAgua=new Pokemon(seeking, Macho,10,1000,1000,10,10,sinAtaques)
-    unPokemonDeAgua = unPokemonDeAgua.aprendeAtaque(mordida)
+    unPokemonDeAgua = aprendeMordida(unPokemonDeAgua)
     unPokemonQueEvolucionaConPiedraLunar= Pokemon(nidorina, Hembra,10,20,20,10,10,sinAtaques)
     unPokemonQueEvolucionaConPiedraAgua= Pokemon(staryu, Hembra,10,20,20,10,10,sinAtaques)
     peleador=new Pokemon(machoke, Macho,10,20,20,10,10,sinAtaques)
@@ -188,7 +195,7 @@ class Punto2Test {
     
     val reposar = new RealizarAtaque(reposo)
     
-    val carlitosReposado = carlitos.copy(energia = carlitos.energia - 10).aprendeAtaque(reposo).realizarActividad(reposar)
+    val carlitosReposado = carlitos.copy(energia = carlitos.energia - 10).realizarActividad(aprendeReposo).realizarActividad(reposar)
     
     assertEquals(carlitosReposado.estado, new Dormido)
     assertEquals(carlitosReposado.energiaMaxima, carlitosReposado.energia)
@@ -197,14 +204,14 @@ class Punto2Test {
   @Test
   def `pokemon realiza ataque Enfocarse sube su velocidad en un punto` = {   
     val enfocar = new RealizarAtaque(enfocarse)
-    val carlitosEnfocado = carlitos.aprendeAtaque(enfocarse).realizarActividad(enfocar)
+    val carlitosEnfocado = aprendeEnfocarse(carlitos).realizarActividad(enfocar)
     assertEquals(carlitos.velocidad + 1, carlitosEnfocado.velocidad)
   }    
       
   @Test
   def `pokemon realiza ataque endurecerse, sube su energia 5 puntos pero queda paralizado` = {   
     val endurecer = RealizarAtaque(endurucerse)
-    val carlitosEnfocado = carlitos.aprendeAtaque(endurucerse).realizarActividad(endurecer)
+    val carlitosEnfocado = aprendeEndurecerse(carlitos).realizarActividad(endurecer)
     assertEquals(carlitos.energia + 5, carlitosEnfocado.energia)
     assertEstado(carlitosEnfocado.estado, new Paralizado)
   }    
@@ -354,7 +361,7 @@ class Punto2Test {
 ////////////////////////////////////////////////COMER ZINC//////////////////////////////////////////////////////////////////////////////////////////////////
   @Test
   def `pokemon come zinc y aumenta los PA maximos de todos sus ataques` = {
-    carlitos = carlitos.aprendeAtaque(corte)
+    carlitos = aprendeCorte(carlitos)
     val valorEsperado1=carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon+2
     val valorEsperado2=carlitos.dameAtaque(corte).puntosAtaqueMaximoDelPokemon+2
     val carlitosDespuesDeComerZinc = carlitos.realizarActividad(comeZinc) 
@@ -421,6 +428,15 @@ class Punto2Test {
   def `pokemon hembra que no evoluciona por intercambio, es cambiado y varia su peso pero queda en estado invalido y lanza error` : Unit = {
     carlita = carlita.cambiarPeso(-19)
     carlita.realizarActividad(teCambioPorOtro)    
+  }  
+
+////////////////////////////////////////////////ESTADO KO//////////////////////////////////////////////////////////////////////////////////////////////////
+
+  @Test(expected = classOf[NoPuedeRealizarActividadPorKO])
+  def `pokemon no realiza actividad si esta en estado KO` : Unit = {
+    val endurecer = RealizarAtaque(endurucerse)
+    val carlitosKO = hacerPesas(endurecer(aprendeEndurecerse(carlitos)))
+    morder(carlitosKO)
   }  
   
 }

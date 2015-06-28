@@ -1,22 +1,31 @@
 package Actividad
 
 import tadp.grupo1.pokemon.Pokemon
+import tadp.grupo1.pokemon.EstadoInvalido
+import tadp.grupo1.pokemon.estado.KO
+import tadp.grupo1.pokemon.estado.Dormido
+import tadp.grupo1.pokemon.NoPuedeRealizarActividadPorKO
 
 /**
  * @author usuario
  */
-abstract class Actividad extends Function1[Pokemon, Pokemon]  {
+trait Actividad extends Function1[Pokemon, Pokemon]  {
+    
+  def applyActividad(pokemon : Pokemon) : Pokemon
   
+  def apply(pokemon : Pokemon) = {
   
-  // TODO ver de hacer un template method: Por ejmplo algo asi:
-  /*
-   * def apply(pokemon : Pokemon) = { 
-   * 
-   *    evaluarEstados() //matcher definido aca en Actividad con la logica de dormido y KO
-   *    abstract applyActividad() // el metodo que antes hacia de apply que tienen que redefinir las actividades concretas
-   *    evaluarPeso() // definido aca tambien que con lo que haciamos al final de llamar a .estadoValido()
-   */
+    val pokemonDespuesDeRealizarActivdad : Pokemon = pokemon.estado match {
+      case _: KO            => throw new NoPuedeRealizarActividadPorKO
+      case dormido: Dormido => pokemon.copy(estado = dormido.ignorasteActividad)
+      case _                => applyActividad(pokemon)
+    }
+
+    if (!pokemonDespuesDeRealizarActivdad.estadoValido()){ 
+      throw new EstadoInvalido()  // TODO ver de mejorar este if
+    }
+    
+    pokemonDespuesDeRealizarActivdad
   
-  def apply(pokemon : Pokemon) = { pokemon  } // TODO hecho aca para no tener que definirlo en todas las subclases 
-  
+  }
 }

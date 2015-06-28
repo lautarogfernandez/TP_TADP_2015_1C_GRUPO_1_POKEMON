@@ -104,67 +104,6 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
     (peso <= especie.pesoMaximo) && (peso > 0) //creo que hay mas, pero no se me ocurren    
   }
 
-  def aprendeAtaque(ataque: AtaqueGenerico): Pokemon = {
-    val nuevaListAtaques = ataques.::(new AtaquePokemon(ataque, ataque.puntosAtaqueMaximo, ataque.puntosAtaqueMaximo))
-    copy(ataques = nuevaListAtaques)
-  }
-
-  def usaPiedra(piedra: Piedra): Pokemon = {
-    especie.condicionEvolucion match {
-      case _: UsarPiedraLunar if piedra.tipo == Lunar                         => evolucionar()
-      case _: UsarPiedraParaEvolucion if piedra.tipo == especie.tipoPrincipal => evolucionar()
-      case _ =>
-        var pokemonCapazEnvenenado = this
-        if (piedra.tipo.leGanaA(especie.tipoPrincipal) || piedra.tipo.leGanaA(especie.tipoSecundario)) {
-          pokemonCapazEnvenenado = copy(estado = new Envenenado)
-        }
-        pokemonCapazEnvenenado
-    }
-  }
-
-  def usaPocion(): Pokemon = {
-    copy(energia = math.min(energia + 50, energiaMaxima))
-  }
-
-  def usaAntidoto(): Pokemon = {
-    estado match {
-      case _: Envenenado => cambiarEstado(new EstadoNormal)
-      case _             => this
-    }
-  }
-
-  def usaEther(): Pokemon = {
-    estado match {
-      case _: KO => this // TODO no habria que controlar el KO antes de entrar a la actividad en si ?? porque con el KO creo que no puede hacer nada
-      case _     => cambiarEstado(new EstadoNormal)
-    }
-  }
-
-  def comeHierro(): Pokemon = {
-    subirAtributo(fuerzaASubir = 5)
-  }
-
-  def comeCalcio(): Pokemon = {
-    subirAtributo(velocidadASubir = 5)
-  }
-
-  def comeZinc(): Pokemon = {
-    this.copy(ataques = this.ataques.map(ataque => ataque.aumentarPAMaximo(2))) // TODO es correcto 
-  }
-
-  def descansa(): Pokemon = {
-    val ataquesConPARecargados = ataques.map(ataque => ataque.reestablecerPA)
-    val pokemonConAtaquesRecargados = copy(ataques = ataquesConPARecargados)
-    pokemonConAtaquesRecargados.estado match {
-      case _: EstadoNormal if ((energiaMaxima * 0.5) > energia) => pokemonConAtaquesRecargados.cambiarEstado(new Dormido)
-      case _ => pokemonConAtaquesRecargados
-    }
-  }
-
-  def fingirIntercambio(): Pokemon = {
-    especie.sufriIntercambio(this)
-  }
-
   def bajarPA(ataqueGenerico: AtaqueGenerico) = {
 
     val nuevoAtaque = dameAtaque(ataqueGenerico).bajaPA()
@@ -181,33 +120,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
   }
 
   def realizarActividad(actividad: Actividad): Pokemon = {
-    val pokemonDespuesDeRealizarActivdad : Pokemon = estado match {
-      case _: KO            => throw new NoPuedeRealizarActividadPorKO
-      case dormido: Dormido => copy(estado = dormido.ignorasteActividad)
-      case _                => actividad(this)
-      /* match {
-        case realizarAtaque: RealizarAtaque  => realizarAtaque(this)       
-        case levantarPesas: LevantarPesas => levantarPesas(this)        
-        case nadar: Nadar => nadar(this)          
-        case aprenderAtaque: AprenderAtaque => aprenderAtaque(this)        
-        case usarPiedra: Actividad.UsarPiedra => usarPiedra(this)
-        case _: UsarPocion                    => usaPocion()
-        case _: UsarAntidoto                  => usaAntidoto()
-        case _: UsarEther                     => usaEther()
-        case _: ComerHierro                   => comeHierro()
-        case _: ComerCalcio                   => comeCalcio()
-        case _: ComerZinc                     => comeZinc()
-        case _: Descansar                     => descansa()
-        case _: FingirIntercambio             => fingirIntercambio()
-      }
-*/
-    }
-
-    if (!pokemonDespuesDeRealizarActivdad.estadoValido()){ 
-      throw new EstadoInvalido()  // Por que hacer un if en vez de un match al principio??
-    }
-    
-    pokemonDespuesDeRealizarActivdad
+    actividad(this)
   }
 
 }
