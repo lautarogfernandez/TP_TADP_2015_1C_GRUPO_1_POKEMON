@@ -14,7 +14,7 @@ trait Actividad extends Function1[Pokemon, Try[Pokemon]]  {
     
   def applyActividad(pokemon : Pokemon) : Pokemon
   
-  def apply(pokemon : Pokemon) = Try[Pokemon] {
+  def apply(pokemon : Pokemon) = Try{
   
     val pokemonDespuesDeRealizarActivdad : Pokemon = pokemon.estado match {
       case _: KO            => throw new NoPuedeRealizarActividadPorKO
