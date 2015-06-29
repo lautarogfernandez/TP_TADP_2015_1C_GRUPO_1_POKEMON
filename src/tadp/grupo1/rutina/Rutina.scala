@@ -1,4 +1,4 @@
-package rutina
+package tadp.grupo1.rutina
 
 import Actividad.Actividad
 import tadp.grupo1.pokemon.Pokemon
@@ -9,7 +9,7 @@ import scala.util.Success
 /**
  * @author Alejandro
  */
-case class Rutina(listaActividades: List[Actividad]) {
+case class Rutina(nombre: String, listaActividades: List[Actividad]) {
 
   def realizarRutina(pokemon: Pokemon): Pokemon = {
 

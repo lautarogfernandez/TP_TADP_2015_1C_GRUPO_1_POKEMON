@@ -13,7 +13,7 @@ import tadp.grupo1.pokemon.tipo._
 import tadp.grupo1.pokemon.estado._
 import tadp.grupo1.pokemon.genero._
 import Actividad._
-import rutina.Rutina
+import tadp.grupo1.rutina.Rutina
 
 /**
  * @author Alejandro
@@ -56,8 +56,14 @@ class Punto3Test {
   val hacerPesas=new LevantarPesas (5)
   val nada=new Nadar(5)
   val nadaMas=new Nadar(125)
+  val aprendeMordida = new AprenderAtaque(mordida)
   val aprendeMaldicion=new AprenderAtaque(maldicion)
+  val aprendeHipnosis = new AprenderAtaque(hipnosis)
   val aprendeCorte=new AprenderAtaque(corte)
+  val aprendeReposo = new AprenderAtaque(reposo)
+  val aprendeDragonTail=new AprenderAtaque(dragonTail)
+  val aprendeEndurecerse = new AprenderAtaque(endurucerse)
+  val aprendeEnfocarse = new AprenderAtaque(enfocarse)
   val usaPiedraLunar=new Usar(piedraLunar)
   val usaPiedraAgua=new Usar(piedraAgua)
   val usarPocion=new Usar(Pocion)
@@ -79,22 +85,20 @@ class Punto3Test {
   var unPokemonQueEvolucionaConPiedraLunar:Pokemon=null
   var unPokemonQueEvolucionaConPiedraAgua:Pokemon=null
   var peleador:Pokemon=null  
-  
-  // SUPER TODO en todos lados que hice pepe = pepe.realizarActividad() en realidad estaria bueno 
-  // crear un val pepeNuevo para que se vea la diferencia que pepe sigue siendo el original
-  
+
   @Before
   def setUp(){    
     carlitos = new Pokemon(rattata, Macho,10,12,12,10,10,sinAtaques)
-    carlitos = carlitos.aprendeAtaque(mordida)
-    carlita=new Pokemon(jynx, Hembra,11,12,12,10,10,sinAtaques)
-    carlita = carlita.aprendeAtaque(hipnosis)
+    carlitos = aprendeMordida(carlitos)
+    carlita = new Pokemon(jynx, Hembra,11,12,12,10,10,sinAtaques)
+    carlita = aprendeHipnosis(carlita)
     pequeñoDragon=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
-    pequeñoDragon = pequeñoDragon.aprendeAtaque(dragonTail)
+    pequeñoDragon = aprendeDragonTail(pequeñoDragon)
     phantom=new Pokemon(gengar, Macho,10,12,12,10,10,sinAtaques)
     luchador=new Pokemon(machop, Macho,10,12,12,10,10,sinAtaques)
     unPokemonDeFuego=new Pokemon(charmander, Macho,10,12,12,10,10,sinAtaques)
     unPokemonDeAgua=new Pokemon(seeking, Macho,10,1000,1000,10,10,sinAtaques)
+    unPokemonDeAgua = aprendeMordida(unPokemonDeAgua)
     unPokemonQueEvolucionaConPiedraLunar= Pokemon(nidorina, Hembra,10,20,20,10,10,sinAtaques)
     unPokemonQueEvolucionaConPiedraAgua= Pokemon(staryu, Hembra,10,20,20,10,10,sinAtaques)
     peleador=new Pokemon(machoke, Macho,10,20,20,10,10,sinAtaques)
@@ -107,7 +111,7 @@ class Punto3Test {
   @Test
   def `pokemon hace rutina que termina bien y se devuelve un pokemon que queda como deberia` : Unit = {
     
-    val rutinaQuePuedeTerminarCarlitos = Rutina(List(aprendeCorte, comeZinc, morder, comeHierro, hacerPesas))
+    val rutinaQuePuedeTerminarCarlitos = Rutina("rutinaQuePuedeTerminarCarlitos", List(aprendeCorte, comeZinc, morder, comeHierro, hacerPesas))
     val carlitosLuegoDeRutina = rutinaQuePuedeTerminarCarlitos.realizarRutina(carlitos) 
     
     // Exp despues de la rutina
@@ -131,13 +135,13 @@ class Punto3Test {
   
   @Test(expected = classOf[NoPuedeLevantarPesas])
   def `pokemon hace rutina que no puede terminar y puedo obtener la exception que me dice porque no la pudo terminar` : Unit = {
-    val rutinaQuePuedeTerminarCarlitos = Rutina(List(aprendeCorte, hacerPesas, comeZinc, morder, comeHierro))
-    val carlitosLuegoDeRutina = rutinaQuePuedeTerminarCarlitos.realizarRutina(phantom) 
+    val rutinaQueNoPuedeTerminarPhantom = Rutina("rutinaQueNoPuedeTerminarPhantom", List(aprendeCorte, hacerPesas, comeZinc, morder, comeHierro))
+    val carlitosLuegoDeRutina = rutinaQueNoPuedeTerminarPhantom.realizarRutina(phantom) 
   }
   
   @Test
   def `pokemon hace rutina vacia devuelve el mismo pokemon` : Unit = {
-    val rutinaVacia= Rutina(List())
+    val rutinaVacia= Rutina("rutinaVacia", List())
     val carlitosDespeusDeRutina = rutinaVacia.realizarRutina(carlitos) 
     
     assertEquals(carlitos, carlitosDespeusDeRutina)
