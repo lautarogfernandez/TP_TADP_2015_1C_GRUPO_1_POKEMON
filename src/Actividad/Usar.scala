@@ -19,7 +19,7 @@ object Hierro extends Consumible{}
 object Calcio extends Consumible{}
 object Zinc extends Consumible{}
 
-class Usar(consumible:Consumible) extends Actividad{
+case class Usar(consumible:Consumible) extends Actividad{
   
   override def applyActividad(pokemon: Pokemon) = {
     (consumible,pokemon) match {

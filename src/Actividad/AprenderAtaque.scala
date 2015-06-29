@@ -6,7 +6,7 @@ import tadp.grupo1.pokemon.estado._
 /**
  * @author usuario
  */
-class AprenderAtaque (val ataque:AtaqueGenerico) extends Actividad{
+case class AprenderAtaque (val ataque:AtaqueGenerico) extends Actividad{
   
   override def applyActividad(pokemon: Pokemon) = {
     (ataque,ataque.tipo,pokemon,pokemon.especie) match {
