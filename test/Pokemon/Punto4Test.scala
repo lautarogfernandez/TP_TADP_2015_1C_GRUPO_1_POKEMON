@@ -17,6 +17,8 @@ import tadp.grupo1.rutina.Rutina
 import tadp.grupo1.rutina.AnalizadorDeRutinas
 import tadp.grupo1.rutina.NingunaRutinaPudoSerCompletada
 import scala.util.Try
+import scala.util.Success
+import scala.util.Failure
 
 /**
  * @author Alejandro
@@ -132,10 +134,10 @@ class Punto4Test {
     val listaDeRutinas = List(rutinaVacia, rutinaParaSerCampeonDeNado, rutinaQuePuedeTerminarCarlitos, rutinaQueNoPuedeTerminarCarlitos)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, listaDeRutinas, mayorNivelPosible)
     
-    val nivelDespeusDeRutinaVacia = rutinaVacia.realizarRutina(unPokemonDeAgua).nivel()
-    val nivelDespeusDeRutinaParaSerCampeonDeNado = rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua).nivel() // TODO ver si esta bien que llegue a nivel 9
-    val nivelDespeusDeRutinaQuePuedeTerminarCarlitos = rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).nivel()
-    val nivelDespeusDeRutinaQueNoPuedeTerminarCarlitos = rutinaQueNoPuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).nivel()
+    val nivelDespeusDeRutinaVacia = rutinaVacia.realizarRutina(unPokemonDeAgua).get.nivel()
+    val nivelDespeusDeRutinaParaSerCampeonDeNado = rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua).get.nivel() // TODO ver si esta bien que llegue a nivel 9
+    val nivelDespeusDeRutinaQuePuedeTerminarCarlitos = rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).get.nivel()
+    val nivelDespeusDeRutinaQueNoPuedeTerminarCarlitos = rutinaQueNoPuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).get.nivel()
     
     assertEquals(rutinaParaSerCampeonDeNado.nombre, nombreRutinaQueDaMayorNivel)    
   }
@@ -143,13 +145,22 @@ class Punto4Test {
   @Test(expected = classOf[NingunaRutinaPudoSerCompletada])
   def `pokemon no puede terminar ninguna de las rutinas debo obtener la exception que me dice porque no pudo terminar ningun` : Unit = {
     
-    val phantomPasadoPorAgua = Try(rutinaParaSerCampeonDeNado.realizarRutina(phantom))
-    val phantomNoPuedeLevantarPesa = Try(rutinaQueNoPuedeTerminarPhantom.realizarRutina(phantom))
-    val phantomKO = Try(rutinaKO.realizarRutina(phantom))
+    val phantomPasadoPorAgua = rutinaParaSerCampeonDeNado.realizarRutina(phantom)
+    val phantomNoPuedeLevantarPesa = rutinaQueNoPuedeTerminarPhantom.realizarRutina(phantom)
+    val phantomKO = rutinaKO.realizarRutina(phantom)
     
     val listaDeRutinas = List(rutinaParaSerCampeonDeNado, rutinaQueNoPuedeTerminarPhantom, rutinaKO)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(phantom, listaDeRutinas, mayorNivelPosible)
+    
+
   }
+  
+
+//  def matchTry[U >: T](tryAMatchear : Try[U]) : U = 
+//    tryAMatchear match{
+//      case Success(u) => u
+//      case Failure(exc) => Throw exc 
+//    }
   
   @Test(expected = classOf[NingunaRutinaPudoSerCompletada])
   def `no hay ninguna rutina dentro de la lista de rutinas a analizar y devuelvo NingunaRutinaPudoSerCompletada` : Unit = {

@@ -11,16 +11,15 @@ class NingunaRutinaPudoSerCompletada extends RuntimeException
 
 object AnalizadorDeRutinas {
   
-  def analizarRutinasSegunCriterio(pokemon : Pokemon, rutinas : List[Rutina], criterio : (Pokemon, Pokemon) => Boolean) : String = {
+  def analizarRutinasSegunCriterio(pokemon : Pokemon, rutinas : List[Rutina], criterio : (Pokemon, Pokemon) => Boolean) : Try[String] = {
     
-    rutinas.map(rutina => (rutina, Try(rutina.realizarRutina(pokemon))) )
+    rutinas.map(rutina => (rutina.nombre, rutina.realizarRutina(pokemon)) )
            .filter(tuplaRutinaPokemonResultante => tuplaRutinaPokemonResultante._2.isSuccess)
            .sortWith( (tupla1, tupla2) => criterio(tupla1._2.get, tupla2._2.get))
-           .headOption
-           .getOrElse(throw new NingunaRutinaPudoSerCompletada)
-           ._1
-           .nombre
-    
+           .headOption match{
+              case Some(tuplaRutinaPokemonResultante) => Try(tuplaRutinaPokemonResultante._1)
+              case None => Try(throw new NingunaRutinaPudoSerCompletada)
+            }
   }
   
 }

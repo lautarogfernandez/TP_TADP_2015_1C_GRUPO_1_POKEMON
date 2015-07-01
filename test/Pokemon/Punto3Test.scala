@@ -1,6 +1,6 @@
 package Pokemon
 
-import org.junit.Assert.assertEquals
+import org.junit.Assert._
 import org.junit.Test
 import org.junit.Ignore
 import org.junit.Before
@@ -116,18 +116,18 @@ class Punto3Test {
     
     // Exp despues de la rutina
     val experienciaEsperada = carlitos.experiencia + BigInt(50) + BigInt(5)
-    assertEquals(experienciaEsperada, carlitosLuegoDeRutina.experiencia)
+    assertEquals(experienciaEsperada, carlitosLuegoDeRutina.get.experiencia)
 
     // Comer Zinc y AprenderCorte
     val valorEsperadoMordida = carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon + 2
-    assertEquals(valorEsperadoMordida, carlitosLuegoDeRutina.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon)
-    assertEquals(32, carlitosLuegoDeRutina.dameAtaque(corte).puntosAtaqueMaximoDelPokemon)   
+    assertEquals(valorEsperadoMordida, carlitosLuegoDeRutina.get.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(32, carlitosLuegoDeRutina.get.dameAtaque(corte).puntosAtaqueMaximoDelPokemon)   
     
     // Morder
-    assertEquals(29, carlitosLuegoDeRutina.dameAtaque(mordida).puntosAtaque)
+    assertEquals(29, carlitosLuegoDeRutina.get.dameAtaque(mordida).puntosAtaque)
     
     // comeHierro
-    assertEquals(carlitos.fuerza + 5, carlitosLuegoDeRutina.fuerza)
+    assertEquals(carlitos.fuerza + 5, carlitosLuegoDeRutina.get.fuerza)
     
     // HacerPesas
     assertEstado(new EstadoNormal, carlitos.estado)
