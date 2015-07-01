@@ -119,7 +119,7 @@ case class Pokemon(val especie: Especie, val genero: Genero, val pesoBase: Int, 
 
   }
 
-  def realizarActividad(actividad: Actividad): Try[Pokemon] = {
+  def realizarActividad(actividad: Actividad): Pokemon = {
     actividad(this)
   }
 

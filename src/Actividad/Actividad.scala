@@ -5,16 +5,15 @@ import tadp.grupo1.pokemon.EstadoInvalido
 import tadp.grupo1.pokemon.estado.KO
 import tadp.grupo1.pokemon.estado.Dormido
 import tadp.grupo1.pokemon.NoPuedeRealizarActividadPorKO
-import scala.util.Try
 
 /**
  * @author usuario
  */
-trait Actividad extends Function1[Pokemon, Try[Pokemon]]  {
+trait Actividad extends Function1[Pokemon, Pokemon]  {
     
   def applyActividad(pokemon : Pokemon) : Pokemon
   
-  def apply(pokemon : Pokemon) = Try[Pokemon] {
+  def apply(pokemon : Pokemon) = {
   
     val pokemonDespuesDeRealizarActivdad : Pokemon = pokemon.estado match {
       case _: KO            => throw new NoPuedeRealizarActividadPorKO
