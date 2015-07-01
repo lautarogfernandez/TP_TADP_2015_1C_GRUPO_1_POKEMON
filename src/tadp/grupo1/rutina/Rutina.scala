@@ -11,19 +11,17 @@ import scala.util.Success
  */
 case class Rutina(nombre: String, listaActividades: List[Actividad]) {
 
-  def realizarRutina(pokemon: Pokemon): Try[Pokemon] = {
+  def realizarRutina(pokemon: Pokemon): Pokemon = {
 
-    //def pokemonDespuesDeRutina = listaActividades.foldLeft(Try(pokemon)) {
-      
-    listaActividades.foldLeft(Try(pokemon)) {
-      (pokemonAnterior, actividadActual) => pokemonAnterior.flatMap( poke => poke.realizarActividad(actividadActual))
-     // (pokemonAnterior, actividadActual) => pokemonAnterior.map( poke => poke.realizarActividad(actividadActual).get) // Funca esto o tira excpetion cuando devuelva un Failure()
+    def pokemonDespuesDeRutina = listaActividades.foldLeft(Try(Try(pokemon))) {
+//      (pokemonAnterior, actividadActual) => pokemonAnterior.flatMap( poke => poke.realizarActividad(actividadActual))
+      (pokemonAnterior, actividadActual) => pokemonAnterior.map( poke => poke.realizarActividad(actividadActual))
     }
     
-//    pokemonDespuesDeRutina match {
-//      case Failure(exception) => throw exception
-//      case Success(pokemonDespuesDeRutina) => pokemonDespuesDeRutina
-//    }
+    pokemonDespuesDeRutina match {
+      case Failure(exception) => throw exception
+      case Success(pokemonDespuesDeRutina) => pokemonDespuesDeRutina
+    }
 
 //    listaActividades.foldLeft(pokemon) {
 //      (pokemonAnterior, actividadActual) => pokemonAnterior.realizarActividad(actividadActual)
