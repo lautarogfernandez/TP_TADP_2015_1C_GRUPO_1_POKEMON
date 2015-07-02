@@ -17,8 +17,8 @@ import tadp.grupo1.pokemon.tipo._
  */
 class Punto1Test {
   
-  val charizard=new Especie(550,100, Fuego,10,10,10,10, Volador)
-  val charmeleon=new Especie(450,70, Fuego,7,7,7,7, Dragon,new SubirNivel(32),Some(charizard))
+  val charizard=new Especie(350,100, Fuego,10,10,10,10, Volador)
+  val charmeleon=new Especie(350,70, Fuego,7,7,7,7, Dragon,new SubirNivel(32),Some(charizard))
   val charmander=new Especie(350,22, Fuego,4,4,4,4, Dragon,new SubirNivel(16),Some(charmeleon))
   
   var carlitos:Pokemon=null
