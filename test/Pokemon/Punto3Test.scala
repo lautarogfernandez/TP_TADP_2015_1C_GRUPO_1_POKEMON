@@ -14,7 +14,6 @@ import tadp.grupo1.pokemon.estado._
 import tadp.grupo1.pokemon.genero._
 import Actividad._
 import tadp.grupo1.rutina.Rutina
-
 import scala.util.{Try, Failure, Success}
 
 /**
@@ -112,10 +111,18 @@ class Punto3Test {
 
   @Test
   def `pokemon hace rutina con una sola actividad y se devuelve un nuevo pokemon que queda como deberia` : Unit = {
-    fail()
+    val rutinaQuePuedeTerminarCarlitos = Rutina("rutinaQuePuedeTerminarCarlitos", List(morder))
+    val carlitosLuegoDeRutina = rutinaQuePuedeTerminarCarlitos.realizarRutina(carlitos)
+
+    // Exp despues de la rutina
+    val experienciaEsperada = carlitos.experiencia + BigInt(50)
+    assertEquals(experienciaEsperada, carlitosLuegoDeRutina.get.experiencia)
+
+    // Morder
+    assertEquals(29, carlitosLuegoDeRutina.get.dameAtaque(mordida).puntosAtaque)
   }
 
-    @Test
+  @Test
   def `pokemon hace rutina de varias actividdes que termina bien y se devuelve un pokemon que queda como deberia` : Unit = {
     
     val rutinaQuePuedeTerminarCarlitos = Rutina("rutinaQuePuedeTerminarCarlitos", List(aprendeCorte, comeZinc, morder, comeHierro, hacerPesas))
@@ -148,7 +155,14 @@ class Punto3Test {
     assertTryConFailure(carlitosLuegoDeRutina, "NoTieneElAtaque")
   }
 
-  def assertTryConFailure(carlitosLuegoDeRutina: Try[Pokemon], nombreDeLaException : String): Unit = {
+  def assertTryConSuccess(carlitosLuegoDeRutina :  Try[Pokemon]) = {
+    carlitosLuegoDeRutina match {
+      case Success(pokemon) => pokemon
+      case Failure(exception) => fail("Se esperaba un pokemon pero se recibio esta excepcion " + exception.getMessage)
+    }
+  }
+
+  def assertTryConFailure(carlitosLuegoDeRutina: Try[Pokemon], nombreDeLaException : String) : Unit = {
     carlitosLuegoDeRutina match {
       case Success(_) => fail("Deberia haber fallado con la Exception " + nombreDeLaException)
       case Failure(exeption) => throw exeption
