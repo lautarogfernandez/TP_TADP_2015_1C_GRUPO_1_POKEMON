@@ -162,6 +162,13 @@ class Punto3Test {
     }
   }
 
+  implicit def assertTryConSuccessASD[T](carlitosLuegoDeRutina :  Try[T]) = T {
+    carlitosLuegoDeRutina match {
+      case Success(pokemon : T) => pokemon
+      case Failure(exception) => fail("Se esperaba un pokemon pero se recibio esta excepcion " + exception.getMessage)
+    }
+  }
+
   def assertTryConFailure(carlitosLuegoDeRutina: Try[Pokemon], nombreDeLaException : String) : Unit = {
     carlitosLuegoDeRutina match {
       case Success(_) => fail("Deberia haber fallado con la Exception " + nombreDeLaException)
