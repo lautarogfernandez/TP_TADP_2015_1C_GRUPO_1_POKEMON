@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="JPEG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="tadp.grupo1.pokemon.Pokemon" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Pokemon.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="843" width="399" x="52" y="-268"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="tadp.grupo1.pokemon.Especie" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Especie.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="522" y="159"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="tadp.grupo1.pokemon.AtaquePokemon" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Ataque.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="830" y="-10"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="tadp.grupo1.pokemon.AtaqueGenerico" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Ataque.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="834" y="118"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="tadp.grupo1.pokemon.Piedra" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Piedra.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1568" y="239"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="Actividad.Zinc" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1870" y="298"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Actividad.Nadar" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Nadar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1183" y="17"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="Actividad.Ether$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1767" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="Actividad.Ether" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1767" y="298"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="Actividad.Antidoto" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2311" y="298"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="Actividad.Zinc$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1870" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="12" language="java" name="Actividad.Actividad" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Actividad.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1358" y="72"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="13" language="java" name="Actividad.Calcio$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1975" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="Actividad.Descansar$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Descansar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1185" y="141"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="Actividad.Calcio" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1975" y="298"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="Actividad.AprenderAtaque" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/AprenderAtaque.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1169" y="103"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="Actividad.FingirIntercambio" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/FingirIntercambio.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1414" y="180"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="Actividad.RealizarAtaque" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/RealizarAtaque.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1166" y="63"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="Actividad.Pocion" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2195" y="298"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="Actividad.Hierro" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2084" y="298"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="Actividad.Hierro$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2084" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="Actividad.LevantarPesas" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/LevantarPesas.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1381" y="-9"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="23" language="java" name="Actividad.Consumible" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1980" y="65"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="24" language="java" name="Actividad.FingirIntercambio$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/FingirIntercambio.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1401" y="127"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="Actividad.Usar" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1523" y="82"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="Actividad.Descansar" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Descansar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1189" y="201"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="Actividad.Pocion$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2195" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="Actividad.Antidoto$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/Actividad/Usar.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2311" y="242"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="29" language="java" name="tadp.grupo1.pokemon.condicion_evolucion.Condicion" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/condicion_evolucion/Condicion.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="362" y="333"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="30" language="java" name="tadp.grupo1.pokemon.condicion_evolucion.UsarPiedraParaEvolucion" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/condicion_evolucion/Condicion.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="43" y="390"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="tadp.grupo1.pokemon.condicion_evolucion.UsarPiedraLunar" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/condicion_evolucion/Condicion.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="203" y="392"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="tadp.grupo1.pokemon.condicion_evolucion.SubirNivel" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/condicion_evolucion/Condicion.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="46" width="190" x="267" y="375"/>    
+    <display autosize="false" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="tadp.grupo1.pokemon.condicion_evolucion.NoEvoluciona" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/condicion_evolucion/Condicion.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="525" y="395"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="tadp.grupo1.pokemon.condicion_evolucion.Intercambiar" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/condicion_evolucion/Condicion.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="641" y="391"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="tadp.grupo1.pokemon.estado.KO" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/estado/Estado.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="138" y="-19"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="tadp.grupo1.pokemon.estado.Estado" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/estado/Estado.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="246" y="17"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="37" language="java" name="tadp.grupo1.pokemon.estado.Envenenado" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/estado/Estado.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="144" y="-65"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="tadp.grupo1.pokemon.estado.EstadoNormal" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/estado/Estado.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="245" y="-83"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="tadp.grupo1.pokemon.estado.Paralizado" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/estado/Estado.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="375" y="-14"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="tadp.grupo1.pokemon.estado.Dormido" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/estado/Estado.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="392" y="-70"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="tadp.grupo1.pokemon.genero.Macho" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/genero/Genero.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-216" y="-2"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="tadp.grupo1.pokemon.genero.Macho$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/genero/Genero.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-59" y="2"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="tadp.grupo1.pokemon.genero.Hembra" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/genero/Genero.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-219" y="50"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="44" language="java" name="tadp.grupo1.pokemon.genero.Genero" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/genero/Genero.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="51" y="41"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="45" language="java" name="tadp.grupo1.pokemon.genero.Hembra$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/genero/Genero.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-58" y="54"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="tadp.grupo1.pokemon.tipo.NoTiene$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/NoTiene.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="933" y="435"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="tadp.grupo1.pokemon.tipo.Fuego$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Fuego.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1050" y="436"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="tadp.grupo1.pokemon.tipo.Planta" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Planta.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1158" y="492"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="49" language="java" name="tadp.grupo1.pokemon.tipo.Tipo" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Tipo.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1089" y="334"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="50" language="java" name="tadp.grupo1.pokemon.tipo.Fuego" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Fuego.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1055" y="494"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="tadp.grupo1.pokemon.tipo.NoTiene" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/NoTiene.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="934" y="494"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="tadp.grupo1.pokemon.tipo.Planta$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Planta.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1147" y="436"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="tadp.grupo1.pokemon.tipo.Normal$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Normal.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1250" y="439"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="tadp.grupo1.pokemon.tipo.Agua" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Agua.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1353" y="496"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="tadp.grupo1.pokemon.tipo.Normal" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Normal.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1253" y="496"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="tadp.grupo1.pokemon.tipo.Agua$" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/tipo/Agua.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1352" y="440"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="tadp.grupo1.rutina.NingunaRutinaPudoSerCompletada" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/rutina/AnalisisDeRutina.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="116" y="505"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="tadp.grupo1.rutina.AnalizadorDeRutinas$" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/rutina/AnalisisDeRutina.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-155" y="293"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="tadp.grupo1.rutina.Rutina" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/rutina/Rutina.scala" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-160" y="141"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="tadp.grupo1.rutina.AnalizadorDeRutinas" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/rutina/AnalisisDeRutina.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-159" y="228"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="tadp.grupo1.pokemon.NoPuedeRealizarActividadPorKO" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Exceptions.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-422" y="575"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="tadp.grupo1.pokemon.EstadoInvalido" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Exceptions.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-405" y="505"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="tadp.grupo1.pokemon.NoPuedeRealizarActividad" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Exceptions.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-147" y="505"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="tadp.grupo1.pokemon.NoTieneElAtaque" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Exceptions.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-217" y="575"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="tadp.grupo1.pokemon.NoTieneMasPA" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Exceptions.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-63" y="575"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="tadp.grupo1.pokemon.NoPuedeLevantarPesas" 
+    project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="/TP_TADP_2015_1C_GRUPO_1_POKEMON/src/tadp/grupo1/pokemon/Exceptions.scala" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="112" y="575"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="java.lang.RuntimeException" project="TP_TADP_2015_1C_GRUPO_1_POKEMON" 
+    file="C:/Program Files/Java/jre1.8.0_25/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-145" y="440"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="63"/>  
+  </generalization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="49"/>  
+  </generalization>  
+  <realization id="70">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="71">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="72" name="tipo"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="74">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="75">    
+    <bendpoint x="1080" y="211"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="76" name="tipo"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="79" name="MODULE$"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="81">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="82">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="83">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="84" name="MODULE$"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="86">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="87">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="88" name="MODULE$"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="91" name="MODULE$"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="94" name="MODULE$"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="96">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="97">    
+    <end type="SOURCE" refId="66"/>    
+    <end type="TARGET" refId="63"/>  
+  </generalization>  
+  <generalization id="98">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="44"/>  
+  </generalization>  
+  <generalization id="99">    
+    <end type="SOURCE" refId="56"/>    
+    <end type="TARGET" refId="49"/>  
+  </generalization>  
+  <association id="100">    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="101" name="MODULE$"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="103">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <generalization id="104">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="49"/>  
+  </generalization>  
+  <association id="105">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="106" name="genero"/>      
+      <multiplicity id="107" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="108">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <association id="109">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="110" name="MODULE$"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <bendpoint x="1117" y="63"/>    
+    <bendpoint x="1023" y="69"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="113" name="ataque"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="116" name="MODULE$"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <bendpoint x="796" y="345"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="119" name="tipoSecundario"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="121">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="67"/>  
+  </generalization>  
+  <association id="122">    
+    <bendpoint x="851" y="203"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="123" name="tipoPrincipal"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="125">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="49"/>  
+  </generalization>  
+  <realization id="126">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <realization id="127">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="128">    
+    <bendpoint x="1013" y="141"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="129" name="ataque"/>      
+      <multiplicity id="130" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="132" name="MODULE$"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="134">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="135">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="136" name="consumible"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="138">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="139" name="MODULE$"/>      
+      <multiplicity id="140" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="141">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="142">    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="63"/>  
+  </generalization>  
+  <association id="143">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="144" name="MODULE$"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="146">    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="63"/>  
+  </generalization>  
+  <association id="147">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="148" name="MODULE$"/>      
+      <multiplicity id="149" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="150">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <generalization id="151">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="44"/>  
+  </generalization>  
+  <generalization id="152">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="49"/>  
+  </generalization>  
+  <realization id="153">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <association id="154">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="155" name="ataqueGenerico"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="157">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <realization id="158">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="159">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="160" name="especie"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="162">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="163">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="164" name="estado"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="166">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="167">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <realization id="168">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <generalization id="169">    
+    <end type="SOURCE" refId="62"/>    
+    <end type="TARGET" refId="67"/>  
+  </generalization>  
+  <generalization id="170">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="171">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <realization id="172">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="173">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="174" name="MODULE$"/>      
+      <multiplicity id="175" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="176">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="177" name="MODULE$"/>      
+      <multiplicity id="178" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="179">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="180" name="MODULE$"/>      
+      <multiplicity id="181" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="60" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="182">    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="67"/>  
+  </generalization>  
+  <association id="183">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="184" name="condicionEvolucion"/>      
+      <multiplicity id="185" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="186">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="187">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="188" name="MODULE$"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
