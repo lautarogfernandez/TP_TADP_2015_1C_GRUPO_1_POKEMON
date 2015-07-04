@@ -20,6 +20,14 @@ object AnalizadorDeRutinas {
               case Some(tuplaRutinaPokemonResultante) => Try(tuplaRutinaPokemonResultante._1)
               case None => Try(throw new NingunaRutinaPudoSerCompletada)
             }
-  }
+    }
+    // No funca la debo estar manqueando en algo 
+
+    //    val listaDePokemonesDespuesRutina = for {
+//      rutina <- rutinas
+//      pelo <- Try(rutina.realizarRutina(pokemon))
+//
+//    } yield (rutina.nombre, rutina.realizarRutina(pokemon))
+
   
 }

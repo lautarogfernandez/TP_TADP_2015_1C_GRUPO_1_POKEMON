@@ -14,11 +14,11 @@ case class Rutina(nombre: String, listaActividades: List[Actividad]) {
   def realizarRutina(pokemon: Pokemon): Try[Pokemon] = {
 
     listaActividades.foldLeft(Try(pokemon)) {
+      
       (pokemonAnterior, actividadActual) => pokemonAnterior.map(_.realizarActividad(actividadActual))
+      
+      // (pokemonAnterior, actividadActual) => { for{ poke <- pokemonAnterior } yield actividadActual(poke) }
     }
-    
-//    listaActividades.foldLeft(pokemon) {
-//      (pokemonAnterior, actividadActual) => pokemonAnterior.realizarActividad(actividadActual)
-//    }
+
   }
 }
