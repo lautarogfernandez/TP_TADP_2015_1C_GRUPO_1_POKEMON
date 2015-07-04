@@ -47,9 +47,9 @@ class Punto4Test extends TestsPokemon{
     val listaDeRutinas = List(rutinaParaNadarHastaElBorde1SolaActividad)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, listaDeRutinas, mayorNivelPosible)
 
-    assertEquals(5, obtenerObjetoAdentroDelTry(rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua)).nivel())
+    assertEquals(5, rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.nivel)
 
-    assertEquals(rutinaParaNadarHastaElBorde1SolaActividad.nombre, obtenerObjetoAdentroDelTry(nombreRutinaQueDaMayorNivel))
+    assertEquals(rutinaParaNadarHastaElBorde1SolaActividad.nombre, nombreRutinaQueDaMayorNivel.obtenerObjetoAdentroDelTry)
   }
 
   @Test
@@ -58,9 +58,9 @@ class Punto4Test extends TestsPokemon{
     val listaDeRutinas = List(rutinaQuePuedeTerminarCarlitos)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(carlitos, listaDeRutinas, mayorNivelPosible)
 
-    assertEquals(1, obtenerObjetoAdentroDelTry(rutinaQuePuedeTerminarCarlitos.realizarRutina(carlitos)).nivel())
+    assertEquals(1, rutinaQuePuedeTerminarCarlitos.realizarRutina(carlitos).obtenerObjetoAdentroDelTry.nivel)
 
-    assertEquals(rutinaQuePuedeTerminarCarlitos.nombre, obtenerObjetoAdentroDelTry(nombreRutinaQueDaMayorNivel))
+    assertEquals(rutinaQuePuedeTerminarCarlitos.nombre, nombreRutinaQueDaMayorNivel.obtenerObjetoAdentroDelTry)
   }
 
   @Test
@@ -69,9 +69,9 @@ class Punto4Test extends TestsPokemon{
     val listaDeRutinas = List(rutinaParaNadarHastaElBorde1SolaActividad, rutinaVacia, rutinaParaNadarHastaElBorde1SolaActividad2)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, listaDeRutinas, mayorNivelPosible)
 
-    assertEquals(5, obtenerObjetoAdentroDelTry(rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua)).nivel())
+    assertEquals(5, rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.nivel())
 
-    assertEquals(rutinaParaNadarHastaElBorde1SolaActividad.nombre, obtenerObjetoAdentroDelTry(nombreRutinaQueDaMayorNivel))
+    assertEquals(rutinaParaNadarHastaElBorde1SolaActividad.nombre, nombreRutinaQueDaMayorNivel.obtenerObjetoAdentroDelTry)
   }
 
 
@@ -81,12 +81,12 @@ class Punto4Test extends TestsPokemon{
     val listaDeRutinas = List(rutinaVacia, rutinaParaSerCampeonDeNado, rutinaQuePuedeTerminarCarlitos, rutinaQueNoPuedeTerminarCarlitos)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, listaDeRutinas, mayorNivelPosible)
     
-    val nivelDespeusDeRutinaVacia = obtenerObjetoAdentroDelTry(rutinaVacia.realizarRutina(unPokemonDeAgua)).nivel()
-    val nivelDespeusDeRutinaParaSerCampeonDeNado = obtenerObjetoAdentroDelTry(rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua)).nivel() // TODO ver si esta bien que llegue a nivel 9
-    val nivelDespeusDeRutinaQuePuedeTerminarCarlitos = obtenerObjetoAdentroDelTry(rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua)).nivel()
-    val nivelDespeusDeRutinaQueNoPuedeTerminarCarlitos = obtenerObjetoAdentroDelTry(rutinaQueNoPuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua)).nivel()
+    val nivelDespeusDeRutinaVacia = rutinaVacia.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.nivel
+    val nivelDespeusDeRutinaParaSerCampeonDeNado = rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.nivel // TODO ver si esta bien que llegue a nivel 9
+    val nivelDespeusDeRutinaQuePuedeTerminarCarlitos = rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.nivel
+    val nivelDespeusDeRutinaQueNoPuedeTerminarCarlitos = rutinaQueNoPuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.nivel
     
-    assertEquals(rutinaParaSerCampeonDeNado.nombre, obtenerObjetoAdentroDelTry(nombreRutinaQueDaMayorNivel))    
+    assertEquals(rutinaParaSerCampeonDeNado.nombre, nombreRutinaQueDaMayorNivel.obtenerObjetoAdentroDelTry)    
   }
 
   @Test
@@ -95,25 +95,24 @@ class Punto4Test extends TestsPokemon{
     val listaDeRutinas = List(rutinaParaSerCampeonDeNado, rutinaParaNadarHastaElBorde1SolaActividad, rutinaQuePuedeTerminarCarlitos)
     val nombreRutinaQueDejaConMasEnergia = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, listaDeRutinas, mayorCantidadEnergiaPosible)
 
-    assertEquals(365, obtenerObjetoAdentroDelTry(rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua)).energia)
-    assertEquals(875, obtenerObjetoAdentroDelTry(rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua)).energia)
-    assertEquals(1000, obtenerObjetoAdentroDelTry(rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua)).energia)
+    assertEquals(365, rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.energia)
+    assertEquals(875, rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.energia)
+    assertEquals(1000, rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.energia)
 
-    assertEquals(rutinaQuePuedeTerminarCarlitos.nombre, obtenerObjetoAdentroDelTry(nombreRutinaQueDejaConMasEnergia))
+    assertEquals(rutinaQuePuedeTerminarCarlitos.nombre, nombreRutinaQueDejaConMasEnergia.obtenerObjetoAdentroDelTry)
   }
 
   @Test
   def `usando criterio menorPesoPosible devuelve el nombre de la rutina que deja menor peso` : Unit = {
-
-
+    
     val listaDeRutinas = List(rutinaParaSerCampeonDeNado, rutinaQuePuedeTerminarCarlitos, rutinaParaNadarHastaElBorde1SolaActividad)
     val nombreRutinaQueDejaConMenosPeso = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, listaDeRutinas, menorPesoPosible)
 
-    assertEquals(38, obtenerObjetoAdentroDelTry(rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua)).peso)
-    assertEquals(26, obtenerObjetoAdentroDelTry(rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua)).peso)
-    assertEquals(10, obtenerObjetoAdentroDelTry(rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua)).peso)
+    assertEquals(38, rutinaParaSerCampeonDeNado.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.peso)
+    assertEquals(26, rutinaParaNadarHastaElBorde1SolaActividad.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.peso)
+    assertEquals(10, rutinaQuePuedeTerminarCarlitos.realizarRutina(unPokemonDeAgua).obtenerObjetoAdentroDelTry.peso)
 
-    assertEquals(rutinaQuePuedeTerminarCarlitos.nombre, obtenerObjetoAdentroDelTry(nombreRutinaQueDejaConMenosPeso))
+    assertEquals(rutinaQuePuedeTerminarCarlitos.nombre, nombreRutinaQueDejaConMenosPeso.obtenerObjetoAdentroDelTry)
   }
   
   @Test(expected = classOf[NingunaRutinaPudoSerCompletada])
@@ -125,13 +124,13 @@ class Punto4Test extends TestsPokemon{
     
     val listaDeRutinas = List(rutinaParaSerCampeonDeNado, rutinaQueNoPuedeTerminarPhantom, rutinaKO)
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(phantom, listaDeRutinas, mayorNivelPosible)
-    obtenerObjetoAdentroDelTry(nombreRutinaQueDaMayorNivel)
+    nombreRutinaQueDaMayorNivel.obtenerObjetoAdentroDelTry
   }
   
   @Test(expected = classOf[NingunaRutinaPudoSerCompletada])
   def `no hay ninguna rutina dentro de la lista de rutinas a analizar y devuelvo NingunaRutinaPudoSerCompletada` : Unit = {
     val nombreRutinaQueDaMayorNivel = AnalizadorDeRutinas.analizarRutinasSegunCriterio(unPokemonDeAgua, List(), mayorNivelPosible)
-    obtenerObjetoAdentroDelTry(nombreRutinaQueDaMayorNivel)
+    nombreRutinaQueDaMayorNivel.obtenerObjetoAdentroDelTry
   }
   
 }

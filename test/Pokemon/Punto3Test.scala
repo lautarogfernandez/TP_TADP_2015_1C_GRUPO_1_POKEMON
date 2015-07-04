@@ -28,10 +28,10 @@ class Punto3Test extends TestsPokemon{
 
     // Exp despues de la rutina
     val experienciaEsperada = carlitos.experiencia + BigInt(50)
-    assertEquals(experienciaEsperada, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).experiencia)
+    assertEquals(experienciaEsperada, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.experiencia)
 
     // Morder
-    assertEquals(29, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).dameAtaque(mordida).puntosAtaque)
+    assertEquals(29, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.dameAtaque(mordida).puntosAtaque)
   }
 
   @Test
@@ -42,18 +42,18 @@ class Punto3Test extends TestsPokemon{
     
     // Exp despues de la rutina
     val experienciaEsperada = carlitos.experiencia + BigInt(50) + BigInt(5)
-    assertEquals(experienciaEsperada, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).experiencia)
+    assertEquals(experienciaEsperada, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.experiencia)
 
     // Comer Zinc y AprenderCorte
     val valorEsperadoMordida = carlitos.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon + 2
-    assertEquals(valorEsperadoMordida, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).dameAtaque(mordida).puntosAtaqueMaximoDelPokemon)
-    assertEquals(32, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).dameAtaque(corte).puntosAtaqueMaximoDelPokemon)   
+    assertEquals(valorEsperadoMordida, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.dameAtaque(mordida).puntosAtaqueMaximoDelPokemon)
+    assertEquals(32, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.dameAtaque(corte).puntosAtaqueMaximoDelPokemon)   
     
     // Morder
-    assertEquals(29, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).dameAtaque(mordida).puntosAtaque)
+    assertEquals(29, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.dameAtaque(mordida).puntosAtaque)
     
     // comeHierro
-    assertEquals(carlitos.fuerza + 5, obtenerObjetoAdentroDelTry(carlitosLuegoDeRutina).fuerza)
+    assertEquals(carlitos.fuerza + 5, carlitosLuegoDeRutina.obtenerObjetoAdentroDelTry.fuerza)
     
     // HacerPesas
     assertEstado(new EstadoNormal, carlitos.estado)
